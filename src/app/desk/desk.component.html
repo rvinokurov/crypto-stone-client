@@ -1,4 +1,15 @@
 <div class="desk">
+  <div class="desk--player-name desk--player-name_enemy">
+    {{enemy.name}}
+  </div>
+  <div class="desk--player-name desk--player-name_player">
+    {{player.name}}
+  </div>
+
+
+  <app-sausage  [count]="enemy.sausages"></app-sausage>
+  <app-sausage isPlayer="true" [count]="player.sausages"></app-sausage>
+
   <app-hero-card class="desk--hero-card desk--hero-card_enemy"></app-hero-card>
   <div class="desk--pane desk--pane_enemy">
 
@@ -6,7 +17,7 @@
 
   <div class="desk--card-pane desk--card-pane_enemy">
     <app-card
-        *ngFor="let card of enemyCards"
+        *ngFor="let card of enemy.cards"
         class="desc-card"
         [card]="card">
     </app-card>
@@ -27,7 +38,7 @@
 
   <div class="desk--card-pane desk--card-pane_player">
     <app-card
-      *ngFor="let card of cards"
+      *ngFor="let card of player.cards"
       class="desc-card"
       draggable
       [dragData]="card"

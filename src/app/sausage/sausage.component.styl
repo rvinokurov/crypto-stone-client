@@ -1,0 +1,51 @@
+.sausage-counter
+  border-radius 50%
+  font-size 1.3rem;
+  border 0.1rem solid #ff9623;
+  box-shadow 0 0 0.5rem 0 #ff9623
+  position absolute
+  z-index 1500
+  width 4rem
+  height 3rem
+  color #8b5727
+  background-color #ffe49b
+  box-sizing border-box
+  text-align left
+  padding-left 0.6rem
+  padding-bottom 0.2rem
+  vertical-align middle
+  padding-top 0.65rem
+
+
+  &:after
+    display block
+    content ''
+    width 2rem
+    height 2rem
+    position absolute
+    top 0.42rem
+    right 0.1rem
+
+    background-image url(/assets/sausage.png)
+    background-size contain
+    background-repeat no-repeat
+
+
+
+  $sausageHorizontal = 8rem
+  $sausageVertical = 3rem
+
+  &_enemy
+    top $sausageVertical
+    right $sausageHorizontal
+
+
+  &_player
+    bottom $sausageVertical
+    left $sausageHorizontal
+
+  &--value
+    display inline-block
+    line-height 1.3rem
+    height 1.3rem
+    font-size 1.3rem

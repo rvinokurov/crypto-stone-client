@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { DeskComponent } from './desk/desk.component';
 import { CardComponent } from './card/card.component';
 import { HeroCardComponent } from './hero-card/hero-card.component';
+import { SausageComponent } from './sausage/sausage.component';
+import {PlayerService} from './player.service';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { HeroCardComponent } from './hero-card/hero-card.component';
     AppComponent,
     DeskComponent,
     CardComponent,
-    HeroCardComponent
+    HeroCardComponent,
+    SausageComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,9 @@ import { HeroCardComponent } from './hero-card/hero-card.component';
     HttpClientModule,
     NgDragDropModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    PlayerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
