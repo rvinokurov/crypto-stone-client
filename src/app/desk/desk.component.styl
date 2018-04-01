@@ -1,16 +1,60 @@
 $player-pane-height = 7rem
+$cardHeight = 6rem
+$cardWidth = 4rem
+
+app-card.desc-card
+  display: inline-block
+  width $cardWidth
+  height $cardHeight
+  padding 0.3rem
+
+app-card.desc-card .card
+  border-radius 0.3rem
+  display inline-block
+  box-shadow 0 0 0.3rem 0.1rem #487a8b
+
+  &.draggableClone
+    width $cardWidth * 1.2 !important
+    height $cardHeight * 1.2 !important
+
+  &.draggableClone .card
+    box-shadow none !important
+    background-color red !important
+
+&.inDrag
+  opacity 0.5
 
 .desk
   width 100%
   height 100%
-  background-color #024329
+  background-color #273745
   position relative
+  box-shadow inset 0 0 5em 1em #17222e
 
+  $playgroundOffset = $player-pane-height
   &--playground
     position absolute
-    width 100%
-    height "calc(100% - %s)" % ($player-pane-height * 2)
-    top $player-pane-height
+    width calc(100% - 3em)
+    height "calc(100% - %s)" % ($playgroundOffset * 2)
+    border-radius 20%
+    top $playgroundOffset
+    background-color #026d44
+    box-shadow inset 0 0 12em 1em #023c25, 0 0 0.5em 0 #023c25
+    left 1.5em
+
+  &--playground-cards
+    position absolute
+    text-align center
+    width 90%
+    height $cardHeight
+    left 5%
+    &_enemy
+      top 50%
+      margin-top -($cardHeight + 1rem)
+
+    &_player
+      bottom 50%
+      margin-bottom -($cardHeight + 1rem)
 
   &--card-pane
     z-index 500
@@ -18,6 +62,7 @@ $player-pane-height = 7rem
     width 24rem
     left calc(50% - 12rem)
     height 6rem
+    text-align center
 
     &_enemy
       top 1rem
@@ -25,28 +70,11 @@ $player-pane-height = 7rem
     &_player
       bottom 1rem
 
-
-  &--pane
-    background-color #4c6c7a;
-    width 70%
-
-    height $player-pane-height
-    position absolute
-    border-radius 0.5rem
-
-    &_enemy
-      top 0.5rem
-      right 2rem
-
-    &_player
-      left 2rem
-      bottom 0.5rem
-
   &--hero-card
     z-index 1000
     position absolute
     &_enemy
-      top  1rem
+      top 1rem
       right 1rem
 
     &_player

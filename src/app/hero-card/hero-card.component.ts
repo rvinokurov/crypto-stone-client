@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-hero-card',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() isPlayerHero = false;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

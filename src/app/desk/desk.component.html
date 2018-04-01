@@ -5,24 +5,41 @@
   </div>
 
   <div class="desk--card-pane desk--card-pane_enemy">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-
+    <app-card
+        *ngFor="let card of enemyCards"
+        class="desc-card"
+        [card]="card">
+    </app-card>
   </div>
 
-  <div class="desk--playground">
-
+  <div class="desk--playground" droppable
+       (onDrop)="onCardDrop($event)">
+    <div class="desk--playground-cards desk--playground-cards_enemy"></div>
+    <div class="desk--playground-cards desk--playground-cards_player">
+      <app-card
+        *ngFor="let card of playerCardsOnDesk"
+        class="desc-card"
+        [card]="card"
+        isPlayerCard="true">
+      </app-card>
+    </div>
   </div>
 
   <div class="desk--card-pane desk--card-pane_player">
-    <app-card isPlayerCard="true"></app-card>
-    <app-card isPlayerCard="true"></app-card>
-    <app-card isPlayerCard="true"></app-card>
+    <app-card
+      *ngFor="let card of cards"
+      class="desc-card"
+      draggable
+      [dragData]="card"
+      [dragClass]="'inDrag'"
+      [dragTransitClass]="'draggableClone'"
+      [card]="card"
+      isPlayerCard="true">
+    </app-card>
   </div>
 
 
-  <app-hero-card class="desk--hero-card desk--hero-card_player"></app-hero-card>
+  <app-hero-card class="desk--hero-card desk--hero-card_player" isPlayerHero="true"></app-hero-card>
   <div class="desk--pane desk--pane_player">
 
   </div>
