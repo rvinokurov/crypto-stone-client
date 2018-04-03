@@ -12,7 +12,6 @@ import {
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.styl'],
-  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('cardState', [
       state('initial', style({

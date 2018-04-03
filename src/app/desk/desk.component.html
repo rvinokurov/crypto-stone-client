@@ -26,11 +26,15 @@
   <div class="desk--playground" droppable
        (onDrop)="onCardDrop($event)">
     <div class="desk--playground-cards desk--playground-cards_enemy"></div>
+
     <div class="desk--playground-cards desk--playground-cards_player">
       <app-card
         *ngFor="let card of playerCardsOnDesk"
         class="desc-card"
         [card]="card"
+        [attackingCard]="card"
+        classOnAttack="desc-card--in-attack"
+        appLaunchAnAttack
         isPlayerCard="true">
       </app-card>
     </div>
@@ -41,6 +45,7 @@
       *ngFor="let card of player.cards"
       class="desc-card"
       draggable
+      (onDragStart)="onDragStart($event)"
       [dragData]="card"
       [dragClass]="'inDrag'"
       [dragTransitClass]="'draggableClone'"

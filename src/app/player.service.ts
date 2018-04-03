@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Player} from './model/Player'
+import {Player} from './model/Player';
+import {Card} from './model/Card';
 
 @Injectable()
 export class PlayerService {
@@ -11,9 +12,9 @@ export class PlayerService {
     return new Player({
       name: 'ChaosCode',
       cards: [
-        {},
-        {},
-        {},
+        new Card(),
+        new Card(),
+        new Card(),
       ],
       sausages: 99
     });
@@ -23,9 +24,9 @@ export class PlayerService {
     return new Player({
       name: 'Gil',
       cards: [
-        {},
-        {},
-        {},
+        new Card(),
+        new Card(),
+        new Card(),
       ],
       sausages: 99
     });

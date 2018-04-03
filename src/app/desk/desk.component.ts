@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { DropEvent } from 'ng-drag-drop';
+import {DropEvent} from 'ng-drag-drop';
 import {Player} from '../model/Player';
 import {PlayerService} from '../player.service';
 
@@ -18,7 +18,12 @@ export class DeskComponent implements OnInit {
 
   enemy: Player;
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService) {
+  }
+
+  onDragStart(e: DropEvent) {
+    console.log('enter drag');
+  }
 
   onCardDrop(e: DropEvent) {
     this.playerCardsOnDesk.push(e.dragData);

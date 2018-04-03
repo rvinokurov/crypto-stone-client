@@ -11,6 +11,7 @@ import { CardComponent } from './card/card.component';
 import { HeroCardComponent } from './hero-card/hero-card.component';
 import { SausageComponent } from './sausage/sausage.component';
 import {PlayerService} from './player.service';
+import { LaunchAnAttackDirective } from './desk/directive/launch-an-attack.directive';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {PlayerService} from './player.service';
     DeskComponent,
     CardComponent,
     HeroCardComponent,
-    SausageComponent
+    SausageComponent,
+    LaunchAnAttackDirective
   ],
   imports: [
     BrowserModule,
