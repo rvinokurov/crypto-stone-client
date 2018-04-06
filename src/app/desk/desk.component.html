@@ -18,7 +18,7 @@
   <div class="desk--card-pane desk--card-pane_enemy">
     <app-card
         *ngFor="let card of enemy.cards"
-        class="desc-card"
+        class="desc-card enemy"
         [card]="card">
     </app-card>
   </div>
@@ -45,7 +45,7 @@
       *ngFor="let card of player.cards"
       class="desc-card"
       draggable
-      (onDragStart)="onDragStart($event)"
+      (onDragStart)="onDragStart(card)"
       [dragData]="card"
       [dragClass]="'inDrag'"
       [dragTransitClass]="'draggableClone'"

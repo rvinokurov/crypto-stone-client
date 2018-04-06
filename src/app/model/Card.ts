@@ -1,4 +1,8 @@
 export class Card {
-  inAttack: false;
-  inDesk: false;
+  inAttack = false;
+  inDesk = false;
+
+  constructor() {
+
+  }
 }

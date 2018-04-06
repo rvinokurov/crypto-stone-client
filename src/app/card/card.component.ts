@@ -36,7 +36,9 @@ export class CardComponent implements OnInit {
 
   cardState = 'initial';
 
-  constructor() { }
+  constructor() {
+    console.log('create');
+  }
 
   ngOnInit() {
     setTimeout(() => {

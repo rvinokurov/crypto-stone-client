@@ -21,8 +21,8 @@ export class DeskComponent implements OnInit {
   constructor(private playerService: PlayerService) {
   }
 
-  onDragStart(e: DropEvent) {
-    console.log('enter drag');
+  onDragStart(card) {
+    console.log('enter drag', card);
   }
 
   onCardDrop(e: DropEvent) {
@@ -33,6 +33,7 @@ export class DeskComponent implements OnInit {
 
   ngOnInit() {
     this.player = this.playerService.getPlayer();
+    console.log(this.player);
     this.enemy = this.playerService.getEnemy();
   }
 
