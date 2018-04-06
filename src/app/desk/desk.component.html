@@ -30,7 +30,8 @@
     <div class="desk--playground-cards desk--playground-cards_player">
       <app-card
         *ngFor="let card of playerCardsOnDesk"
-        class="desc-card"
+        class="in-desk"
+
         [card]="card"
         [attackingCard]="card"
         classOnAttack="desc-card--in-attack"
@@ -43,7 +44,6 @@
   <div class="desk--card-pane desk--card-pane_player">
     <app-card
       *ngFor="let card of player.cards"
-      class="desc-card"
       draggable
       (onDragStart)="onDragStart(card)"
       [dragData]="card"
