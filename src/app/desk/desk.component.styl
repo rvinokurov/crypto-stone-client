@@ -1,6 +1,6 @@
-$player-pane-height = 7rem
-$cardHeight = 6rem
-$cardWidth = 4rem
+$player-pane-height = 10rem
+$cardHeight = 7rem
+$cardWidth = 5.5rem
 
 
 
@@ -57,22 +57,22 @@ $cardWidth = 4rem
     position absolute
     text-align center
     width 90%
-    height $cardHeight
+    height $cardHeight + 0.7rem
     left 5%
     &_enemy
       top 50%
-      margin-top -($cardHeight + 1rem)
+      margin-top -($cardHeight + 0.7rem)
 
     &_player
       bottom 50%
-      margin-bottom -($cardHeight + 1rem)
+      margin-bottom -($cardHeight + 0.7rem)
 
   &--card-pane
     z-index 500
     position absolute
     width 24rem
     left calc(50% - 12rem)
-    height 6.6rem
+    height 8rem
     text-align center
 
     &_enemy

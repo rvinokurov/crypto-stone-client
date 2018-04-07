@@ -17,8 +17,14 @@ export class DeskComponent implements OnInit {
 
   playerCardsOnDesk = [];
   enemyCardsOnDesk = [
-    new Card(),
-    new Card(),
+    new Card({
+      attack: 15,
+      defence: 6
+    }),
+    new Card({
+      attack: 9,
+      defence: 11
+    }),
   ];
   player: Player;
 

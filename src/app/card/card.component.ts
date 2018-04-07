@@ -6,6 +6,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import {Card} from '../models/Card';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class CardComponent implements OnInit {
 
   @Input() isPlayerCard  = false;
 
-  @Input() card: Object;
+  @Input() card: Card;
 
   cardState = 'initial';
 

@@ -12,9 +12,18 @@ export class PlayerService {
     return new Player({
       name: 'ChaosCode',
       cards: [
-        new Card(),
-        new Card(),
-        new Card(),
+        new Card({
+          attack: 15,
+          defence: 6
+        }),
+        new Card({
+          attack: 9,
+          defence: 11
+        }),
+        new Card({
+          attack: 8,
+          defence: 14
+        }),
       ],
       sausages: 99
     });
@@ -24,9 +33,18 @@ export class PlayerService {
     return new Player({
       name: 'Gil',
       cards: [
-        new Card(),
-        new Card(),
-        new Card(),
+        new Card({
+          attack: 7,
+          defence: 13
+        }),
+        new Card({
+          attack: 9,
+          defence: 11
+        }),
+        new Card({
+          attack: 8,
+          defence: 23
+        }),
       ],
       sausages: 99
     });
