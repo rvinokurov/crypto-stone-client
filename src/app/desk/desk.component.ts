@@ -1,8 +1,9 @@
-import {Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {DropEvent} from 'ng-drag-drop';
 import {Player} from '../models/Player';
 import {PlayerService} from '../player.service';
 import {Card} from '../models/Card';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-desk',
@@ -12,6 +13,7 @@ import {Card} from '../models/Card';
 })
 export class DeskComponent implements OnInit {
 
+  gameId: string = '';
 
   playerCardsOnDesk = [];
   enemyCardsOnDesk = [
@@ -26,13 +28,11 @@ export class DeskComponent implements OnInit {
 
   showNewCard = false;
 
-  constructor(private playerService: PlayerService, private elementRef: ElementRef) {
+  constructor(private playerService: PlayerService, private  route: ActivatedRoute) {
   }
 
 
-
   selectToAttack(card: Card) {
-    console.log(card);
     card.inAttack = !card.inAttack;
     this.playerCardsOnDesk.forEach((c) => {
       if (c.id !== card.id) {
@@ -53,9 +53,11 @@ export class DeskComponent implements OnInit {
 
 
   ngOnInit() {
-    this.player = this.playerService.getPlayer();
-    console.log(this.player);
-    this.enemy = this.playerService.getEnemy();
+    this.route.params.subscribe((params) => {
+      this.gameId = params.gameId;
+      this.player = this.playerService.getPlayer();
+      this.enemy = this.playerService.getEnemy();
+    });
   }
 
 }

@@ -24,11 +24,10 @@
   </div>
 
   <div class="desk--card-pane desk--card-pane_enemy">
-    <app-card
+    <app-card-deck
       *ngFor="let card of enemy.cards"
-      class="desc-card enemy"
       [card]="card">
-    </app-card>
+    </app-card-deck>
   </div>
 
   <div class="desk--playground" droppable

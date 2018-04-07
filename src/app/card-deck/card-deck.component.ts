@@ -1,26 +1,20 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import {Component, Input, OnInit} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.styl'],
+  selector: 'app-card-deck',
+  templateUrl: './card-deck.component.html',
+  styleUrls: ['./card-deck.component.styl'],
   animations: [
     trigger('cardState', [
       state('initial', style({
         transform: 'scale(0)'
       })),
-      state('boom',   style({
+      state('boom', style({
         transform: 'scale(1.5)'
       })),
-      state('inited',   style({
+      state('inited', style({
         transform: 'scale(1)'
       })),
       transition('initial => boom', animate('150ms ease-out')),
@@ -28,16 +22,14 @@ import {
     ])
   ]
 })
-export class CardComponent implements OnInit {
-
-  @Input() isPlayerCard  = false;
+export class CardDeckComponent implements OnInit {
 
   @Input() card: Object;
-
   cardState = 'initial';
 
   constructor() {
   }
+
 
   ngOnInit() {
     setTimeout(() => {

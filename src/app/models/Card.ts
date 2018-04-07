@@ -5,6 +5,5 @@ export class Card {
 
   constructor() {
     this.id = Math.floor(Math.random() * 10000000);
-    console.log(this.id);
   }
 }

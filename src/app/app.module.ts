@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DeskComponent } from './desk/desk.component';
@@ -11,9 +12,14 @@ import { CardComponent } from './card/card.component';
 import { HeroCardComponent } from './hero-card/hero-card.component';
 import { SausageComponent } from './sausage/sausage.component';
 import {PlayerService} from './player.service';
-import { CrosshairComponent } from './crosshair/crosshair.component';
 import { DeckComponent } from './deck/deck.component';
 import { NewCardComponent } from './new-card/new-card.component';
+import { CardDeckComponent } from './card-deck/card-deck.component';
+
+
+const appRoutes: Routes = [
+  { path: 'game/:id',      component: DeskComponent }
+];
 
 
 @NgModule({
@@ -23,16 +29,20 @@ import { NewCardComponent } from './new-card/new-card.component';
     CardComponent,
     HeroCardComponent,
     SausageComponent,
-    CrosshairComponent,
     DeckComponent,
-    NewCardComponent
+    NewCardComponent,
+    CardDeckComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    RouterModule.forRoot(
+      appRoutes,
+      {  }
+    )
   ],
   providers: [
     PlayerService
