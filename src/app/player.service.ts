@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Player} from './model/Player';
-import {Card} from './model/Card';
+import {Player} from './models/Player';
+import {Card} from './models/Card';
 
 @Injectable()
 export class PlayerService {

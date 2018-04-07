@@ -3,7 +3,7 @@ $cardWidth = 4.6rem
 
 @keyframes pulse {
   0% {
-    box-shadow 0 0 0.2rem 0.2rem #487a8b, inset 0 0 0.2rem 0.2rem #487a8b
+    box-shadow 0 0 0.2rem 0.2rem #487a8b, inset 0 0 2rem 0 #487a8b
     border 1px solid #487a8b
   }
   50% {
@@ -11,10 +11,26 @@ $cardWidth = 4.6rem
     box-shadow 0 0 0.5rem 0.5rem #487a8b, inset 0 0 5rem 0rem rgba(72, 122, 139, 0.61)
   }
   100% {
-    box-shadow 0 0 0.2rem 0.2rem #487a8b, inset 0 0 0.2rem 0.2rem #487a8b
+    box-shadow 0 0 0.2rem 0.2rem #487a8b, inset 0 0 2rem 0 #487a8b
     border 1px solid #487a8b
   }
 }
+
+@keyframes target {
+  0% {
+    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 2rem 0 rgba(139, 14, 0, 0.3)
+    border 1px solid #8b0e00
+  }
+  50% {
+    border 1px solid #8b0e00
+    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 5rem 0rem rgba(139, 14, 0, 0.3)
+  }
+  100% {
+    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 2rem 0 rgba(139, 14, 0, 0.3)
+    border 1px solid #8b0e00
+  }
+}
+
 
 :host
   display: inline-block
@@ -25,6 +41,10 @@ $cardWidth = 4.6rem
   margin 0 -0.5em
   position relative
   transition all 0.2s ease
+  &.drag-handle
+    cursor url('/assets/pointer.cur'), auto
+  &.drag-handle:active
+    cursor url('/assets/pointer.cur'), auto
   .card
     transition all 0.1s ease
   &:hover:not(.enemy):not(.in-desk)
@@ -32,9 +52,14 @@ $cardWidth = 4.6rem
     margin -0.55em 0.6em -0.55em 0.6em
     width $cardWidth * 1.1
     height $cardHeight * 1.1
-    cursor pointer
+    cursor url('/assets/pointer.cur'), auto
     border-radius 0.44rem
-  &.in-desk:hover
+
+  &.target:hover
+    .card
+      animation: target 1.4s infinite ease-in-out;
+
+  &.in-attack:not(.enemy)
     width $cardWidth * 1.1
     height $cardHeight * 1.1
     margin -0.55em 0
@@ -47,6 +72,13 @@ $cardWidth = 4.6rem
 
 
 
+:host.in-desk
+  margin 0 0.1rem
+
+:host.enemy
+  .card
+    box-shadow 0 0 0.3rem 0.3rem #ee7c00
+
 
 .card
   height 100%
@@ -56,6 +88,7 @@ $cardWidth = 4.6rem
   border 1px solid #084d8b
   background-color #ffffff
   box-shadow 0 0 0.3rem 0.3rem #487a8b
+
 
 
 

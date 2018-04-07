@@ -1,4 +1,7 @@
-<div class="desk">
+<div class="desk"
+     [class.desk_attack-mode]="playerInAttack === true">
+
+
   <div class="desk--player-name desk--player-name_enemy">
     {{enemy.name}}
   </div>
@@ -7,7 +10,7 @@
   </div>
 
 
-  <app-sausage  [count]="enemy.sausages"></app-sausage>
+  <app-sausage [count]="enemy.sausages"></app-sausage>
   <app-sausage isPlayer="true" [count]="player.sausages"></app-sausage>
 
   <app-hero-card class="desk--hero-card desk--hero-card_enemy"></app-hero-card>
@@ -17,25 +20,30 @@
 
   <div class="desk--card-pane desk--card-pane_enemy">
     <app-card
-        *ngFor="let card of enemy.cards"
-        class="desc-card enemy"
-        [card]="card">
+      *ngFor="let card of enemy.cards"
+      class="desc-card enemy"
+      [card]="card">
     </app-card>
   </div>
 
   <div class="desk--playground" droppable
        (onDrop)="onCardDrop($event)">
-    <div class="desk--playground-cards desk--playground-cards_enemy"></div>
+    <div class="desk--playground-cards desk--playground-cards_enemy">
+      <app-card
+        [class.target]="playerInAttack === true"
+        *ngFor="let card of enemyCardsOnDesk"
+        class="in-desk enemy"
+        [card]="card">
+      </app-card>
+    </div>
 
     <div class="desk--playground-cards desk--playground-cards_player">
       <app-card
         *ngFor="let card of playerCardsOnDesk"
         class="in-desk"
-
+        (click)="selectToAttack(card)"
         [card]="card"
-        [attackingCard]="card"
-        classOnAttack="desc-card--in-attack"
-        appLaunchAnAttack
+        [class.in-attack]="card.inAttack === true"
         isPlayerCard="true">
       </app-card>
     </div>
@@ -47,7 +55,7 @@
       draggable
       (onDragStart)="onDragStart(card)"
       [dragData]="card"
-      [dragClass]="'inDrag'"
+      [dragClass]="'draggableClone'"
       [dragTransitClass]="'draggableClone'"
       [card]="card"
       isPlayerCard="true">
