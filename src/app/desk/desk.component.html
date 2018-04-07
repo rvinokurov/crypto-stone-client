@@ -1,6 +1,8 @@
 <div class="desk"
      [class.desk_attack-mode]="playerInAttack === true">
 
+  <app-new-card *ngIf="showNewCard === true"></app-new-card>
+
   <app-deck class="enemy"></app-deck>
   <app-deck class="player"></app-deck>
 
@@ -56,7 +58,6 @@
     <app-card
       *ngFor="let card of player.cards"
       draggable
-      (onDragStart)="onDragStart(card)"
       [dragData]="card"
       [dragClass]="'draggableClone'"
       [dragTransitClass]="'draggableClone'"

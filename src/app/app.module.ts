@@ -13,6 +13,7 @@ import { SausageComponent } from './sausage/sausage.component';
 import {PlayerService} from './player.service';
 import { CrosshairComponent } from './crosshair/crosshair.component';
 import { DeckComponent } from './deck/deck.component';
+import { NewCardComponent } from './new-card/new-card.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DeckComponent } from './deck/deck.component';
     HeroCardComponent,
     SausageComponent,
     CrosshairComponent,
-    DeckComponent
+    DeckComponent,
+    NewCardComponent
   ],
   imports: [
     BrowserModule,

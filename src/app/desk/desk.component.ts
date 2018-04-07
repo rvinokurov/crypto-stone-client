@@ -24,22 +24,12 @@ export class DeskComponent implements OnInit {
 
   playerInAttack = false;
 
+  showNewCard = false;
+
   constructor(private playerService: PlayerService, private elementRef: ElementRef) {
   }
 
-  onDragStart(card) {
-    console.log('enter drag', card);
-  }
 
-  onCrosshairClick($event: MouseEvent) {
-    console.log('emited', $event);
-    const event = <MouseEvent> new Event('click');
-    //Object.assign(event, $event);
-    event.clientX = $event.clientX;
-    event.clientY = $event.clientY;
-    //const event = {...(new Event('click')), ...$event};
-    this.elementRef.nativeElement.dispatchEvent(event);
-  }
 
   selectToAttack(card: Card) {
     console.log(card);
@@ -55,6 +45,10 @@ export class DeskComponent implements OnInit {
   onCardDrop(e: DropEvent) {
     this.playerCardsOnDesk.push(e.dragData);
     this.player.cards.pop();
+    setTimeout(() => {
+      this.showNewCard = true;
+    }, 1000);
+
   }
 
 
