@@ -1,6 +1,9 @@
 <div class="desk"
      [class.desk_attack-mode]="playerInAttack === true">
 
+  <app-deck class="enemy"></app-deck>
+  <app-deck class="player"></app-deck>
+
 
   <div class="desk--player-name desk--player-name_enemy">
     {{enemy.name}}

@@ -3,33 +3,34 @@ $cardWidth = 4.6rem
 
 @keyframes pulse {
   0% {
-    box-shadow 0 0 0.2rem 0.2rem #487a8b, inset 0 0 2rem 0 #487a8b
-    border 1px solid #487a8b
+    box-shadow 0 0 0.2rem 0.2rem #b58bad, inset 0 0 2rem 0 #b58bad
+    border 1px solid #b58bad
   }
   50% {
-    border 1px solid #487a8b
-    box-shadow 0 0 0.5rem 0.5rem #487a8b, inset 0 0 5rem 0rem rgba(72, 122, 139, 0.61)
+    border 1px solid #b58bad
+    box-shadow 0 0 0.5rem 0.5rem #b58bad, inset 0 0 5rem 0rem rgba(181, 139, 173, 0.61)
   }
   100% {
-    box-shadow 0 0 0.2rem 0.2rem #487a8b, inset 0 0 2rem 0 #487a8b
-    border 1px solid #487a8b
+    box-shadow 0 0 0.2rem 0.2rem #b58bad, inset 0 0 2rem 0 #b58bad
+    border 1px solid #b58bad
   }
 }
 
 @keyframes target {
   0% {
-    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 2rem 0 rgba(139, 14, 0, 0.3)
-    border 1px solid #8b0e00
+    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 2rem 0 rgba(238, 124, 0, 0.3)
+    border 1px solid #ee7c00
   }
   50% {
-    border 1px solid #8b0e00
-    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 5rem 0rem rgba(139, 14, 0, 0.3)
+    border 1px solid #ee7c00
+    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 5rem 0rem rgba(238, 124, 0, 0.3)
   }
   100% {
-    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 2rem 0 rgba(139, 14, 0, 0.3)
-    border 1px solid #8b0e00
+    box-shadow  0 0 0.3rem 0.3rem #ee7c00, inset 0 0 2rem 0 rgba(238, 124, 0, 0.3)
+    border 1px solid #ee7c00
   }
 }
+
 
 
 :host
@@ -78,16 +79,23 @@ $cardWidth = 4.6rem
 :host.enemy
   .card
     box-shadow 0 0 0.3rem 0.3rem #ee7c00
+    border 1px solid #ee7c00
+    background-image url('/assets/deck-enemy.jpg');
+    background-size cover
+    background-repeat no-repeat
 
+:host.enemy.in-desk
+  .card
+    background white
 
 .card
   height 100%
   width 100%
   display inline-block
   border-radius 0.4rem
-  border 1px solid #084d8b
+  border 1px solid #b58bad
   background-color #ffffff
-  box-shadow 0 0 0.3rem 0.3rem #487a8b
+  box-shadow 0 0 0.3rem 0.3rem #b58bad
 
 
 

@@ -1,0 +1,41 @@
+:host
+  width 5rem
+  height 7rem
+  position absolute
+
+  &.enemy
+    top 3rem
+    left 3rem
+    .deck
+      background-image url('/assets/deck-enemy.jpg');
+      background-size cover
+      background-repeat no-repeat
+
+  &.player
+    bottom 2rem
+    right 3rem
+
+    .deck
+      background-image url('/assets/deck.jpg');
+      background-size cover
+      background-repeat no-repeat
+
+  .deck
+    width 4rem
+    height 6rem
+    border 1px solid #2a2a2a
+    border-radius 0.2rem
+    position absolute
+    top 0
+    left 0
+    z-index 2000
+    box-sizing border-box
+    &_1
+      z-index 1999
+      top 0.1rem
+      left 0.1rem
+    &_2
+      z-index 1998
+      top 0.22rem
+      left 0.22rem
+
