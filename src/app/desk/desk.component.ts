@@ -50,6 +50,8 @@ export class DeskComponent implements OnInit {
 
   showNewCard = false;
 
+  playerId= '';
+
   constructor(private playerService: PlayerService, private  route: ActivatedRoute) {
   }
 
@@ -77,6 +79,7 @@ export class DeskComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.gameId = params.gameId;
+      this.playerId  = params.playerId;
       this.player = this.playerService.getPlayer();
       this.enemy = this.playerService.getEnemy();
     });
