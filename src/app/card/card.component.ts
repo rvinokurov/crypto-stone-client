@@ -1,11 +1,5 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import {Component, Input, OnInit} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Card} from '../models/Card';
 
 
@@ -18,10 +12,10 @@ import {Card} from '../models/Card';
       state('initial', style({
         transform: 'scale(0)'
       })),
-      state('boom',   style({
+      state('boom', style({
         transform: 'scale(1.5)'
       })),
-      state('inited',   style({
+      state('inited', style({
         transform: 'scale(1)'
       })),
       transition('initial => boom', animate('150ms ease-out')),
@@ -31,13 +25,21 @@ import {Card} from '../models/Card';
 })
 export class CardComponent implements OnInit {
 
-  @Input() isPlayerCard  = false;
+  @Input() isPlayerCard = false;
 
   @Input() card: Card;
 
   cardState = 'initial';
 
   constructor() {
+  }
+
+  get defenceImage() {
+    return `url('/assets/shield-${this.card.defence.type}.png')`;
+  }
+
+  get attackImage() {
+    return `url('/assets/sword-${this.card.attack.type}.png')`;
   }
 
   ngOnInit() {

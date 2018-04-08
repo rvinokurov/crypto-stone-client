@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Player} from './models/Player';
-import {Card} from './models/Card';
+import {Card, elemental} from './models/Card';
 
 @Injectable()
 export class PlayerService {
@@ -10,19 +10,43 @@ export class PlayerService {
 
   getPlayer() {
     return new Player({
-      name: 'ChaosCode',
+      name: 'Ooooh!',
       cards: [
         new Card({
-          attack: 15,
-          defence: 6
+          attack: {
+            value: 15,
+            type: elemental.water
+          },
+          defence: {
+            value: 6,
+            type: elemental.fire
+          },
+          sausageSteal: 3,
+          avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/668104.svg',
         }),
         new Card({
-          attack: 9,
-          defence: 11
+          attack: {
+            value: 9,
+            type: elemental.air
+          },
+          defence: {
+            value: 11,
+            type: elemental.air
+          },
+          sausageSteal: 9,
+          avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/668093.svg',
         }),
         new Card({
-          attack: 8,
-          defence: 14
+          attack: {
+            value: 8,
+            type: elemental.earth
+          },
+          defence: {
+            value: 14,
+            type: elemental.fire
+          },
+          sausageSteal: 12,
+          avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/668022.svg'
         }),
       ],
       sausages: 99
@@ -31,19 +55,40 @@ export class PlayerService {
 
   getEnemy() {
     return new Player({
-      name: 'Gil',
+      name: 'Yeaah',
       cards: [
         new Card({
-          attack: 7,
-          defence: 13
+          attack: {
+            value: 7,
+            type: elemental.fire
+          },
+          defence: {
+            value: 13,
+            type: elemental.air
+          },
+          avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/668104.svg',
         }),
         new Card({
-          attack: 9,
-          defence: 11
+          attack: {
+            value: 9,
+            type: elemental.earth
+          },
+          defence: {
+            value: 11,
+            type: elemental.earth
+          },
+          avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/668093.svg',
         }),
         new Card({
-          attack: 8,
-          defence: 23
+          attack: {
+            value: 8,
+            type: elemental.earth
+          },
+          defence: {
+            value: 23,
+            type: elemental.water
+          },
+          avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/668022.svg'
         }),
       ],
       sausages: 99

@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {DropEvent} from 'ng-drag-drop';
 import {Player} from '../models/Player';
 import {PlayerService} from '../player.service';
-import {Card} from '../models/Card';
+import {Card, elemental} from '../models/Card';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -13,17 +13,33 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class DeskComponent implements OnInit {
 
-  gameId: string = '';
+  gameId = '';
 
   playerCardsOnDesk = [];
   enemyCardsOnDesk = [
     new Card({
-      attack: 15,
-      defence: 6
+      attack: {
+        value: 15,
+        type: elemental.earth
+      },
+      defence: {
+        value: 6,
+        type: elemental.fire
+      },
+      sausageSteal: 8,
+      avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/658220.svg'
     }),
     new Card({
-      attack: 9,
-      defence: 11
+      attack: {
+        value: 9,
+        type: elemental.air
+      },
+      defence: {
+        value: 11,
+        type: elemental.fire
+      },
+      sausageSteal: 19,
+      avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/660109.svg'
     }),
   ];
   player: Player;
@@ -52,7 +68,7 @@ export class DeskComponent implements OnInit {
     this.playerCardsOnDesk.push(e.dragData);
     this.player.cards.pop();
     setTimeout(() => {
-      this.showNewCard = true;
+      // this.showNewCard = true;
     }, 1000);
 
   }
