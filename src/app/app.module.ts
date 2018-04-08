@@ -18,7 +18,7 @@ import { CardDeckComponent } from './card-deck/card-deck.component';
 
 
 const appRoutes: Routes = [
-  { path: 'games/:gameId/players/:playerId',      component: DeskComponent }
+  { path: 'table/:gameId/:playerId',      component: DeskComponent }
 ];
 
 

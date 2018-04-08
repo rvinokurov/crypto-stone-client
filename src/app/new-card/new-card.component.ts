@@ -1,4 +1,5 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, Renderer2} from '@angular/core';
+import {Card} from '../models/Card';
 
 @Component({
   selector: 'app-new-card',
@@ -10,6 +11,8 @@ export class NewCardComponent implements OnInit {
   flipped = false;
   showed = false;
 
+  @Input() card: Card;
+
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
   }
 
@@ -20,6 +23,14 @@ export class NewCardComponent implements OnInit {
         this.flipped = true;
       }, 200);
     }, 10);
+  }
+
+  get defenceImage() {
+    return `url('/assets/shield-${this.card.defence.type}.png')`;
+  }
+
+  get attackImage() {
+    return `url('/assets/sword-${this.card.attack.type}.png')`;
   }
 
   @HostListener('click')

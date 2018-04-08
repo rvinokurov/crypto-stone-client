@@ -50,7 +50,9 @@ export class DeskComponent implements OnInit {
 
   showNewCard = false;
 
-  playerId= '';
+  playerId = '';
+
+  newPlayerCard: Card;
 
   constructor(private playerService: PlayerService, private  route: ActivatedRoute) {
   }
@@ -70,6 +72,18 @@ export class DeskComponent implements OnInit {
     this.playerCardsOnDesk.push(e.dragData);
     this.player.cards.pop();
     setTimeout(() => {
+      this.newPlayerCard = new Card({
+        attack: {
+          value: 9,
+          type: elemental.air
+        },
+        defence: {
+          value: 11,
+          type: elemental.fire
+        },
+        sausageSteal: 19,
+        avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/622943.svg'
+      });
       this.showNewCard = true;
     }, 1000);
 
@@ -79,9 +93,25 @@ export class DeskComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.gameId = params.gameId;
-      this.playerId  = params.playerId;
+      this.playerId = params.playerId;
       this.player = this.playerService.getPlayer();
       this.enemy = this.playerService.getEnemy();
+
+      setTimeout(() => {
+        this.newPlayerCard = new Card({
+          attack: {
+            value: 9,
+            type: elemental.air
+          },
+          defence: {
+            value: 11,
+            type: elemental.fire
+          },
+          sausageSteal: 19,
+          avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/622943.svg'
+        });
+        this.showNewCard = true;
+      }, 10);
     });
   }
 

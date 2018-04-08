@@ -1,9 +1,26 @@
 <div class="new-card"
      [class.new-card_flipped]="flipped===true">
   <div class="new-card--face">
+    <div class="new-card--sausage-generation">
+      <div class="new-card--value">{{card.sausageGeneration}}</div>
+    </div>
+    <div class="new-card--sausage-steal">
+      <div class="new-card--value">{{card.sausageSteal}}</div>
+    </div>
+
+    <div class="new-card--defence" [style.background-image]="defenceImage">
+      <div class="new-card--value">{{card.defence.value}}</div>
+    </div>
+    <div class="new-card--attack" [style.background-image]="attackImage">
+      <div class="new-card--value">{{card.attack.value}}</div>
+    </div>
+
+    <div class="new-card--avatar"
+         [style.background-image]="card.avatar"></div>
 
   </div>
   <div class="new-card--deck">
+
 
   </div>
 </div>

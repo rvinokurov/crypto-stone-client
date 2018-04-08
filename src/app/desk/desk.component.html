@@ -1,7 +1,10 @@
 <div class="desk"
      [class.desk_attack-mode]="playerInAttack === true">
 
-  <app-new-card *ngIf="showNewCard === true"></app-new-card>
+  <app-new-card
+    *ngIf="showNewCard === true"
+    [card]="newPlayerCard">
+  </app-new-card>
 
   <app-deck class="enemy"></app-deck>
   <app-deck class="player"></app-deck>
