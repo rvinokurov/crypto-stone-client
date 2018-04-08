@@ -68,7 +68,7 @@ export class DeskComponent implements OnInit {
     this.playerCardsOnDesk.push(e.dragData);
     this.player.cards.pop();
     setTimeout(() => {
-      // this.showNewCard = true;
+      this.showNewCard = true;
     }, 1000);
 
   }
