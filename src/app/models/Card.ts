@@ -10,7 +10,7 @@ export class Card {
   inDesk = false;
   id = 0;
   attack = {
-    type : elemental.fire,
+    type: elemental.fire,
     value: 0
   };
   defence = {
@@ -21,11 +21,12 @@ export class Card {
   sausageGeneration = 10;
   sausageSteal = 0;
 
-  constructor({attack, defence, avatar, sausageSteal = 0}) {
+  constructor({id, attack, defence, avatar, sausageSteal = 0, sausageGeneration = 10}) {
     this.attack = attack;
     this.defence = defence;
     this.avatar = `url(${avatar})`;
     this.sausageSteal = sausageSteal;
-    this.id = Math.floor(Math.random() * 10000000);
+    this.sausageGeneration = sausageGeneration;
+    this.id = id;
   }
 }

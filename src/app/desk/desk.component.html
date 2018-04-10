@@ -1,4 +1,5 @@
 <div class="desk"
+     *ngIf="player"
      [class.desk_attack-mode]="playerInAttack === true">
 
   <div class="desk--grass-1"></div>
@@ -24,7 +25,7 @@
 
 
   <app-sausage [count]="enemy.sausages"></app-sausage>
-  <app-sausage isPlayer="true" [count]="player.sausages"></app-sausage>
+  <app-sausage *ngIf="player" isPlayer="true" [count]="player.sausages"></app-sausage>
 
   <app-hero-card class="desk--hero-card desk--hero-card_enemy"
                  [player]="enemy"></app-hero-card>

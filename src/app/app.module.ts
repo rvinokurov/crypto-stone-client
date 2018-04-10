@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,7 +18,7 @@ import { CardDeckComponent } from './card-deck/card-deck.component';
 
 
 const appRoutes: Routes = [
-  { path: 'table/:gameId/:playerId',      component: DeskComponent },
+  { path: 'table/:guid/:puid',      component: DeskComponent },
 ];
 
 
@@ -35,6 +35,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
