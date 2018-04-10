@@ -11,6 +11,9 @@ export class PlayerService {
   getPlayer() {
     return new Player({
       name: 'Ooooh!',
+      hero: {
+        url: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/545030.svg',
+      },
       cards: [
         new Card({
           attack: {
@@ -56,6 +59,9 @@ export class PlayerService {
   getEnemy() {
     return new Player({
       name: 'Yeaah',
+      hero: {
+        url: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/539939.svg',
+      },
       cards: [
         new Card({
           attack: {

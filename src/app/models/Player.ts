@@ -1,5 +1,9 @@
 import {Card} from './Card';
 
+export interface Hero {
+  url: string
+}
+
 
 export class Player {
 
@@ -8,6 +12,8 @@ export class Player {
   name: string;
 
   sausages: number;
+
+  hero: Hero;
 
   constructor(player: playerModel) {
     Object.assign(<Player>this, player);

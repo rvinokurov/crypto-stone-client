@@ -9,9 +9,61 @@ $cardWidth = 5.5rem
   cursor url('/assets/default.cur'), auto
   width 100%
   height 100%
-  background-color #273745
+  //background-color #273745
+  background-image url('/assets/wood.png')
   position relative
-  box-shadow inset 0 0 5em 1em #17222e
+  box-shadow inset 0 0 1rem 0.5rem rgba(23, 34, 46, 0.5)
+
+  //&--grass-1
+  //  width: 40%;
+  //  height: 40%;
+  //  background-image: url(/assets/grass-bg-1.png);
+  //  background-repeat: no-repeat;
+  //  background-position: 50% 50%;
+  //  background-size: contain;
+  //  position: absolute;
+  //  bottom: -5%;
+  //  left: -5%;
+  //  opacity: 0.5;
+  //  transform: rotateZ(15deg);
+  //&--grass-2
+  //  width: 40%;
+  //  height: 40%;
+  //  background-image: url(/assets/grass-bg-2.png);
+  //  background-repeat: no-repeat;
+  //  background-position: 50% 50%;
+  //  background-size: contain;
+  //  position: absolute;
+  //  -webkit-transform: rotateZ(180deg);
+  //  transform: rotateZ(211deg);
+  //  top: -10%;
+  //  right: -7%;
+  //  opacity: 0.5;
+  //&--grass-3
+  //  width 8rem
+  //  height 8em
+  //  background-image url('/assets/grass-bg-3.png')
+  //  background-repeat no-repeat
+  //  background-position 50% 50%
+  //  background-size contain
+  //  position absolute
+  //  bottom 0
+  //  right 3rem
+  //&--grass-4
+  //  width: 33%;
+  //  height: 33%;
+  //  background-image: url(/assets/grass-bg-4.png);
+  //  background-repeat: no-repeat;
+  //  background-position: 50% 50%;
+  //  background-size: contain;
+  //  position: absolute;
+  //  -webkit-transform: rotateZ(180deg);
+  //  transform: rotateZ(147deg);
+  //  top: -8%;
+  //  left: 0rem;
+  //  opacity: 0.7;
+
+
 
   &_attack-mode
     cursor url('/assets/attack.cur'), auto
@@ -23,12 +75,14 @@ $cardWidth = 5.5rem
     color black
     position absolute
     border-radius 1rem
-    height 1rem
-    line-height height
+    border 1px solid #6b4627
+    height 1.1rem
+    line-height 1.1rem
+    vertical-align middle
     font-size 0.8rem
     z-index 2000
 
-    $playerHorizontal = 6.5rem
+    $playerHorizontal = 8rem
     $playerVertical = 8rem
 
     &_player
@@ -41,15 +95,45 @@ $cardWidth = 5.5rem
 
 
   $playgroundOffset = $player-pane-height
+
+
   &--playground
+    box-sizing border-box
     position absolute
     width calc(100% - 3em)
     height "calc(100% - %s)" % ($playgroundOffset * 2)
-    border-radius 20%
+    border-bottom-left-radius: 20% 20%;
+    border-bottom-right-radius: 20% 20%;
+    border-top-left-radius: 20% 20%;
+    border-top-right-radius: 20% 20%;
     top $playgroundOffset
-    background-color #026d44
-    box-shadow inset 0 0 12em 1em #023c25, 0 0 0.5em 0 #023c25
+    background-image url('/assets/grass3.jpg')
+    box-shadow inset 0 0 12em 1em #023c25, 0 0 10px 5px #023c25
     left 1.5em
+    z-index 20
+
+  &--playground-border
+    z-index 10
+    content ''
+    display block
+    box-sizing border-box
+    position absolute
+    width calc(100% - 3em + 20px)
+    height "calc(100% - %s + 20px)" % ($playgroundOffset * 2)
+    border-bottom-left-radius: 20% 20%;
+    border-bottom-right-radius: 20% 20%;
+    border-top-left-radius: 20% 20%;
+    border-top-right-radius: 20% 20%;
+    top 'calc(%s - 10px)' % $playgroundOffset
+    background green
+    box-shadow inset 0 0 6px 4px #023c25, 0 0 0.5rem 0 #3b3a3c
+    left calc(1.5em - 10px)
+    border-bottom-left-radius: 20% 50%;
+    border-bottom-right-radius: 20% 50%;
+    border-top-left-radius: 20% 50%;
+    border-top-right-radius: 20% 50%;
+
+
     &:active
       cursor url('/assets/pointer.cur'), auto
 
@@ -85,11 +169,11 @@ $cardWidth = 5.5rem
     z-index 1000
     position absolute
     &_enemy
-      top 1rem
+      top 3rem
       right 1rem
 
     &_player
-      bottom 1rem
+      bottom 3rem
       left 1rem
 
 

@@ -1,6 +1,11 @@
 <div class="desk"
      [class.desk_attack-mode]="playerInAttack === true">
 
+  <div class="desk--grass-1"></div>
+  <div class="desk--grass-2"></div>
+  <div class="desk--grass-3"></div>
+  <div class="desk--grass-4"></div>
+
   <app-new-card
     *ngIf="showNewCard === true"
     [card]="newPlayerCard">
@@ -21,10 +26,13 @@
   <app-sausage [count]="enemy.sausages"></app-sausage>
   <app-sausage isPlayer="true" [count]="player.sausages"></app-sausage>
 
-  <app-hero-card class="desk--hero-card desk--hero-card_enemy"></app-hero-card>
+  <app-hero-card class="desk--hero-card desk--hero-card_enemy"
+                 [player]="enemy"></app-hero-card>
   <div class="desk--pane desk--pane_enemy">
 
   </div>
+
+
 
   <div class="desk--card-pane desk--card-pane_enemy">
     <app-card-deck
@@ -33,6 +41,7 @@
     </app-card-deck>
   </div>
 
+  <div class="desk--playground-border"></div>
   <div class="desk--playground" droppable
        (onDrop)="onCardDrop($event)">
     <div class="desk--playground-cards desk--playground-cards_enemy">
@@ -69,7 +78,8 @@
   </div>
 
 
-  <app-hero-card class="desk--hero-card desk--hero-card_player" isPlayerHero="true"></app-hero-card>
+  <app-hero-card class="desk--hero-card desk--hero-card_player" isPlayerHero="true"
+                 [player]="player"></app-hero-card>
   <div class="desk--pane desk--pane_player">
 
   </div>

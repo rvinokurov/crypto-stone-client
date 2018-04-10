@@ -18,7 +18,7 @@ import { CardDeckComponent } from './card-deck/card-deck.component';
 
 
 const appRoutes: Routes = [
-  { path: 'table/:gameId/:playerId',      component: DeskComponent }
+  { path: 'table/:gameId/:playerId',      component: DeskComponent },
 ];
 
 
@@ -31,7 +31,7 @@ const appRoutes: Routes = [
     SausageComponent,
     DeckComponent,
     NewCardComponent,
-    CardDeckComponent
+    CardDeckComponent,
   ],
   imports: [
     BrowserModule,
