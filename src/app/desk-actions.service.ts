@@ -16,7 +16,7 @@ export enum ActionSubject {
 }
 
 export enum ActionType {
-  playCard = 'play-card',
+  playCard = 'play',
   draw = 'draw'
 }
 
@@ -32,6 +32,7 @@ export class DeskActionsService {
 
   private actionObservable: Observable<ActionEvent>;
   private newPlayerCardSubject = new Subject<Card>();
+  private enemyPlayCardSubject = new Subject<Card>();
   private newEnemyCardSubject = new Subject<void>();
 
   constructor(private socketIoService: SocketIoService) {
@@ -48,8 +49,15 @@ export class DeskActionsService {
     return this.newEnemyCardSubject;
   }
 
+  get onEnemyPlayCard() {
+    return this.enemyPlayCardSubject;
+  }
+
   processAction(action: ActionEvent) {
     console.log(action);
+    if (action.type === ActionType.playCard && action.object === ActionObject.enemy) {
+      this.enemyPlayCardSubject.next(GameModel.createCard(action.payload));
+    }
     if (action.type === ActionType.draw) {
       if (action.subject === ActionSubject.card) {
         if (action.object === ActionObject.player) {
@@ -63,7 +71,7 @@ export class DeskActionsService {
   }
 
   playCard(card: Card) {
-    this.socketIoService.action('play-card', 'card', {id: card.id});
+    this.socketIoService.action(ActionType.playCard, ActionSubject.card, {id: card.id});
   }
 
 
