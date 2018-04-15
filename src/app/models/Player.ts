@@ -1,8 +1,6 @@
 import {Card} from './Card';
+import {Hero} from './Hero';
 
-export interface Hero {
-  url: string
-}
 
 
 export class Player {

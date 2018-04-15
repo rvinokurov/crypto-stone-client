@@ -6,6 +6,9 @@ import {Player} from '../models/Player';
 import {PlayerService} from '../player.service';
 import {Card, elemental} from '../models/Card';
 import {ActivatedRoute} from '@angular/router';
+import {GameService} from '../game.service';
+import {GameModel} from '../models/Game';
+import {Enemy} from '../models/Enemy';
 
 @Component({
   selector: 'app-desk',
@@ -16,14 +19,13 @@ import {ActivatedRoute} from '@angular/router';
 export class DeskComponent implements OnInit {
 
   guid = '';
-
   puid = '';
 
   playerCardsOnDesk = [];
   enemyCardsOnDesk = [];
-  player: Player;
 
-  enemy: Player;
+  player: Player;
+  enemy: Enemy;
 
   playerInAttack = false;
 
@@ -33,7 +35,7 @@ export class DeskComponent implements OnInit {
   newPlayerCard: Card;
 
   constructor(
-    private playerService: PlayerService,
+    private gameService: GameService,
     private  route: ActivatedRoute,
     private socket: Socket
   ) {
@@ -53,22 +55,22 @@ export class DeskComponent implements OnInit {
   onCardDrop(e: DropEvent) {
     this.playerCardsOnDesk.push(e.dragData);
     this.player.cards.pop();
-    setTimeout(() => {
-      this.newPlayerCard = new Card({
-        id: 0,
-        attack: {
-          value: 9,
-          type: elemental.air
-        },
-        defence: {
-          value: 11,
-          type: elemental.fire
-        },
-        sausageSteal: 19,
-        avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/622943.svg'
-      });
-      this.showNewCard = true;
-    }, 1000);
+    // setTimeout(() => {
+    //   this.newPlayerCard = new Card({
+    //     id: 0,
+    //     attack: {
+    //       value: 9,
+    //       type: elemental.air
+    //     },
+    //     defence: {
+    //       value: 11,
+    //       type: elemental.fire
+    //     },
+    //     sausageSteal: 19,
+    //     avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/622943.svg'
+    //   });
+    //   this.showNewCard = true;
+    // }, 1000);
 
   }
 
@@ -88,10 +90,11 @@ export class DeskComponent implements OnInit {
         this.socket.emit('register', this.puid);
       });
 
-      this.playerService.getPlayer(this.guid, this.puid).subscribe(player => {
-        this.player = player;
+      this.gameService.getGame(this.guid, this.puid).subscribe((game: GameModel) => {
+        this.player = game.player;
+        this.enemy = game.enemy;
       });
-      this.enemy = this.playerService.getEnemy();
+      // this.enemy = this.playerService.getEnemy();
 
       // setTimeout(() => {
       //   this.newPlayerCard = new Card({

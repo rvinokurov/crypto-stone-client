@@ -12,10 +12,10 @@ import { DeskComponent } from './desk/desk.component';
 import { CardComponent } from './card/card.component';
 import { HeroCardComponent } from './hero-card/hero-card.component';
 import { SausageComponent } from './sausage/sausage.component';
-import {PlayerService} from './player.service';
 import { DeckComponent } from './deck/deck.component';
 import { NewCardComponent } from './new-card/new-card.component';
 import { CardDeckComponent } from './card-deck/card-deck.component';
+import { GameService } from './game.service';
 
 
 const appRoutes: Routes = [
@@ -50,7 +50,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     SocketIoModule.forRoot(config)
   ],
   providers: [
-    PlayerService
+    GameService
   ],
   bootstrap: [AppComponent]
 })

@@ -24,7 +24,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class CardDeckComponent implements OnInit {
 
-  @Input() card: Object;
+  @Input() card: Number;
   cardState = 'initial';
 
   constructor() {

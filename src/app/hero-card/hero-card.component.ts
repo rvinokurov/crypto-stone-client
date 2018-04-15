@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Player} from '../models/Player';
+import {Hero} from '../models/Hero';
 
 @Component({
   selector: 'app-hero-card',
@@ -11,18 +11,18 @@ export class HeroCardComponent implements OnInit {
 
   @Input() isPlayerHero = false;
 
-  @Input() player: Player;
+  @Input() hero: Hero;
 
   constructor(private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
-    console.log(this.player);
+    console.log(this.hero);
   }
 
   get heroImage() {
-    if (this.player) {
-      return this.sanitizer.bypassSecurityTrustStyle(`url('${this.player.hero.url}')`);
+    if (this.hero) {
+      return this.sanitizer.bypassSecurityTrustStyle(`url('${this.hero.url}')`);
     }
     return '';
   }

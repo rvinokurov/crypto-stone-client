@@ -28,7 +28,7 @@
   <app-sausage *ngIf="player" isPlayer="true" [count]="player.sausages"></app-sausage>
 
   <app-hero-card class="desk--hero-card desk--hero-card_enemy"
-                 [player]="enemy"></app-hero-card>
+                 [hero]="enemy.hero"></app-hero-card>
   <div class="desk--pane desk--pane_enemy">
 
   </div>
@@ -80,7 +80,7 @@
 
 
   <app-hero-card class="desk--hero-card desk--hero-card_player" isPlayerHero="true"
-                 [player]="player"></app-hero-card>
+                 [hero]="player.hero"></app-hero-card>
   <div class="desk--pane desk--pane_player">
 
   </div>
