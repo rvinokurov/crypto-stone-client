@@ -39,6 +39,8 @@
 
   <div class="desk--card-pane desk--card-pane_enemy">
     <app-card-deck
+      [style.margin-left]="enemyCardMargin"
+      [style.margin-right]="enemyCardMargin"
       *ngFor="let card of enemy.cards"
       [card]="card">
     </app-card-deck>
@@ -70,6 +72,9 @@
 
   <div class="desk--card-pane desk--card-pane_player">
     <app-card
+      class="player-card-hover"
+      [style.margin-left]="playerCardMargin"
+      [style.margin-right]="playerCardMargin"
       *ngFor="let card of player.cards"
       draggable
       [dragData]="card"

@@ -8,7 +8,12 @@ export class GameModel {
 
   enemy: Enemy;
 
+  playerCardsOnDesk: Card[];
+  enemyCardsOnDesk: Card[];
+
   constructor(game: any) {
+    this.playerCardsOnDesk = game.player_desk.map(GameModel.createCard);
+    this.enemyCardsOnDesk = game.opponent_desk.map(GameModel.createCard);
     this.enemy = new Enemy({
       cardsInHand: game.opponent_hand,
       name: game.opponent_name,
