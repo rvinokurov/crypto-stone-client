@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Socket} from 'ng-socket-io';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class SocketIoService {
@@ -25,6 +26,10 @@ export class SocketIoService {
       this.socket.emit('register', this.puid);
     });
 
+  }
+
+  subscribe<T>(action): Observable<T> {
+    return this.socket.fromEvent(action);
   }
 
   action(type: string, subject: string, payload: any) {

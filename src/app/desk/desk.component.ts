@@ -90,6 +90,14 @@ export class DeskComponent implements OnInit {
         this.player = game.player;
         this.enemy = game.enemy;
       });
+
+      this.deskActionsService.onNewPlayerCard.subscribe((card: Card) => {
+        this.player.cards.push(card);
+      });
+
+      this.deskActionsService.onNewEnemyrCard.subscribe(() => {
+        ++this.enemy.cardsInHand;
+      });
       // this.enemy = this.playerService.getEnemy();
 
       // setTimeout(() => {
