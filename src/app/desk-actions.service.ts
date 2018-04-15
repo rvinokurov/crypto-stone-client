@@ -9,7 +9,7 @@ export class DeskActionsService {
   }
 
   playCard(card: Card) {
-    this.socketIoService.action('play-card', {id: card.id});
+    this.socketIoService.action('play-card', 'card', {id: card.id});
   }
 
 }

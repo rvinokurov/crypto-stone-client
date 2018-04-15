@@ -27,12 +27,13 @@ export class SocketIoService {
 
   }
 
-  action(type: string, subject: any) {
+  action(type: string, subject: string, payload: any) {
     this.socket.emit('action', {
       puid: this.puid,
       guid: this.guid,
       type,
-      subject
+      subject,
+      payload
     });
   }
 
