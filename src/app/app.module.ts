@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { AppComponent } from './app.component';
 import { DeskComponent } from './desk/desk.component';
@@ -20,6 +21,8 @@ import { CardDeckComponent } from './card-deck/card-deck.component';
 const appRoutes: Routes = [
   { path: 'table/:guid/:puid',      component: DeskComponent },
 ];
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
 @NgModule({
@@ -43,7 +46,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {  }
-    )
+    ),
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     PlayerService

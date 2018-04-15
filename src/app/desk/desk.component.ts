@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {DropEvent} from 'ng-drag-drop';
+import {Socket} from 'ng-socket-io';
+
 import {Player} from '../models/Player';
 import {PlayerService} from '../player.service';
 import {Card, elemental} from '../models/Card';
@@ -18,9 +20,7 @@ export class DeskComponent implements OnInit {
   puid = '';
 
   playerCardsOnDesk = [];
-  enemyCardsOnDesk = [
-
-  ];
+  enemyCardsOnDesk = [];
   player: Player;
 
   enemy: Player;
@@ -30,10 +30,13 @@ export class DeskComponent implements OnInit {
   showNewCard = false;
 
 
-
   newPlayerCard: Card;
 
-  constructor(private playerService: PlayerService, private  route: ActivatedRoute) {
+  constructor(
+    private playerService: PlayerService,
+    private  route: ActivatedRoute,
+    private socket: Socket
+  ) {
   }
 
 
@@ -74,6 +77,11 @@ export class DeskComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.guid = params.guid;
       this.puid = params.puid;
+
+      this.socket.emit('register', this.puid);
+      this.socket.on('random', (message) => {
+        console.log('message', message);
+      });
       this.playerService.getPlayer(this.guid, this.puid).subscribe(player => {
         this.player = player;
       });

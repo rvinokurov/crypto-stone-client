@@ -25,8 +25,10 @@
     "core-js": "^2.4.1",
     "lodash-es": "^4.17.8",
     "ng-drag-drop": "^4.0.0",
+    "ng-socket-io": "^0.2.4",
     "normalize.css": "^8.0.0",
     "rxjs": "^5.5.2",
+    "socket.io-client": "^2.1.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -36,6 +38,7 @@
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
+    "@types/rx": "^4.1.1",
     "codelyzer": "~3.2.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
