@@ -1,30 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgDragDropModule } from 'ng-drag-drop';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {NgDragDropModule} from 'ng-drag-drop';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule, Routes} from '@angular/router';
+import {SocketIoConfig, SocketIoModule} from 'ng-socket-io';
 
-import { AppComponent } from './app.component';
-import { DeskComponent } from './desk/desk.component';
-import { CardComponent } from './card/card.component';
-import { HeroCardComponent } from './hero-card/hero-card.component';
-import { SausageComponent } from './sausage/sausage.component';
-import { DeckComponent } from './deck/deck.component';
-import { NewCardComponent } from './new-card/new-card.component';
-import { CardDeckComponent } from './card-deck/card-deck.component';
-import { GameService } from './game.service';
-import { SocketIoService} from './socket-io.service';
-import { DeskActionsService} from './desk-actions.service';
-
+import {AppComponent} from './app.component';
+import {DeskComponent} from './desk/desk.component';
+import {CardComponent} from './card/card.component';
+import {HeroCardComponent} from './hero-card/hero-card.component';
+import {SausageComponent} from './sausage/sausage.component';
+import {DeckComponent} from './deck/deck.component';
+import {NewCardComponent} from './new-card/new-card.component';
+import {CardDeckComponent} from './card-deck/card-deck.component';
+import {GameService} from './game.service';
+import {SocketIoService} from './socket-io.service';
+import {DeskActionsService} from './desk-actions.service';
+import {config  as appConfig} from '../config';
 
 const appRoutes: Routes = [
-  { path: 'table/:guid/:puid',      component: DeskComponent },
+  {path: 'table/:guid/:puid', component: DeskComponent},
 ];
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
 
 
 @NgModule({
@@ -47,7 +47,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NgDragDropModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      {  }
+      {}
     ),
     SocketIoModule.forRoot(config)
   ],
@@ -58,4 +58,5 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
