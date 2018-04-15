@@ -82,6 +82,12 @@ export class DeskComponent implements OnInit {
       this.socket.on('random', (message) => {
         console.log('message', message);
       });
+
+      this.socket.on('disconnect', () => {
+        console.log('reconnect');
+        this.socket.emit('register', this.puid);
+      });
+
       this.playerService.getPlayer(this.guid, this.puid).subscribe(player => {
         this.player = player;
       });
