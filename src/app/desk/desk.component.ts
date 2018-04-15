@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {DropEvent} from 'ng-drag-drop';
-import {Socket} from 'ng-socket-io';
 
 import {Player} from '../models/Player';
 import {Card} from '../models/Card';
@@ -8,6 +7,8 @@ import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../game.service';
 import {GameModel} from '../models/Game';
 import {Enemy} from '../models/Enemy';
+import {SocketIoService} from '../socket-io.service';
+import {DeskActionsService} from '../desk-actions.service';
 
 @Component({
   selector: 'app-desk',
@@ -36,7 +37,8 @@ export class DeskComponent implements OnInit {
   constructor(
     private gameService: GameService,
     private  route: ActivatedRoute,
-    private socket: Socket
+    private socketIoService: SocketIoService,
+    private deskActionsService: DeskActionsService,
   ) {
   }
 
@@ -52,8 +54,11 @@ export class DeskComponent implements OnInit {
   }
 
   onCardDrop(e: DropEvent) {
-    this.playerCardsOnDesk.push(e.dragData);
-    this.player.cards.pop();
+    const deskCard: Card = e.dragData;
+    this.playerCardsOnDesk.push(deskCard);
+
+    this.player.cards = this.player.cards.filter((card: Card) => card.id !== deskCard.id);
+    this.deskActionsService.playCard(deskCard);
     // setTimeout(() => {
     //   this.newPlayerCard = new Card({
     //     id: 0,
@@ -79,15 +84,7 @@ export class DeskComponent implements OnInit {
       this.guid = params.guid;
       this.puid = params.puid;
 
-      this.socket.emit('register', this.puid);
-      this.socket.on('random', (message) => {
-        console.log('message', message);
-      });
-
-      this.socket.on('disconnect', () => {
-        console.log('reconnect');
-        this.socket.emit('register', this.puid);
-      });
+      this.socketIoService.register(this.guid, this.puid);
 
       this.gameService.getGame(this.guid, this.puid).subscribe((game: GameModel) => {
         this.player = game.player;

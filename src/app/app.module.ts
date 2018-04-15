@@ -16,6 +16,8 @@ import { DeckComponent } from './deck/deck.component';
 import { NewCardComponent } from './new-card/new-card.component';
 import { CardDeckComponent } from './card-deck/card-deck.component';
 import { GameService } from './game.service';
+import { SocketIoService} from './socket-io.service';
+import { DeskActionsService} from './desk-actions.service';
 
 
 const appRoutes: Routes = [
@@ -50,7 +52,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     SocketIoModule.forRoot(config)
   ],
   providers: [
-    GameService
+    GameService,
+    SocketIoService,
+    DeskActionsService
   ],
   bootstrap: [AppComponent]
 })
