@@ -21,7 +21,7 @@ export enum ActionType {
 }
 
 export interface ActionEvent {
-  type: string;
+  type: ActionType;
   object?: ActionObject;
   payload?: any;
   subject: ActionSubject;
