@@ -3,8 +3,7 @@ import {DropEvent} from 'ng-drag-drop';
 import {Socket} from 'ng-socket-io';
 
 import {Player} from '../models/Player';
-import {PlayerService} from '../player.service';
-import {Card, elemental} from '../models/Card';
+import {Card} from '../models/Card';
 import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../game.service';
 import {GameModel} from '../models/Game';
