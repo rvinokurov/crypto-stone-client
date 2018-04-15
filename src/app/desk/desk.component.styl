@@ -76,26 +76,51 @@ $cardWidth = 5.5rem
     left 1.5em
     z-index 20
 
-  &--playground-border
-    z-index 10
+  &--playground-border-2
+    z-index 20
     content ''
     display block
     box-sizing border-box
     position absolute
     width calc(100% - 3em + 20px)
     height "calc(100% - %s + 20px)" % ($playgroundOffset * 2)
+    top 'calc(%s - 10px)' % $playgroundOffset
+    background green
+    box-shadow inset 0 0 6px 4px #023c25, 0 0 5px 1px #3b3a3c
+    left calc(1.5em - 10px)
     border-bottom-left-radius: 20% 20%;
     border-bottom-right-radius: 20% 20%;
     border-top-left-radius: 20% 20%;
     border-top-right-radius: 20% 20%;
-    top 'calc(%s - 10px)' % $playgroundOffset
+
+
+  &--playground-border
+    z-index 10
+    content ''
+    display block
+    box-sizing border-box
+    position absolute
+    width calc(100% - 3em + 60px)
+    height 50%
+    top 25%
     background green
-    box-shadow inset 0 0 6px 4px #023c25, 0 0 0.5rem 0 #3b3a3c
-    left calc(1.5em - 10px)
-    border-bottom-left-radius: 20% 50%;
-    border-bottom-right-radius: 20% 50%;
-    border-top-left-radius: 20% 50%;
-    border-top-right-radius: 20% 50%;
+    box-shadow inset 0 0 6px 4px #023c25, 0 0 2rem 1rem #3b3a3c
+    left calc(1.5em - 30px)
+    border-radius 50%
+
+  &--playground-border-1
+    z-index 10
+    content ''
+    display block
+    box-sizing border-box
+    position absolute
+    width 50%
+    height "calc(100% - %s + 60px)" % ($playgroundOffset * 2)
+    top 'calc(%s - 30px)' % $playgroundOffset
+    background green
+    box-shadow inset 0 0 6px 4px #023c25, 0 0 2rem 1rem #3b3a3c
+    left 25%
+    border-radius 50%
 
 
     &:active
