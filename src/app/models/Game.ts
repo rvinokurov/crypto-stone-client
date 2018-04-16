@@ -24,6 +24,7 @@ export class GameModel {
     });
 
     this.player = new Player({
+      id: game.player_id,
       name: game.player_name,
       hero: {
         url: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/545030.svg',

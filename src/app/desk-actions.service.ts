@@ -4,6 +4,7 @@ import {Card} from './models/Card';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {GameModel} from './models/Game';
+import {Player} from './models/Player';
 
 export enum ActionObject {
   player = 'player',
@@ -12,12 +13,14 @@ export enum ActionObject {
 
 
 export enum ActionSubject {
-  card = 'card'
+  card = 'card',
+  turn  = 'turn'
 }
 
 export enum ActionType {
   playCard = 'play',
-  draw = 'draw'
+  draw = 'draw',
+  end = 'end'
 }
 
 export interface ActionEvent {
@@ -51,6 +54,10 @@ export class DeskActionsService {
 
   get onEnemyPlayCard() {
     return this.enemyPlayCardSubject;
+  }
+
+  endTurn() {
+    this.socketIoService.action(ActionType.end, ActionSubject.turn, {});
   }
 
   processAction(action: ActionEvent) {

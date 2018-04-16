@@ -60,6 +60,10 @@ export class DeskComponent implements OnInit {
     this.playerInAttack = card.inAttack;
   }
 
+  endTurn() {
+    this.deskActionsService.endTurn();
+  }
+
   onCardDrop(e: DropEvent) {
     const deskCard: Card = e.dragData;
     this.playerCardsOnDesk.push(deskCard);
