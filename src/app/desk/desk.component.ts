@@ -66,6 +66,7 @@ export class DeskComponent implements OnInit {
 
   onCardDrop(e: DropEvent) {
     const deskCard: Card = e.dragData;
+    deskCard.inDesk = true;
     this.playerCardsOnDesk.push(deskCard);
 
     this.player.cards = this.player.cards.filter((card: Card) => card.id !== deskCard.id);

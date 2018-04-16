@@ -4,91 +4,92 @@
 
   <div class="desk--wrapper">
 
-  <app-end-turn-button (click)="endTurn()"></app-end-turn-button>
+    <app-end-turn-button (click)="endTurn()"></app-end-turn-button>
 
-  <app-new-card
-    *ngIf="showNewCard === true"
-    [card]="newPlayerCard">
-  </app-new-card>
+    <app-new-card
+      *ngIf="showNewCard === true"
+      [card]="newPlayerCard">
+    </app-new-card>
 
-  <app-deck class="enemy"></app-deck>
-  <app-deck class="player"></app-deck>
-
-
-  <div class="desk--player-name desk--player-name_enemy">
-    {{enemy.name}}
-  </div>
-  <div class="desk--player-name desk--player-name_player">
-    {{player.name}}
-  </div>
+    <app-deck class="enemy"></app-deck>
+    <app-deck class="player"></app-deck>
 
 
-  <app-sausage [count]="enemy.sausages"></app-sausage>
-  <app-sausage *ngIf="player" isPlayer="true" [count]="player.sausages"></app-sausage>
-
-  <app-hero-card class="desk--hero-card desk--hero-card_enemy"
-                 [hero]="enemy.hero"></app-hero-card>
-  <div class="desk--pane desk--pane_enemy">
-
-  </div>
-
-
-
-  <div class="desk--card-pane desk--card-pane_enemy">
-    <app-card-deck
-      [style.margin-left]="enemyCardMargin"
-      [style.margin-right]="enemyCardMargin"
-      *ngFor="let card of enemy.cards"
-      [card]="card">
-    </app-card-deck>
-  </div>
-
-  <div class="desk--playground-border"></div>
-  <div class="desk--playground-border-1"></div>
-  <div class="desk--playground-border-2"></div>
-  <div class="desk--playground" droppable
-       (onDrop)="onCardDrop($event)">
-    <div class="desk--playground-cards desk--playground-cards_enemy">
-      <app-card
-        [class.target]="playerInAttack === true"
-        *ngFor="let card of enemyCardsOnDesk"
-        class="in-desk enemy"
-        [card]="card">
-      </app-card>
+    <div class="desk--player-name desk--player-name_enemy">
+      {{enemy.name}}
+    </div>
+    <div class="desk--player-name desk--player-name_player">
+      {{player.name}}
     </div>
 
-    <div class="desk--playground-cards desk--playground-cards_player">
+
+    <app-sausage [count]="enemy.sausages"></app-sausage>
+    <app-sausage *ngIf="player" isPlayer="true" [count]="player.sausages"></app-sausage>
+
+    <app-hero-card class="desk--hero-card desk--hero-card_enemy"
+                   [hero]="enemy.hero"></app-hero-card>
+    <div class="desk--pane desk--pane_enemy">
+
+    </div>
+
+
+    <div class="desk--card-pane desk--card-pane_enemy">
+      <app-card-deck
+        [style.margin-left]="enemyCardMargin"
+        [style.margin-right]="enemyCardMargin"
+        *ngFor="let card of enemy.cards"
+        [card]="card">
+      </app-card-deck>
+    </div>
+
+    <div class="desk--playground-border"></div>
+    <div class="desk--playground-border-1"></div>
+    <div class="desk--playground-border-2"></div>
+    <div class="desk--playground" droppable
+         (onDrop)="onCardDrop($event)">
+      <div class="desk--playground-cards desk--playground-cards_enemy">
+        <app-card
+          [class.target]="playerInAttack === true"
+          *ngFor="let card of enemyCardsOnDesk"
+          class="in-desk enemy"
+          [card]="card">
+        </app-card>
+      </div>
+
+      <div class="desk--playground-cards desk--playground-cards_player">
+        <app-card
+          *ngFor="let card of playerCardsOnDesk"
+          class="in-desk"
+          (click)="selectToAttack(card)"
+          [card]="card"
+          [inAttack]="card.inAttack"
+          [puttedToDesk]="card.inDesk"
+          [class.in-attack]="card.inAttack === true"
+          isPlayerCard="true">
+        </app-card>
+      </div>
+    </div>
+
+    <div class="desk--card-pane desk--card-pane_player">
       <app-card
-        *ngFor="let card of playerCardsOnDesk"
-        class="in-desk"
-        (click)="selectToAttack(card)"
+        class="player-card-hover"
+        [style.margin-left]="playerCardMargin"
+        [style.margin-right]="playerCardMargin"
+        *ngFor="let card of player.cards"
+        draggable
+        [dragData]="card"
+        [dragClass]="'draggableClone'"
+        [dragTransitClass]="'draggableClone'"
         [card]="card"
-        [class.in-attack]="card.inAttack === true"
         isPlayerCard="true">
       </app-card>
     </div>
-  </div>
-
-  <div class="desk--card-pane desk--card-pane_player">
-    <app-card
-      class="player-card-hover"
-      [style.margin-left]="playerCardMargin"
-      [style.margin-right]="playerCardMargin"
-      *ngFor="let card of player.cards"
-      draggable
-      [dragData]="card"
-      [dragClass]="'draggableClone'"
-      [dragTransitClass]="'draggableClone'"
-      [card]="card"
-      isPlayerCard="true">
-    </app-card>
-  </div>
 
 
-  <app-hero-card class="desk--hero-card desk--hero-card_player" isPlayerHero="true"
-                 [hero]="player.hero"></app-hero-card>
-  <div class="desk--pane desk--pane_player">
+    <app-hero-card class="desk--hero-card desk--hero-card_player" isPlayerHero="true"
+                   [hero]="player.hero"></app-hero-card>
+    <div class="desk--pane desk--pane_player">
 
-  </div>
+    </div>
   </div>
 </div>

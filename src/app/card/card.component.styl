@@ -3,16 +3,47 @@ $cardWidth = 5.5rem
 
 @keyframes pulse {
   0% {
-    box-shadow 0 0 0.2rem 0.2rem #b58bad, inset 0 0 2rem 0 #b58bad
+    box-shadow 0 0 1rem 0.1rem #b58bad, inset 0 0 5rem 0 #b58bad
     border 1px solid #b58bad
   }
   50% {
     border 1px solid #b58bad
-    box-shadow 0 0 0.5rem 0.5rem #b58bad, inset 0 0 5rem 0rem rgba(181, 139, 173, 0.61)
+    box-shadow 0 0 1rem 0.1rem #5cda94, inset 0 0 5rem 0rem #5cda94
   }
   100% {
-    box-shadow 0 0 0.2rem 0.2rem #b58bad, inset 0 0 2rem 0 #b58bad
+    box-shadow 0 0 1rem 0.1rem #b58bad, inset 0 0 5rem 0 #b58bad
     border 1px solid #b58bad
+  }
+}
+
+@keyframes put-in-desk {
+  30% {
+    opacity 1
+    transform translate3d(30%, -30%, 0) scale(1.2)
+    box-shadow -1rem 1rem 1rem 0.1rem rgba(0, 0, 0, 0.3)
+  }
+
+  65% {
+    opacity 1
+    transform translate3d(5%, 5%, 0) scale(0.8)
+    box-shadow -0.2rem 0.2rem 0.5rem 0.1rem rgba(0, 0, 0, 0.3)
+  }
+
+  80% {
+    opacity 1
+    transform translate3d(0, 0, 0) scale(1.05) rotate(-5deg)
+    box-shadow 0 0 0 0 black
+  }
+  85% {
+    opacity 1
+    transform translate3d(0, 0, 0) scale(1.1) rotate(3deg)
+    box-shadow 0 0 0 0 black
+  }
+
+  100% {
+    opacity 1
+    transform translate3d(0,0,0) scale(1)
+    box-shadow 0 0 0 0 black
   }
 }
 
@@ -31,10 +62,23 @@ $cardWidth = 5.5rem
   }
 }
 
+.card-host
+  width 100%
+  height 100%
+
+
+:host:not(.in-attack)
+  .card-host
+    transition all 0.05s ease-out
+    &--put-in-desk
+      opacity 0
+      box-shadow -1rem 1rem 1rem 0.1rem rgba(0, 0, 0, 0.3)
+      transform translate3d(20%, 20%, 0) scale(1.2)
+      animation put-in-desk 0.7s ease-in forwards
 
 
 :host
-  overflow hidden
+  //overflow hidden
   display: inline-block
   width $cardWidth
   height $cardHeight
@@ -42,31 +86,39 @@ $cardWidth = 5.5rem
   box-sizing border-box
   margin 0 -0.5em
   position relative
-  transition all 0.2s ease
+  transition all 0.05s ease
   &.drag-handle
     cursor url('/assets/pointer.cur'), auto
   &.drag-handle:active
     cursor url('/assets/pointer.cur'), auto
   .card
-    overflow hidden
-    transition all 0.1s ease
+    //overflow hidden
+    transition all 0.05s ease-out
   &:hover:not(.enemy):not(.in-desk)
-    transform translateY(0.27em)
+    transform translateY(-0.1rem)
     margin -0.55em 0.6em -0.55em 0.6em
-    width $cardWidth * 1.1
-    height $cardHeight * 1.1
+    //width $cardWidth * 1.1
+    //height $cardHeight * 1.1
     cursor url('/assets/pointer.cur'), auto
     border-radius 0.44rem
+
+    .card-host
+      transform scale(1.1)
+
 
   &.target:hover
     .card
       animation: target 1.4s infinite ease-in-out;
 
   &.in-attack:not(.enemy)
-    width $cardWidth * 1.1
-    height $cardHeight * 1.1
+    //width $cardWidth * 1.1
+    //height $cardHeight * 1.1
     margin -0.55em 0
-    transform translateY(0.27em)
+    //transform translateY(-0.1rem)
+    .card-host, .card-host.card-host--put-in-desk
+      //opacity 1
+      transform scale(1.1)!important
+      //animation none
     .card
       border-radius 0.44rem
       border 1px solid #487a8b
@@ -104,6 +156,8 @@ $cardWidth = 5.5rem
   background-image url('/assets/card-background.jpg')
   background-repeat no-repeat
   background-size 100% 100%
+
+
 
   &--avatar
     background-position 50% 50%

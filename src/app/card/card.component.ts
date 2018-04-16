@@ -10,16 +10,24 @@ import {Card} from '../models/Card';
   animations: [
     trigger('cardState', [
       state('initial', style({
-        transform: 'scale(0)'
+        transform: 'scale(0.5) translate3d(0, 1000rem, 0rem)'
       })),
-      state('boom', style({
-        transform: 'scale(1.5)'
+      state('put', style({
+        transform: 'scale(1.5) translate3d(0, 150%, 0)'
+      })),
+      state('putted', style({
+        transform: 'scale(0.5) translate3d(0, 0, 0)'
+      })),
+      state('boomed', style({
+        transform: 'scale(1.2) translate3d(0, 0, 0)'
       })),
       state('inited', style({
-        transform: 'scale(1)'
+        transform: 'scale(1) translate3d(0, 0, 0)'
       })),
-      transition('initial => boom', animate('150ms ease-out')),
-      transition('boom => inited', animate('150ms ease-out'))
+      transition('initial => put', animate('100ms ease-out')),
+      transition('put => putted', animate('100ms ease-out')),
+      transition('putted => boomed', animate('250ms ease-out')),
+      transition('boomed => inited', animate('100ms ease-out')),
     ])
   ]
 })
@@ -29,9 +37,17 @@ export class CardComponent implements OnInit {
 
   @Input() card: Card;
 
-  cardState = 'initial';
+  // cardState = 'initial';
+  cardState = null;
+  @Input() puttedToDesk = false;
 
   constructor() {
+  }
+
+  @Input() set inAttack(inAttack) {
+    if (inAttack) {
+      this.puttedToDesk = false;
+    }
   }
 
   get defenceImage() {
@@ -42,13 +58,25 @@ export class CardComponent implements OnInit {
     return `url('/assets/sword-${this.card.attack.type}.png')`;
   }
 
-  ngOnInit() {
+  animatePut() {
+    this.cardState = 'initial';
     setTimeout(() => {
-      this.cardState = 'boom';
+      this.cardState = 'put';
+    }, 100);
+    setTimeout(() => {
+      this.cardState = 'putted';
     }, 200);
     setTimeout(() => {
+      this.cardState = 'boomed';
+    }, 300);
+    setTimeout(() => {
       this.cardState = 'inited';
-    }, 400);
+    }, 550);
+  }
+
+
+  ngOnInit() {
+
   }
 
 }

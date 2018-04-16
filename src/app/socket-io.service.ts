@@ -33,13 +33,15 @@ export class SocketIoService {
   }
 
   action(type: string, subject: string, payload: any) {
-    this.socket.emit('action', {
+    const action = {
       puid: this.puid,
       guid: this.guid,
       type,
       subject,
       payload
-    });
+    };
+    console.log(JSON.stringify(action, null, '    ');
+    this.socket.emit('action', action);
   }
 
 }
