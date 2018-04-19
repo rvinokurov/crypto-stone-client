@@ -39,6 +39,7 @@ export class CardComponent implements OnInit {
 
   // cardState = 'initial';
   cardState = null;
+
   @Input() puttedToDesk = false;
 
   constructor() {

@@ -40,7 +40,7 @@ export class SocketIoService {
       subject,
       payload
     };
-    console.log(JSON.stringify(action, null, '    ');
+    console.log(JSON.stringify(action, null, '    '));
     this.socket.emit('action', action);
   }
 

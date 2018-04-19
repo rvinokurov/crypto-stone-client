@@ -34,12 +34,18 @@ export class DeskComponent implements OnInit {
 
   newPlayerCard: Card;
 
+  takeCardSound = new Audio('/assets/sound/card-take.wav');
+
+  touchCardSound = new Audio('/assets/sound/card-take2.wav');
+
   constructor(
     private gameService: GameService,
     private  route: ActivatedRoute,
     private socketIoService: SocketIoService,
     private deskActionsService: DeskActionsService,
   ) {
+    this.touchCardSound.volume = 0.2;
+
   }
 
   get enemyCardMargin() {
@@ -58,6 +64,16 @@ export class DeskComponent implements OnInit {
       }
     });
     this.playerInAttack = card.inAttack;
+  }
+
+  onCardOver() {
+    // this.touchCardSound.load();
+    this.touchCardSound.play();
+  }
+
+  onDragStart() {
+    this.takeCardSound.play();
+    console.log('on drag start');
   }
 
   endTurn() {

@@ -76,8 +76,10 @@
         [style.margin-left]="playerCardMargin"
         [style.margin-right]="playerCardMargin"
         *ngFor="let card of player.cards"
+        (mouseover)="onCardOver()"
         draggable
         [dragData]="card"
+        (onDragStart)="onDragStart()"
         [dragClass]="'draggableClone'"
         [dragTransitClass]="'draggableClone'"
         [card]="card"
