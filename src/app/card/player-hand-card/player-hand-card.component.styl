@@ -1,0 +1,19 @@
+@import '../shared/card.styl'
+
+:host
+  position relative
+  z-index 200
+  host()
+  padding  0.6em
+  .host
+    card-host()
+
+    &.drag-handle
+      cursor url('/assets/pointer.cur'), auto
+    &.drag-handle:active
+      cursor url('/assets/pointer.cur'), auto
+    &:hover
+      transform translateY(0.5rem) scale(1.1)
+      margin -0.55em 0.6em -0.55em 0.6em
+      cursor url('/assets/pointer.cur'), auto
+

@@ -71,7 +71,7 @@
     </div>
 
     <div class="desk--card-pane desk--card-pane_player">
-      <app-card
+      <app-player-hand-card
         class="player-card-hover"
         [style.margin-left]="playerCardMargin"
         [style.margin-right]="playerCardMargin"
@@ -82,9 +82,8 @@
         (onDragStart)="onDragStart()"
         [dragClass]="'draggableClone'"
         [dragTransitClass]="'draggableClone'"
-        [card]="card"
-        isPlayerCard="true">
-      </app-card>
+        [card]="card">
+      </app-player-hand-card>
     </div>
 
 

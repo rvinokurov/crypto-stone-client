@@ -1,0 +1,24 @@
+<div class="card-host"  [@cardState]="cardState"
+  [class.card-host--put-in-desk]="puttedToDesk && !card.inAttack">
+  <div class="card"
+       [class.card_enemy]="!isPlayerCard"
+       [class.card_player]="isPlayerCard">
+
+    <div class="card--sausage-generation">
+      <div class="card--value">{{card.sausageGeneration}}</div>
+    </div>
+    <div class="card--sausage-steal">
+      <div class="card--value">{{card.sausageSteal}}</div>
+    </div>
+
+    <div class="card--defence" [style.background-image]="defenceImage">
+      <div class="card--value">{{card.defence.value}}</div>
+    </div>
+    <div class="card--attack" [style.background-image]="attackImage">
+      <div class="card--value">{{card.attack.value}}</div>
+    </div>
+
+    <div class="card--avatar"
+         [style.background-image]="card.avatar"></div>
+  </div>
+</div>
