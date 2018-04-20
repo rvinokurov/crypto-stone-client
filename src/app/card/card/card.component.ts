@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Card} from '../models/Card';
+import {Card} from '../../models/Card';
 
 
 @Component({

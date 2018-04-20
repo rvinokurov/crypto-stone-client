@@ -44,7 +44,7 @@ export class DeskComponent implements OnInit {
     private socketIoService: SocketIoService,
     private deskActionsService: DeskActionsService,
   ) {
-    this.touchCardSound.volume = 0.2;
+    this.touchCardSound.volume = 0.15;
 
   }
 

@@ -9,7 +9,7 @@ import {SocketIoConfig, SocketIoModule} from 'ng-socket-io';
 
 import {AppComponent} from './app.component';
 import {DeskComponent} from './desk/desk.component';
-import {CardComponent} from './card/card.component';
+
 import {HeroCardComponent} from './hero-card/hero-card.component';
 import {SausageComponent} from './sausage/sausage.component';
 import {DeckComponent} from './deck/deck.component';
@@ -19,7 +19,8 @@ import {GameService} from './game.service';
 import {SocketIoService} from './socket-io.service';
 import {DeskActionsService} from './desk-actions.service';
 import {config  as appConfig} from '../config';
-import { EndTurnButtonComponent } from './end-turn-button/end-turn-button.component';
+import {EndTurnButtonComponent} from './end-turn-button/end-turn-button.component';
+import {CardModule} from './card/card.module';
 
 const appRoutes: Routes = [
   {path: 'table/:guid/:puid', component: DeskComponent},
@@ -32,7 +33,6 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
   declarations: [
     AppComponent,
     DeskComponent,
-    CardComponent,
     HeroCardComponent,
     SausageComponent,
     DeckComponent,
@@ -51,7 +51,8 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
       appRoutes,
       {}
     ),
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    CardModule
   ],
   providers: [
     GameService,
