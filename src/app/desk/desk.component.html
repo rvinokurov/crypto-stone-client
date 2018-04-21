@@ -49,12 +49,12 @@
     <div class="desk--playground" droppable
          (onDrop)="onCardDrop($event)">
       <div class="desk--playground-cards desk--playground-cards_enemy">
-        <app-card
+        <app-enemy-card-in-desk
           [class.target]="playerInAttack === true"
           *ngFor="let card of enemyCardsOnDesk"
           class="in-desk enemy"
           [card]="card">
-        </app-card>
+        </app-enemy-card-in-desk>
       </div>
 
       <div class="desk--playground-cards desk--playground-cards_player">

@@ -38,6 +38,8 @@ export class DeskComponent implements OnInit {
 
   touchCardSound = new Audio('/assets/sound/card-take2.wav');
 
+  endTurnSound = new Audio('/assets/sound/end-turn-2.wav');
+
   constructor(
     private gameService: GameService,
     private  route: ActivatedRoute,
@@ -77,7 +79,9 @@ export class DeskComponent implements OnInit {
   }
 
   endTurn() {
-    this.deskActionsService.endTurn();
+
+    this.endTurnSound.play();
+    // this.deskActionsService.endTurn();
   }
 
   onCardDrop(e: DropEvent) {

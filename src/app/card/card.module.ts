@@ -24,6 +24,7 @@ import { EnemyCardInDeskComponent } from './enemy-card-in-desk/enemy-card-in-des
     PlayerHandCardComponent,
     EnemyCardComponent,
     PlayerCardInDeskComponent,
+    EnemyCardInDeskComponent
   ]
 })
 export class CardModule { }
