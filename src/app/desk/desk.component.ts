@@ -48,6 +48,9 @@ export class DeskComponent implements OnInit {
     this.touchCardSound.volume = 0.15;
   }
 
+  cardIdentify(index, card) {
+    return card.id;
+  }
 
   selectToAttack(card: Card) {
     card.inAttack = !card.inAttack;
@@ -124,6 +127,7 @@ export class DeskComponent implements OnInit {
       });
 
       this.deskActionsService.onEnemyPlayCard.subscribe((card: Card) => {
+        card.puttedToDesk = true;
         this.enemyCardsOnDesk.push(card);
       });
       // this.enemy = this.playerService.getEnemy();

@@ -1,5 +1,13 @@
-<app-card
-  [card]="card"
-  class="enemy-hand-card">
-</app-card>
+<div class="enemy-card"
+     [class.enemy-card_putted-to-desk]="card.puttedToDesk && !card.inAttack"
+     [class.enemy-card_flipped]="!card.puttedToDesk"
+     (transitionend)="transitionEnd($event)">
+  <app-card
+    [card]="card"
+    class="enemy-card--face">
+  </app-card>
+  <app-card-deck
+    class="enemy-card--deck"></app-card-deck>
+</div>
+
 

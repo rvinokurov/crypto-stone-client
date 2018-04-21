@@ -4,7 +4,6 @@ import {Card} from './models/Card';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {GameModel} from './models/Game';
-import {Player} from './models/Player';
 
 export enum ActionObject {
   player = 'player',
@@ -14,7 +13,7 @@ export enum ActionObject {
 
 export enum ActionSubject {
   card = 'card',
-  turn  = 'turn'
+  turn = 'turn'
 }
 
 export enum ActionType {
@@ -30,6 +29,46 @@ export interface ActionEvent {
   subject: ActionSubject;
 }
 
+let enemyCardMock = {
+  'puid': '4404872a-114a-41bb-b324-fcdd24c60d15',
+  'guid': '49fa52a3-2396-4ab4-93db-cba87917fdbb',
+  'type': 'play',
+  'subject': 'card',
+  'payload': {
+    'id': 524156,
+    'image_url': 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/524156.png',
+    'props': {
+      'attack': {
+        'value': 4,
+        'bonus': 0,
+        'prob': 0
+      },
+      'defense': {
+        'value': 12,
+        'bonus': 0,
+        'prob': 0
+      },
+      'elementalOfAttack': {
+        'value': 2
+      },
+      'elementalOfDefence': {
+        'value': 1
+      },
+      'regeneration': {
+        'value': 13,
+        'bonus': 0,
+        'prob': 0
+      },
+      'energy drain': {
+        'value': 3,
+        'bonus': 0,
+        'prob': 0
+      }
+    }
+  },
+  'object': 'enemy'
+};
+
 @Injectable()
 export class DeskActionsService {
 
@@ -41,8 +80,12 @@ export class DeskActionsService {
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
+    setInterval(() => {
+      // this.enemyPlayCardSubject.next(GameModel.createCard(enemyCardMock.payload));
+    }, 5000);
 
   }
+
 
   get onNewPlayerCard() {
     return this.newPlayerCardSubject;
@@ -61,7 +104,7 @@ export class DeskActionsService {
   }
 
   processAction(action: ActionEvent) {
-    console.log(action);
+    console.log(JSON.stringify(action, null, '   '));
     if (action.type === ActionType.playCard && action.object === ActionObject.enemy) {
       this.enemyPlayCardSubject.next(GameModel.createCard(action.payload));
     }
