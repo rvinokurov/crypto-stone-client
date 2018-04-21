@@ -84,7 +84,7 @@ export class DeskComponent implements OnInit {
     this.playerCardsOnDesk.push(deskCard);
 
     this.player.cards = this.player.cards.filter((card: Card) => card.id !== deskCard.id);
-    // this.deskActionsService.playCard(deskCard);
+    this.deskActionsService.playCard(deskCard);
     // setTimeout(() => {
     //   this.newPlayerCard = new Card({
     //     id: 0,

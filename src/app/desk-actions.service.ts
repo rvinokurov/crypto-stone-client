@@ -105,19 +105,24 @@ export class DeskActionsService {
 
   processAction(action: ActionEvent) {
     console.log(JSON.stringify(action, null, '   '));
-    if (action.type === ActionType.playCard && action.object === ActionObject.enemy) {
-      this.enemyPlayCardSubject.next(GameModel.createCard(action.payload));
-    }
-    if (action.type === ActionType.draw) {
-      if (action.subject === ActionSubject.card) {
-        if (action.object === ActionObject.player) {
-          this.newPlayerCardSubject.next(GameModel.createCard(action.payload));
-        }
-        if (action.object === ActionObject.enemy) {
-          this.newEnemyCardSubject.next();
+    try {
+      if (action.type === ActionType.playCard && action.object === ActionObject.enemy) {
+        this.enemyPlayCardSubject.next(GameModel.createCard(action.payload));
+      }
+      if (action.type === ActionType.draw) {
+        if (action.subject === ActionSubject.card) {
+          if (action.object === ActionObject.player) {
+            this.newPlayerCardSubject.next(GameModel.createCard(action.payload.card));
+          }
+          if (action.object === ActionObject.enemy) {
+            this.newEnemyCardSubject.next();
+          }
         }
       }
+    } catch (e) {
+      console.log(e);
     }
+
   }
 
   playCard(card: Card) {
