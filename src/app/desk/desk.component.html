@@ -35,8 +35,7 @@
 
     <div class="desk--card-pane desk--card-pane_enemy">
      <app-enemy-card
-        [style.margin-left]="enemyCardMargin"
-        [style.margin-right]="enemyCardMargin"
+       [appCardMargin]="enemy.cards.length"
         *ngFor="let card of enemy.cards">
       </app-enemy-card>
     </div>
@@ -62,8 +61,7 @@
           *ngFor="let card of playerCardsOnDesk"
           class="in-desk"
           (click)="selectToAttack(card)"
-          [style.margin-left]="playerCardMargin"
-          [style.margin-right]="playerCardMargin"
+          [appCardMargin]="playerCardsOnDesk.length"
           [card]="card"
           [class.in-attack]="card.inAttack === true">
         </app-player-card-in-desk>
@@ -73,8 +71,7 @@
     <div class="desk--card-pane desk--card-pane_player">
       <app-player-hand-card
         class="player-card-hover"
-        [style.margin-left]="playerCardMargin"
-        [style.margin-right]="playerCardMargin"
+        [appCardMargin]="player.cards.length"
         *ngFor="let card of player.cards"
         (mouseover)="onCardOver()"
         draggable

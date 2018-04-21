@@ -6,6 +6,7 @@ import {CardDeckComponent} from './card-deck/card-deck.component';
 import { EnemyCardComponent } from './enemy-card/enemy-card.component';
 import { PlayerCardInDeskComponent } from './player-card-in-desk/player-card-in-desk.component';
 import { EnemyCardInDeskComponent } from './enemy-card-in-desk/enemy-card-in-desk.component';
+import { CardMarginDirective } from './directives/card-margin.directive';
 
 @NgModule({
   imports: [
@@ -17,14 +18,16 @@ import { EnemyCardInDeskComponent } from './enemy-card-in-desk/enemy-card-in-des
     CardDeckComponent,
     EnemyCardComponent,
     PlayerCardInDeskComponent,
-    EnemyCardInDeskComponent
+    EnemyCardInDeskComponent,
+    CardMarginDirective
   ],
   exports : [
     CardComponent,
     PlayerHandCardComponent,
     EnemyCardComponent,
     PlayerCardInDeskComponent,
-    EnemyCardInDeskComponent
+    EnemyCardInDeskComponent,
+    CardMarginDirective
   ]
 })
 export class CardModule { }

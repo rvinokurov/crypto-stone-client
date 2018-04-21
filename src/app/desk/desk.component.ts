@@ -50,13 +50,6 @@ export class DeskComponent implements OnInit {
 
   }
 
-  get enemyCardMargin() {
-    return this.calcMargin(this.enemy.cards.length || 1);
-  }
-
-  get playerCardMargin() {
-    return this.calcMargin(this.player.cards.length || 1);
-  }
 
   selectToAttack(card: Card) {
     card.inAttack = !card.inAttack;
@@ -79,9 +72,8 @@ export class DeskComponent implements OnInit {
   }
 
   endTurn() {
-
     this.endTurnSound.play();
-    // this.deskActionsService.endTurn();
+    this.deskActionsService.endTurn();
   }
 
   onCardDrop(e: DropEvent) {
@@ -110,13 +102,6 @@ export class DeskComponent implements OnInit {
 
   }
 
-  calcMargin(count) {
-    if ((24 / count) >= 8) {
-      return `-1.4rem`;
-    }
-
-    return `-${(8 * count - 24) / (count * 2)}rem`;
-  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
