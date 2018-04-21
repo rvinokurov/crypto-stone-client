@@ -25,12 +25,6 @@ export class EnemyCardInDeskComponent implements OnInit {
         this.putToDeskSound.play();
       }, 800);
     }
-
-    if (this.playerCard.puttedToDesk) {
-      setTimeout(() => {
-        this.playerCard.puttedToDesk = false;
-      }, 1100);
-    }
   }
 
   transitionEnd() {

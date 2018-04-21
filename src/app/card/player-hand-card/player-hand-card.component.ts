@@ -8,11 +8,34 @@ import {Card} from '../../models/Card';
 })
 export class PlayerHandCardComponent implements OnInit {
 
-  @Input() card: Card;
+  private playerCard: Card;
 
-  constructor() { }
+  constructor() {
+  }
+
+  get card() {
+    return this.playerCard;
+  }
+
+  @Input() set card(card: Card) {
+    this.playerCard = card;
+    if (this.playerCard.puttedToHand) {
+      setTimeout(() => {
+        // this.putToDeskSound.volume = 0.5;
+        // this.putToDeskSound.play();
+      }, 800);
+    }
+    
+  }
 
   ngOnInit() {
   }
 
+
+  transitionEnd() {
+    console.log('transitionend');
+    setTimeout(() => {
+      this.playerCard.puttedToHand = false;
+    }, 10);
+  }
 }

@@ -8,6 +8,7 @@ export enum elemental {
 export class Card {
   inAttack = false;
   puttedToDesk = false;
+  puttedToHand = false;
   id = 0;
   attack = {
     type: elemental.fire,

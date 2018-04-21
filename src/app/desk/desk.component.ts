@@ -120,6 +120,7 @@ export class DeskComponent implements OnInit {
       });
 
       this.deskActionsService.onNewPlayerCard.subscribe((card: Card) => {
+        card.puttedToHand = true;
         this.player.cards.push(card);
       });
 

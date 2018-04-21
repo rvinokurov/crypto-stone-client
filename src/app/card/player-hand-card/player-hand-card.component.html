@@ -1,5 +1,14 @@
-<app-card
-  [card]="card"
-  class="player-hand-card">
-</app-card>
+
+<div class="player-hand-card"
+     [class.player-hand-card_putted-to-hand]="card.puttedToHand"
+     [class.player-hand-card_flipped]="!card.puttedToHand"
+     (animationend)="transitionEnd()">
+  <app-card
+    [card]="card"
+    class="player-hand-card--face">
+  </app-card>
+  <app-card-deck
+    class="player-hand-card--deck"></app-card-deck>
+</div>
+
 

@@ -29,44 +29,44 @@ export interface ActionEvent {
   subject: ActionSubject;
 }
 
-let enemyCardMock = {
-  'puid': '4404872a-114a-41bb-b324-fcdd24c60d15',
-  'guid': '49fa52a3-2396-4ab4-93db-cba87917fdbb',
-  'type': 'play',
-  'subject': 'card',
-  'payload': {
-    'id': 524156,
-    'image_url': 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/524156.png',
-    'props': {
-      'attack': {
-        'value': 4,
-        'bonus': 0,
-        'prob': 0
-      },
-      'defense': {
-        'value': 12,
-        'bonus': 0,
-        'prob': 0
-      },
-      'elementalOfAttack': {
-        'value': 2
-      },
-      'elementalOfDefence': {
-        'value': 1
-      },
-      'regeneration': {
-        'value': 13,
-        'bonus': 0,
-        'prob': 0
-      },
-      'energy drain': {
-        'value': 3,
-        'bonus': 0,
-        'prob': 0
+let newCardMock = {
+  "type": "draw",
+  "object": "player",
+  "subject": "card",
+  "payload": {
+    "card": {
+      "id": 557899,
+      "image_url": "https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/557899.png",
+      "props": {
+        "attack": {
+          "value": 3,
+          "bonus": 0,
+          "prob": 0
+        },
+        "defense": {
+          "value": 13,
+          "bonus": 0,
+          "prob": 0
+        },
+        "elementalOfAttack": {
+          "value": 3
+        },
+        "elementalOfDefence": {
+          "value": 3
+        },
+        "regeneration": {
+          "value": 2,
+          "bonus": 0,
+          "prob": 0
+        },
+        "energy drain": {
+          "value": 14,
+          "bonus": 0,
+          "prob": 0
+        }
       }
     }
-  },
-  'object': 'enemy'
+  }
 };
 
 @Injectable()
@@ -80,9 +80,9 @@ export class DeskActionsService {
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
-    setInterval(() => {
-      // this.enemyPlayCardSubject.next(GameModel.createCard(enemyCardMock.payload));
-    }, 5000);
+    // setInterval(() => {
+    //   this.newPlayerCardSubject.next(GameModel.createCard(newCardMock.payload.card));
+    // }, 3000);
 
   }
 

@@ -9,7 +9,7 @@ export class CardMarginDirective {
   }
 
   @Input('appCardMargin') set cardsCount(count) {
-    let margin = (7.5 * count - 24) / (count * 2);
+    let margin = (7.5 * count - 24) / (count * 2) + 0.1;
     if (margin < 1.4) {
       margin = 1.4;
     }
