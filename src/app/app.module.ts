@@ -14,7 +14,6 @@ import {HeroCardComponent} from './hero-card/hero-card.component';
 import {SausageComponent} from './sausage/sausage.component';
 import {DeckComponent} from './deck/deck.component';
 import {NewCardComponent} from './new-card/new-card.component';
-import {CardDeckComponent} from './card-deck/card-deck.component';
 import {GameService} from './game.service';
 import {SocketIoService} from './socket-io.service';
 import {DeskActionsService} from './desk-actions.service';
@@ -37,7 +36,6 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
     SausageComponent,
     DeckComponent,
     NewCardComponent,
-    CardDeckComponent,
     EndTurnButtonComponent,
   ],
   imports: [

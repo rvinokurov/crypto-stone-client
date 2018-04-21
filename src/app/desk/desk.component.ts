@@ -107,11 +107,11 @@ export class DeskComponent implements OnInit {
   }
 
   calcMargin(count) {
-    if ((24 / count) >= 6) {
-      return `-0.5rem`;
+    if ((24 / count) >= 8) {
+      return `-1.4rem`;
     }
 
-    return `-${(6 * count - 24) / (count * 2)}rem`;
+    return `-${(8 * count - 24) / (count * 2)}rem`;
   }
 
   ngOnInit() {

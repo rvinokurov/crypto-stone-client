@@ -20,6 +20,8 @@ $cardWidth = 5.5rem
   background-image url('/assets/wood.png')
   position relative
   box-shadow inset 0 0 1rem 0.5rem rgba(23, 34, 46, 0.5)
+  overflow hidden
+
 
   &--wrapper
     height 100%
@@ -27,6 +29,7 @@ $cardWidth = 5.5rem
     width 100%
     margin 0 auto
     position relative
+
 
 
   &_attack-mode
@@ -86,7 +89,7 @@ $cardWidth = 5.5rem
     height "calc(100% - %s + 20px)" % ($playgroundOffset * 2)
     top 'calc(%s - 10px)' % $playgroundOffset
     background green
-    box-shadow inset 0 0 6px 4px #023c25, 0 0 5px 1px #3b3a3c
+    box-shadow inset 0 0 6px 4px #023c25, 0.5rem 0.5rem 0.5rem 0.1rem rgba(59, 58, 60, 0.63)
     left calc(1.5em - 10px)
     border-bottom-left-radius: 20% 20%;
     border-bottom-right-radius: 20% 20%;
@@ -97,7 +100,8 @@ $cardWidth = 5.5rem
   &--playground-border
     z-index 10
     content ''
-    display block
+    //display block
+    display none
     box-sizing border-box
     position absolute
     width calc(100% - 3em + 60px)
@@ -109,18 +113,34 @@ $cardWidth = 5.5rem
     border-radius 50%
 
   &--playground-border-1
+    transform: rotateZ(-10deg);
     z-index 10
     content ''
     display block
     box-sizing border-box
     position absolute
-    width 50%
-    height "calc(100% - %s + 60px)" % ($playgroundOffset * 2)
-    top 'calc(%s - 30px)' % $playgroundOffset
-    background green
-    box-shadow inset 0 0 6px 4px #023c25, 0 0 2rem 1rem #3b3a3c
-    left 25%
-    border-radius 50%
+    width 70%
+    height 20%
+    top 6rem
+    box-shadow inset 0 0 0.1rem 0.1rem #f9c290, inset 0 0 5rem 0.1rem rgba(249, 194, 144, 0.63)
+    right 2rem
+    background-color #d7834b
+    border-radius 26%
+
+  &--playground-border-3
+    transform: rotateZ(-10deg);
+    z-index: 10;
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 70%;
+    height: 20%;
+    bottom: 6rem;
+    box-shadow: inset 0 0 0.1rem 0.1rem #f2d7ed, inset 0 0 5rem 0.1rem rgba(249,194,144,0.6), 0 0 1rem 0.1rem #3b3a3c;
+    left: 2rem;
+    background-color: #ceb6c9;
+    border-radius: 26%;
 
 
     &:active

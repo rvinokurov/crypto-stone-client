@@ -4,16 +4,21 @@
   position relative
   z-index 200
   host()
-  padding  0.6em
-  .host
+  padding  1.6rem
+  margin -0.6rem -1.2rem -3rem -1.2rem
+  &:hover
+    cursor url('/assets/pointer.cur'), auto
+    .player-hand-card
+      transform  scale(1.1)
+      box-shadow 0.3rem 0.3rem 0.3rem 0.1rem rgba(0, 0, 0, 0.4), inset 0 0 2rem 0 rgba(181, 139, 173, 0.5), inset 0 0 0.1rem
+
+
+  .player-hand-card
     card-host()
+    box-shadow 0.1rem 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.3), inset 0 0 2rem 0 rgba(181, 139, 173, 0.5), inset 0 0 0.1rem
 
     &.drag-handle
       cursor url('/assets/pointer.cur'), auto
     &.drag-handle:active
-      cursor url('/assets/pointer.cur'), auto
-    &:hover
-      transform translateY(0.5rem) scale(1.1)
-      margin -0.55em 0.6em -0.55em 0.6em
       cursor url('/assets/pointer.cur'), auto
 
