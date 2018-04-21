@@ -78,6 +78,7 @@ export class DeskComponent implements OnInit {
   }
 
   onCardDrop(e: DropEvent) {
+    console.log('drop');
     const deskCard: Card = e.dragData;
     deskCard.puttedToDesk = true;
     this.playerCardsOnDesk.push(deskCard);

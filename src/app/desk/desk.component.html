@@ -4,24 +4,29 @@
 
   <div class="desk--wrapper">
 
-    <div class="desk--playground-cards desk--playground-cards_enemy">
-      <app-enemy-card-in-desk
-        [class.target]="playerInAttack === true"
-        *ngFor="let card of enemyCardsOnDesk; trackBy:cardIdentify"
-        class="in-desk enemy"
-        [card]="card">
-      </app-enemy-card-in-desk>
-    </div>
+    <div class="desk--playground desk--playground_dropable" droppable
+         (onDrop)="onCardDrop($event)">
 
-    <div class="desk--playground-cards desk--playground-cards_player">
-      <app-player-card-in-desk
-        *ngFor="let card of playerCardsOnDesk; trackBy:cardIdentify"
-        class="in-desk"
-        (click)="selectToAttack(card)"
-        [appCardMargin]="playerCardsOnDesk.length"
-        [card]="card"
-        [class.in-attack]="card.inAttack === true">
-      </app-player-card-in-desk>
+
+      <div class="desk--playground-cards desk--playground-cards_enemy">
+        <app-enemy-card-in-desk
+          [class.target]="playerInAttack === true"
+          *ngFor="let card of enemyCardsOnDesk; trackBy:cardIdentify"
+          class="in-desk enemy"
+          [card]="card">
+        </app-enemy-card-in-desk>
+      </div>
+
+      <div class="desk--playground-cards desk--playground-cards_player">
+        <app-player-card-in-desk
+          *ngFor="let card of playerCardsOnDesk; trackBy:cardIdentify"
+          class="in-desk"
+          (click)="selectToAttack(card)"
+          [appCardMargin]="playerCardsOnDesk.length"
+          [card]="card"
+          [class.in-attack]="card.inAttack === true">
+        </app-player-card-in-desk>
+      </div>
     </div>
 
 
@@ -66,8 +71,7 @@
 
     <div class="desk--playground-border-2"></div>
     <div class="desk--playground-border-3"></div>
-    <div class="desk--playground" droppable
-         (onDrop)="onCardDrop($event)">
+    <div class="desk--playground">
 
     </div>
 

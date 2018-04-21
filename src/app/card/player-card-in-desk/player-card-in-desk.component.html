@@ -1,6 +1,6 @@
 <app-card
   [card]="card"
   [class.player-hand-card--putted-to-desk]="card.puttedToDesk && !card.inAttack"
-  (transitionend)="transitionEnd()"
+  (animationend)="transitionEnd()"
   class="player-hand-card">
 </app-card>

@@ -37,6 +37,7 @@ export class PlayerCardInDeskComponent implements OnInit {
   }
 
   transitionEnd() {
+    console.log('transend');
     this.playerCard.puttedToDesk = false;
   }
 

@@ -1,7 +1,7 @@
 <div class="enemy-card"
      [class.enemy-card_putted-to-desk]="card.puttedToDesk && !card.inAttack"
      [class.enemy-card_flipped]="!card.puttedToDesk"
-     (transitionend)="transitionEnd()">
+     (animationend)="transitionEnd()">
   <app-card
     [card]="card"
     class="enemy-card--face">
