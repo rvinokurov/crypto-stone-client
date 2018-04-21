@@ -89,7 +89,7 @@ $cardWidth = 5.5rem
     height "calc(100% - %s + 20px)" % ($playgroundOffset * 2)
     top 'calc(%s - 10px)' % $playgroundOffset
     background green
-    box-shadow inset 0 0 6px 4px #023c25, 0.5rem 0.5rem 0.5rem 0.1rem rgba(59, 58, 60, 0.63)
+    box-shadow inset 0 0 6px 4px #023c25, 0.4rem 0.4rem 0.3rem 0.05rem rgba(0, 0, 0, 0.58)
     left calc(1.5em - 10px)
     border-bottom-left-radius: 20% 20%;
     border-bottom-right-radius: 20% 20%;
@@ -113,34 +113,36 @@ $cardWidth = 5.5rem
     border-radius 50%
 
   &--playground-border-1
-    transform: rotateZ(-10deg);
+    display none
+    transform: rotateZ(-19deg);
     z-index 10
     content ''
-    display block
+    //display block
     box-sizing border-box
     position absolute
     width 70%
-    height 20%
+    height: 10rem;
     top 6rem
-    box-shadow inset 0 0 0.1rem 0.1rem #f9c290, inset 0 0 5rem 0.1rem rgba(249, 194, 144, 0.63)
+    box-shadow inset 0 0 0.1rem 0.1rem #ffe59d, inset 0 0 5rem 0.1rem rgba(249, 194, 144, 0.63)
     right 2rem
-    background-color #d7834b
-    border-radius 26%
+    background-color #ffc282
+    border-radius: 50%;
 
   &--playground-border-3
-    transform: rotateZ(-10deg);
+    display none
+    transform: rotateZ(-19deg);
     z-index: 10;
     content: '';
-    display: block;
+    //display: block;
     box-sizing: border-box;
     position: absolute;
     width: 70%;
-    height: 20%;
+    height: 10rem;
     bottom: 6rem;
     box-shadow: inset 0 0 0.1rem 0.1rem #f2d7ed, inset 0 0 5rem 0.1rem rgba(249,194,144,0.6), 0 0 1rem 0.1rem #3b3a3c;
     left: 2rem;
     background-color: #ceb6c9;
-    border-radius: 26%;
+    border-radius: 50%;
 
 
     &:active

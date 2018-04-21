@@ -58,16 +58,15 @@
       </div>
 
       <div class="desk--playground-cards desk--playground-cards_player">
-        <app-card
+        <app-player-card-in-desk
           *ngFor="let card of playerCardsOnDesk"
           class="in-desk"
           (click)="selectToAttack(card)"
+          [style.margin-left]="playerCardMargin"
+          [style.margin-right]="playerCardMargin"
           [card]="card"
-          [inAttack]="card.inAttack"
-          [puttedToDesk]="card.inDesk"
-          [class.in-attack]="card.inAttack === true"
-          isPlayerCard="true">
-        </app-card>
+          [class.in-attack]="card.inAttack === true">
+        </app-player-card-in-desk>
       </div>
     </div>
 
