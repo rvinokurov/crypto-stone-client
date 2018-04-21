@@ -81,9 +81,9 @@ export class DeskActionsService {
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
-    setInterval(() => {
-      this.newEnemyCardSubject.next(new EnemyCard());
-    }, 3000);
+    // setInterval(() => {
+    //   this.newEnemyCardSubject.next(new EnemyCard());
+    // }, 3000);
 
   }
 
