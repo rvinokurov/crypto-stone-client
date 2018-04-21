@@ -59,6 +59,7 @@ export class CardComponent implements OnInit {
     return `url('/assets/sword-${this.card.attack.type}.png')`;
   }
 
+
   animatePut() {
     this.cardState = 'initial';
     setTimeout(() => {
