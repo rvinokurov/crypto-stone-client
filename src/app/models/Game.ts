@@ -1,6 +1,8 @@
 import {Enemy} from './Enemy';
 import {Player} from './Player';
 import {Card, elemental} from './Card';
+import {fill} from 'lodash-es';
+import {EnemyCard} from './EnemyCard';
 
 export class GameModel {
 
@@ -14,8 +16,13 @@ export class GameModel {
   constructor(game: any) {
     this.playerCardsOnDesk = game.player_desk.map(GameModel.createCard);
     this.enemyCardsOnDesk = game.opponent_desk.map(GameModel.createCard);
+    const enemyCards = [];
+    for (let i = 0; i < game.opponent_hand; i++) {
+      enemyCards.push(new EnemyCard());
+    }
     this.enemy = new Enemy({
       cardsInHand: game.opponent_hand,
+      cards: enemyCards,
       name: game.opponent_name,
       hero: {
         url: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/545030.svg',

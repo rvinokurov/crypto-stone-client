@@ -9,6 +9,7 @@ import {GameModel} from '../models/Game';
 import {Enemy} from '../models/Enemy';
 import {SocketIoService} from '../socket-io.service';
 import {DeskActionsService} from '../desk-actions.service';
+import {EnemyCard} from '../models/EnemyCard';
 
 @Component({
   selector: 'app-desk',
@@ -124,8 +125,9 @@ export class DeskComponent implements OnInit {
         this.player.cards.push(card);
       });
 
-      this.deskActionsService.onNewEnemyrCard.subscribe(() => {
-        ++this.enemy.cardsInHand;
+      this.deskActionsService.onNewEnemyrCard.subscribe((card: EnemyCard) => {
+        card.puttedToHand = true;
+        this.enemy.cards.push(card);
       });
 
       this.deskActionsService.onEnemyPlayCard.subscribe((card: Card) => {

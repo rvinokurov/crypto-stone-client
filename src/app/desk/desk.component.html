@@ -62,6 +62,7 @@
     <div class="desk--card-pane desk--card-pane_enemy">
      <app-enemy-card
        [appCardMargin]="enemy.cards.length"
+       [card]="card"
         *ngFor="let card of enemy.cards">
       </app-enemy-card>
     </div>

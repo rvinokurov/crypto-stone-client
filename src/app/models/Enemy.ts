@@ -1,5 +1,6 @@
 import {Hero} from './Hero';
 import {range} from 'lodash-es';
+import {EnemyCard} from './EnemyCard';
 
 export class Enemy {
 
@@ -11,13 +12,12 @@ export class Enemy {
 
   hero: Hero;
 
+  cards: EnemyCard[];
+
   constructor(enemy: EnemyModel) {
     Object.assign(<Enemy>this, enemy);
   }
 
-  get cards(): number[] {
-    return range(this.cardsInHand);
-  }
 }
 
 
@@ -26,4 +26,5 @@ export interface EnemyModel {
   name: string;
   sausages: number;
   hero: Hero;
+  cards: EnemyCard[];
 }

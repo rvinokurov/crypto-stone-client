@@ -4,6 +4,7 @@ import {Card} from './models/Card';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {GameModel} from './models/Game';
+import {EnemyCard} from './models/EnemyCard';
 
 export enum ActionObject {
   player = 'player',
@@ -75,14 +76,14 @@ export class DeskActionsService {
   private actionObservable: Observable<ActionEvent>;
   private newPlayerCardSubject = new Subject<Card>();
   private enemyPlayCardSubject = new Subject<Card>();
-  private newEnemyCardSubject = new Subject<void>();
+  private newEnemyCardSubject = new Subject<EnemyCard>();
 
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
-    // setInterval(() => {
-    //   this.newPlayerCardSubject.next(GameModel.createCard(newCardMock.payload.card));
-    // }, 3000);
+    setInterval(() => {
+      this.newEnemyCardSubject.next(new EnemyCard());
+    }, 3000);
 
   }
 

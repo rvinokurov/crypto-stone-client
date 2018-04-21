@@ -1,2 +1,5 @@
 <app-card-deck
-  class="enemy-hand-card"></app-card-deck>
+  class="enemy-hand-card"
+  [class.enemy-hand-card--putted-to-hand]="card.puttedToHand && !card.inAttack"
+  (animationend)="transitionEnd()"
+></app-card-deck>
