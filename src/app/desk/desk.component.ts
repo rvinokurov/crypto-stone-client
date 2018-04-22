@@ -7,9 +7,10 @@ import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../game.service';
 import {GameModel} from '../models/Game';
 import {Enemy} from '../models/Enemy';
-import {SocketIoService} from '../socket-io.service';
+import {SocketIoService} from '../socket/socket-io.service';
 import {DeskActionsService} from '../desk-actions.service';
 import {EnemyCard} from '../models/EnemyCard';
+import {CardAttackService} from '../card/card-attack.service';
 
 @Component({
   selector: 'app-desk',
@@ -47,6 +48,7 @@ export class DeskComponent implements OnInit {
     private  route: ActivatedRoute,
     private socketIoService: SocketIoService,
     private deskActionsService: DeskActionsService,
+    private cardAttackService: CardAttackService,
   ) {
     this.touchCardSound.volume = 0.15;
   }
@@ -127,7 +129,7 @@ export class DeskComponent implements OnInit {
         this.player.cards.push(card);
       });
 
-      this.deskActionsService.onNewEnemyrCard.subscribe((card: EnemyCard) => {
+      this.deskActionsService.onNewEnemyCard.subscribe((card: EnemyCard) => {
         card.puttedToHand = true;
         this.enemy.cards.push(card);
       });
@@ -137,7 +139,7 @@ export class DeskComponent implements OnInit {
         this.enemyCardsOnDesk.push(card);
       });
 
-      this.deskActionsService.cardInAttack.subscribe((cardInAttack: Card) => {
+      this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
         this.playerInAttack = cardInAttack.inAttack;
         if (cardInAttack.inAttack) {
           this.attackingCard = cardInAttack;
@@ -147,33 +149,22 @@ export class DeskComponent implements OnInit {
       });
 
 
-      this.deskActionsService.targetCard.subscribe((targetCard: Card) => {
-        console.log('tc', targetCard);
 
-        this.playerCardsOnDesk.forEach((card) => {
-          if (card.id === this.attackingCard.id) {
-            card.inAttack = false;
-          }
-        });
 
-        this.deskActionsService.attack(this.attackingCard, targetCard);
-        this.attackingCard = undefined;
-      });
-
-      this.deskActionsService.cardAttack.subscribe((result) => {
-        console.log('res', result);
-
-        const acceptDamage = (card: Card) => {
-          const foundCard = result.cards.find((c) => c.id === card.id);
-          if (foundCard !== undefined) {
-            card.defence.value = card.defence.value - foundCard.damage;
-          }
-        };
-
-        this.playerCardsOnDesk.forEach(acceptDamage);
-        this.enemyCardsOnDesk.forEach(acceptDamage);
-
-      });
+      // this.deskActionsService.cardAttack.subscribe((result) => {
+      //   console.log('res', result);
+      //
+      //   const acceptDamage = (card: Card) => {
+      //     const foundCard = result.cards.find((c) => c.id === card.id);
+      //     if (foundCard !== undefined) {
+      //       card.defence.value = card.defence.value - foundCard.damage;
+      //     }
+      //   };
+      //
+      //   this.playerCardsOnDesk.forEach(acceptDamage);
+      //   this.enemyCardsOnDesk.forEach(acceptDamage);
+      //
+      // });
       // this.enemy = this.playerService.getEnemy();
 
       // setTimeout(() => {

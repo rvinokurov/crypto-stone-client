@@ -1,6 +1,7 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 import {Card} from '../../models/Card';
-import {DeskActionsService} from '../../desk-actions.service';
+import {CardAttackService} from '../card-attack.service';
+import {offset} from '../offset';
 
 @Component({
   selector: 'app-enemy-card-in-desk',
@@ -12,8 +13,8 @@ export class EnemyCardInDeskComponent implements OnInit {
   attackMode = false;
   private playerCard: Card;
 
-  constructor(private deskActionsService: DeskActionsService) {
-    this.deskActionsService.cardInAttack.subscribe((cardInAttack: Card) => {
+  constructor(private cardAttackService: CardAttackService, private elementRef: ElementRef) {
+    this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
       this.attackMode = cardInAttack.inAttack;
     });
   }
@@ -35,7 +36,7 @@ export class EnemyCardInDeskComponent implements OnInit {
   @HostListener('click') target() {
     console.log('click', this.attackMode);
     if (this.attackMode) {
-      this.deskActionsService.setTargetCard(this.playerCard);
+      this.cardAttackService.setTargetCard(this.playerCard, offset(this.elementRef.nativeElement));
     }
   }
 

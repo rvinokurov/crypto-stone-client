@@ -15,11 +15,11 @@ import {SausageComponent} from './sausage/sausage.component';
 import {DeckComponent} from './deck/deck.component';
 import {NewCardComponent} from './new-card/new-card.component';
 import {GameService} from './game.service';
-import {SocketIoService} from './socket-io.service';
 import {DeskActionsService} from './desk-actions.service';
 import {config  as appConfig} from '../config';
 import {EndTurnButtonComponent} from './end-turn-button/end-turn-button.component';
 import {CardModule} from './card/card.module';
+import {SocketModule} from './socket/socket.module';
 
 const appRoutes: Routes = [
   {path: 'table/:guid/:puid', component: DeskComponent},
@@ -50,11 +50,11 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
       {}
     ),
     SocketIoModule.forRoot(config),
-    CardModule
+    CardModule,
+    SocketModule
   ],
   providers: [
     GameService,
-    SocketIoService,
     DeskActionsService
   ],
   bootstrap: [AppComponent]

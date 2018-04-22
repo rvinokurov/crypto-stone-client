@@ -7,10 +7,13 @@ import { EnemyCardComponent } from './enemy-card/enemy-card.component';
 import { PlayerCardInDeskComponent } from './player-card-in-desk/player-card-in-desk.component';
 import { EnemyCardInDeskComponent } from './enemy-card-in-desk/enemy-card-in-desk.component';
 import { CardMarginDirective } from './directives/card-margin.directive';
+import {SocketModule} from '../socket/socket.module';
+import {CardAttackService} from './card-attack.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SocketModule
   ],
   declarations: [
     CardComponent,
@@ -19,7 +22,11 @@ import { CardMarginDirective } from './directives/card-margin.directive';
     EnemyCardComponent,
     PlayerCardInDeskComponent,
     EnemyCardInDeskComponent,
-    CardMarginDirective
+    CardMarginDirective,
+
+  ],
+  providers: [
+    CardAttackService
   ],
   exports : [
     CardComponent,
@@ -27,7 +34,7 @@ import { CardMarginDirective } from './directives/card-margin.directive';
     EnemyCardComponent,
     PlayerCardInDeskComponent,
     EnemyCardInDeskComponent,
-    CardMarginDirective
+    CardMarginDirective,
   ]
 })
 export class CardModule { }
