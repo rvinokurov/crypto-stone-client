@@ -87,10 +87,7 @@ export class DeskActionsService {
   private cardInAttackSubject = new Subject<Card>();
   private targetCardSubject = new Subject<Card>();
   private cardAttackResultSubject = new Subject<{
-    attackingCardId: number,
-    targetCardId: number,
-    attackingCardDefence: number,
-    targetCardDefence: number,
+    cards: { id: number | string, damage: number }[],
     side
   }>();
 
@@ -161,10 +158,15 @@ export class DeskActionsService {
             side = AttackSide.defence;
           }
           const data = {
-            attackingCardId: payload.objectId,
-            targetCardId: payload.subjectId,
-            attackingCardDefence: payload.damageToObject,
-            targetCardDefence: payload.damageToSubject,
+            cards: [{
+              id: payload.objectId,
+              damage: payload.damageToObject,
+            },
+              {
+                id: payload.subjectId,
+                damage: payload.damageToSubject
+              }
+            ],
             side
           };
           this.cardAttackResultSubject.next(data);

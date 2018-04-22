@@ -8,7 +8,7 @@ import {GameService} from '../game.service';
 import {GameModel} from '../models/Game';
 import {Enemy} from '../models/Enemy';
 import {SocketIoService} from '../socket-io.service';
-import {AttackSide, DeskActionsService} from '../desk-actions.service';
+import {DeskActionsService} from '../desk-actions.service';
 import {EnemyCard} from '../models/EnemyCard';
 
 @Component({
@@ -163,23 +163,16 @@ export class DeskComponent implements OnInit {
       this.deskActionsService.cardAttack.subscribe((result) => {
         console.log('res', result);
 
-        let targetCards = this.enemyCardsOnDesk;
-        let attackingCards = this.playerCardsOnDesk;
-        if (result.side === AttackSide.defence) {
-          attackingCards = this.enemyCardsOnDesk;
-          targetCards = this.playerCardsOnDesk;
-        }
+        const acceptDamage = (card: Card) => {
+          const foundCard = result.cards.find((c) => c.id === card.id);
+          if (foundCard !== undefined) {
+            card.defence.value = card.defence.value - foundCard.damage;
+          }
+        };
 
-        attackingCards.forEach((card: Card) => {
-          if (card.id === result.attackingCardId) {
-            card.defence.value = card.defence.value - result.attackingCardDefence;
-          }
-        });
-        targetCards.forEach((card: Card) => {
-          if (card.id === result.targetCardId) {
-            card.defence.value = card.defence.value - result.targetCardDefence;
-          }
-        });
+        this.playerCardsOnDesk.forEach(acceptDamage);
+        this.enemyCardsOnDesk.forEach(acceptDamage);
+
       });
       // this.enemy = this.playerService.getEnemy();
 
