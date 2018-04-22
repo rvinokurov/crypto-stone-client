@@ -21,7 +21,6 @@
         <app-player-card-in-desk
           *ngFor="let card of playerCardsOnDesk; trackBy:cardIdentify"
           class="in-desk"
-          (click)="selectToAttack(card)"
           [appCardMargin]="playerCardsOnDesk.length"
           [card]="card"
           [class.in-attack]="card.inAttack === true">

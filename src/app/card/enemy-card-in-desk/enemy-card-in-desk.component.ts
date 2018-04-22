@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Card} from '../../models/Card';
+import {DeskActionsService} from '../../desk-actions.service';
 
 @Component({
   selector: 'app-enemy-card-in-desk',
@@ -10,7 +11,12 @@ export class EnemyCardInDeskComponent implements OnInit {
   putToDeskSound = new Audio('/assets/sound/put-to-desk.wav');
   private playerCard: Card;
 
-  constructor() {
+  attackMode = false;
+
+  constructor(private deskActionsService: DeskActionsService) {
+    this.deskActionsService.cardInAttack.subscribe((cardInAttack: Card) => {
+      this.attackMode = cardInAttack.inAttack;
+    });
   }
 
   get card() {
@@ -25,6 +31,10 @@ export class EnemyCardInDeskComponent implements OnInit {
         this.putToDeskSound.play();
       }, 800);
     }
+  }
+
+  @HostListener('click') target() {
+    console.log('click', this.attackMode);
   }
 
   transitionEnd() {

@@ -28,6 +28,8 @@ export class DeskComponent implements OnInit {
   player: Player;
   enemy: Enemy;
 
+  attackingCard: Card | undefined;
+
   playerInAttack = false;
 
   showNewCard = false;
@@ -53,15 +55,15 @@ export class DeskComponent implements OnInit {
     return card.id;
   }
 
-  selectToAttack(card: Card) {
-    card.inAttack = !card.inAttack;
-    this.playerCardsOnDesk.forEach((c) => {
-      if (c.id !== card.id) {
-        c.inAttack = false;
-      }
-    });
-    this.playerInAttack = card.inAttack;
-  }
+  // selectToAttack(card: Card) {
+  //   card.inAttack = !card.inAttack;
+  //   this.playerCardsOnDesk.forEach((c) => {
+  //     if (c.id !== card.id) {
+  //       c.inAttack = false;
+  //     }
+  //   });
+  //   this.playerInAttack = card.inAttack;
+  // }
 
   onCardOver() {
     // this.touchCardSound.load();
@@ -133,6 +135,15 @@ export class DeskComponent implements OnInit {
       this.deskActionsService.onEnemyPlayCard.subscribe((card: Card) => {
         card.puttedToDesk = true;
         this.enemyCardsOnDesk.push(card);
+      });
+
+      this.deskActionsService.cardInAttack.subscribe((cardInAttack: Card) => {
+        this.playerInAttack = cardInAttack.inAttack;
+        if (cardInAttack.inAttack) {
+          this.attackingCard = cardInAttack;
+        } else {
+          this.attackingCard = undefined;
+        }
       });
       // this.enemy = this.playerService.getEnemy();
 

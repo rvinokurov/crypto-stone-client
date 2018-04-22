@@ -31,39 +31,39 @@ export interface ActionEvent {
 }
 
 let newCardMock = {
-  "type": "draw",
-  "object": "player",
-  "subject": "card",
-  "payload": {
-    "card": {
-      "id": 557899,
-      "image_url": "https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/557899.png",
-      "props": {
-        "attack": {
-          "value": 3,
-          "bonus": 0,
-          "prob": 0
+  'type': 'draw',
+  'object': 'player',
+  'subject': 'card',
+  'payload': {
+    'card': {
+      'id': 557899,
+      'image_url': 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/557899.png',
+      'props': {
+        'attack': {
+          'value': 3,
+          'bonus': 0,
+          'prob': 0
         },
-        "defense": {
-          "value": 13,
-          "bonus": 0,
-          "prob": 0
+        'defense': {
+          'value': 13,
+          'bonus': 0,
+          'prob': 0
         },
-        "elementalOfAttack": {
-          "value": 3
+        'elementalOfAttack': {
+          'value': 3
         },
-        "elementalOfDefence": {
-          "value": 3
+        'elementalOfDefence': {
+          'value': 3
         },
-        "regeneration": {
-          "value": 2,
-          "bonus": 0,
-          "prob": 0
+        'regeneration': {
+          'value': 2,
+          'bonus': 0,
+          'prob': 0
         },
-        "energy drain": {
-          "value": 14,
-          "bonus": 0,
-          "prob": 0
+        'energy drain': {
+          'value': 14,
+          'bonus': 0,
+          'prob': 0
         }
       }
     }
@@ -77,6 +77,8 @@ export class DeskActionsService {
   private newPlayerCardSubject = new Subject<Card>();
   private enemyPlayCardSubject = new Subject<Card>();
   private newEnemyCardSubject = new Subject<EnemyCard>();
+  private cardInAttackSubject = new Subject<Card>();
+  private targetCardSubject = new Subject<Card>();
 
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
@@ -87,6 +89,13 @@ export class DeskActionsService {
 
   }
 
+  get targetCard() {
+    return this.targetCardSubject;
+  }
+
+  get cardInAttack() {
+    return this.cardInAttackSubject;
+  }
 
   get onNewPlayerCard() {
     return this.newPlayerCardSubject;
@@ -98,6 +107,14 @@ export class DeskActionsService {
 
   get onEnemyPlayCard() {
     return this.enemyPlayCardSubject;
+  }
+
+  setTargetCard(card: Card) {
+    this.cardInAttackSubject.next(card);
+  }
+
+  setCardInAttack(card: Card) {
+    this.cardInAttackSubject.next(card);
   }
 
   endTurn() {
