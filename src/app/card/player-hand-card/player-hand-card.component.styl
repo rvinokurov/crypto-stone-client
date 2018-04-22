@@ -48,9 +48,7 @@
   &:hover
     cursor url('/assets/pointer.cur'), auto
     .player-hand-card
-      transform translate3d(0, 0, 0) scale(1.1) rotateY(180deg)
-
-
+      transform  scale(1.1)
 
 
   .player-hand-card
@@ -62,8 +60,15 @@
     transform-style preserve-3d
 
     &_flipped
-      transform translate3d(0, 0, 0) scale(1) rotateY(180deg)
+      transform translate3d(0, 0, 0) scale(1)
       box-shadow 0 0 0 0 black
+
+    &_flipped
+      .player-hand-card--face
+        transform: rotateY(0deg)
+    &_flipped
+      .player-hand-card--deck
+        display: none
 
     &_putted-to-hand
       z-index 40000
