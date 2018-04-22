@@ -8,7 +8,8 @@ import {EnemyCard} from './models/EnemyCard';
 
 export enum ActionObject {
   player = 'player',
-  enemy = 'enemy'
+  enemy = 'enemy',
+  card = 'card'
 }
 
 
@@ -20,7 +21,8 @@ export enum ActionSubject {
 export enum ActionType {
   playCard = 'play',
   draw = 'draw',
-  end = 'end'
+  end = 'end',
+  attack = 'attack'
 }
 
 export interface ActionEvent {
@@ -110,11 +112,22 @@ export class DeskActionsService {
   }
 
   setTargetCard(card: Card) {
-    this.cardInAttackSubject.next(card);
+    this.targetCard.next(card);
   }
 
   setCardInAttack(card: Card) {
     this.cardInAttackSubject.next(card);
+  }
+
+  attack(playerCard, enemyCard) {
+    this.socketIoService.action(
+      ActionType.attack,
+      ActionSubject.card,
+      {
+        objectId: playerCard.id,
+        subjectId: enemyCard.id
+      },
+      ActionObject.card);
   }
 
   endTurn() {

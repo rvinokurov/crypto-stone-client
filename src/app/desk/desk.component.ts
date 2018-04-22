@@ -145,6 +145,20 @@ export class DeskComponent implements OnInit {
           this.attackingCard = undefined;
         }
       });
+
+
+      this.deskActionsService.targetCard.subscribe((targetCard: Card) => {
+        console.log('tc', targetCard);
+
+        this.playerCardsOnDesk.forEach((card) => {
+          if (card.id === this.attackingCard.id) {
+            card.inAttack = false;
+          }
+        });
+
+        this.deskActionsService.attack(this.attackingCard, targetCard);
+        this.attackingCard = undefined;
+      });
       // this.enemy = this.playerService.getEnemy();
 
       // setTimeout(() => {

@@ -32,12 +32,13 @@ export class SocketIoService {
     return this.socket.fromEvent(action);
   }
 
-  action(type: string, subject: string, payload: any) {
+  action(type: string, subject: string, payload: any, object?) {
     const action = {
       puid: this.puid,
       guid: this.guid,
       type,
       subject,
+      object,
       payload
     };
     console.log(JSON.stringify(action, null, '    '));

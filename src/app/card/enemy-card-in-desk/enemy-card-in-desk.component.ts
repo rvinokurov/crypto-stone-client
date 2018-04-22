@@ -9,9 +9,8 @@ import {DeskActionsService} from '../../desk-actions.service';
 })
 export class EnemyCardInDeskComponent implements OnInit {
   putToDeskSound = new Audio('/assets/sound/put-to-desk.wav');
-  private playerCard: Card;
-
   attackMode = false;
+  private playerCard: Card;
 
   constructor(private deskActionsService: DeskActionsService) {
     this.deskActionsService.cardInAttack.subscribe((cardInAttack: Card) => {
@@ -35,6 +34,9 @@ export class EnemyCardInDeskComponent implements OnInit {
 
   @HostListener('click') target() {
     console.log('click', this.attackMode);
+    if (this.attackMode) {
+      this.deskActionsService.setTargetCard(this.playerCard);
+    }
   }
 
   transitionEnd() {
