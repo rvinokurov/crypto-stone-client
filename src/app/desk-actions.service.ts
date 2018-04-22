@@ -32,6 +32,11 @@ export interface ActionEvent {
   subject: ActionSubject;
 }
 
+export  enum AttackSide {
+  defence = 'defense',
+  attack = 'attack'
+}
+
 let newCardMock = {
   'type': 'draw',
   'object': 'player',
@@ -81,6 +86,13 @@ export class DeskActionsService {
   private newEnemyCardSubject = new Subject<EnemyCard>();
   private cardInAttackSubject = new Subject<Card>();
   private targetCardSubject = new Subject<Card>();
+  private cardAttackResultSubject = new Subject<{
+    attackingCardId: number,
+    targetCardId: number,
+    attackingCardDefence: number,
+    targetCardDefence: number,
+    side
+  }>();
 
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
@@ -89,6 +101,10 @@ export class DeskActionsService {
     //   this.newEnemyCardSubject.next(new EnemyCard());
     // }, 3000);
 
+  }
+
+  get cardAttack() {
+    return this.cardAttackResultSubject;
   }
 
   get targetCard() {
@@ -137,6 +153,23 @@ export class DeskActionsService {
   processAction(action: ActionEvent) {
     console.log(JSON.stringify(action, null, '   '));
     try {
+      if (action.type === ActionType.attack) {
+        if (action.object === ActionObject.card && action.subject === ActionSubject.card) {
+          const {payload} = action;
+          let side = AttackSide.attack;
+          if (payload.side === AttackSide.defence) {
+            side = AttackSide.defence;
+          }
+          const data = {
+            attackingCardId: payload.objectId,
+            targetCardId: payload.subjectId,
+            attackingCardDefence: payload.damageToObject,
+            targetCardDefence: payload.damageToSubject,
+            side
+          };
+          this.cardAttackResultSubject.next(data);
+        }
+      }
       if (action.type === ActionType.playCard && action.object === ActionObject.enemy) {
         this.enemyPlayCardSubject.next(GameModel.createCard(action.payload));
       }

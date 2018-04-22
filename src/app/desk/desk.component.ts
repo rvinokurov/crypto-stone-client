@@ -8,7 +8,7 @@ import {GameService} from '../game.service';
 import {GameModel} from '../models/Game';
 import {Enemy} from '../models/Enemy';
 import {SocketIoService} from '../socket-io.service';
-import {DeskActionsService} from '../desk-actions.service';
+import {AttackSide, DeskActionsService} from '../desk-actions.service';
 import {EnemyCard} from '../models/EnemyCard';
 
 @Component({
@@ -158,6 +158,28 @@ export class DeskComponent implements OnInit {
 
         this.deskActionsService.attack(this.attackingCard, targetCard);
         this.attackingCard = undefined;
+      });
+
+      this.deskActionsService.cardAttack.subscribe((result) => {
+        console.log('res', result);
+
+        let targetCards = this.enemyCardsOnDesk;
+        let attackingCards = this.playerCardsOnDesk;
+        if (result.side === AttackSide.defence) {
+          attackingCards = this.enemyCardsOnDesk;
+          targetCards = this.playerCardsOnDesk;
+        }
+
+        attackingCards.forEach((card: Card) => {
+          if (card.id === result.attackingCardId) {
+            card.defence.value = card.defence.value - result.attackingCardDefence;
+          }
+        });
+        targetCards.forEach((card: Card) => {
+          if (card.id === result.targetCardId) {
+            card.defence.value = card.defence.value - result.targetCardDefence;
+          }
+        });
       });
       // this.enemy = this.playerService.getEnemy();
 
