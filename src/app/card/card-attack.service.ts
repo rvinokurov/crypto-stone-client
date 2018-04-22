@@ -19,6 +19,8 @@ export interface AttackDamage {
 export interface AttackResult {
   attackingCard: AttackDamage;
   targetCard: AttackDamage;
+  attackingCardCoordinates: Coordinates;
+  targetCardCoordinates: Coordinates;
   side: AttackSide
 }
 
@@ -90,7 +92,6 @@ export class CardAttackService {
 
 
   processAction(action: ActionEvent) {
-    console.log('111');
     console.log(JSON.stringify(action, null, '   '));
     try {
       if (action.type === ActionType.attack) {
@@ -109,6 +110,8 @@ export class CardAttackService {
               id: payload.subjectId,
               damage: payload.damageToSubject
             },
+            attackingCardCoordinates: this.attackingCardCoords,
+            targetCardCoordinates: this.targetCardCoords,
             side
           };
           console.log('next', data);
