@@ -9,6 +9,8 @@ export class SocketIoService {
 
   private guid;
 
+  private actions = {};
+
   constructor(private socket: Socket) {
   }
 
@@ -29,7 +31,10 @@ export class SocketIoService {
   }
 
   subscribe<T>(action): Observable<T> {
-    return this.socket.fromEvent(action);
+    if(this.actions[action] === undefined) {
+      this.actions[action] = this.socket.fromEvent(action);
+    }
+    return this.actions[action];
   }
 
   action(type: string, subject: string, payload: any, object?) {

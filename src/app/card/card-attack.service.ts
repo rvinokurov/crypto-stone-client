@@ -10,12 +10,25 @@ export interface Coordinates {
   y: number;
 }
 
+
+export interface AttackDamage {
+  id: number | string;
+  damage: number;
+}
+
+export interface AttackResult {
+  attackingCard: AttackDamage;
+  targetCard: AttackDamage;
+  side: AttackSide
+}
+
 @Injectable()
 export class CardAttackService {
 
   private actionObservable: Observable<ActionEvent>;
   private cardInAttackSubject = new Subject<Card>();
   private targetCardSubject = new Subject<Card>();
+  private endAttackSubject = new Subject<AttackDamage>();
 
   private attackingCard: Card;
   private targetCard: Card;
@@ -24,14 +37,11 @@ export class CardAttackService {
   private targetCardCoords: Coordinates;
 
 
-  private cardAttackResultSubject = new Subject<{
-    attackingCard: { id: number | string, damage: number },
-    targetCard: { id: number | string, damage: number }
-    side
-  }>();
+  private cardAttackResultSubject = new Subject<AttackResult>();
 
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
+    console.log('obs', this.actionObservable);
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
   }
 
@@ -43,12 +53,20 @@ export class CardAttackService {
     return this.cardInAttackSubject;
   }
 
+  get targetDefence() {
+    return this.endAttackSubject;
+  }
+
+  finishAttack(target: { id: number | string, damage: number }) {
+    this.endAttackSubject.next(target);
+  }
+
   setTargetCard(card: Card, coordinates: Coordinates) {
     this.targetCard = card;
     this.targetCardCoords = coordinates;
 
     console.log(card, coordinates);
-    // this.attack(this.attackingCard, this.targetCard);
+    this.attack(this.attackingCard, this.targetCard);
   }
 
   setCardInAttack(card: Card, coordinates: Coordinates) {
@@ -72,6 +90,7 @@ export class CardAttackService {
 
 
   processAction(action: ActionEvent) {
+    console.log('111');
     console.log(JSON.stringify(action, null, '   '));
     try {
       if (action.type === ActionType.attack) {
@@ -92,6 +111,7 @@ export class CardAttackService {
             },
             side
           };
+          console.log('next', data);
           this.cardAttackResultSubject.next(data);
         }
       }
