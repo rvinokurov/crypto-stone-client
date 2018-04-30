@@ -43,6 +43,8 @@ export class DeskComponent implements OnInit {
 
   endTurnSound = new Audio('/assets/sound/end-turn-2.wav');
 
+  ourTurn = false;
+
   constructor(
     private gameService: GameService,
     private  route: ActivatedRoute,
@@ -57,24 +59,13 @@ export class DeskComponent implements OnInit {
     return card.id;
   }
 
-  // selectToAttack(card: Card) {
-  //   card.inAttack = !card.inAttack;
-  //   this.playerCardsOnDesk.forEach((c) => {
-  //     if (c.id !== card.id) {
-  //       c.inAttack = false;
-  //     }
-  //   });
-  //   this.playerInAttack = card.inAttack;
-  // }
 
   onCardOver() {
-    // this.touchCardSound.load();
     this.touchCardSound.play();
   }
 
   onDragStart() {
     this.takeCardSound.play();
-    console.log('on drag start');
   }
 
   endTurn() {
@@ -83,30 +74,12 @@ export class DeskComponent implements OnInit {
   }
 
   onCardDrop(e: DropEvent) {
-    console.log('drop');
     const deskCard: Card = e.dragData;
     deskCard.puttedToDesk = true;
     this.playerCardsOnDesk.push(deskCard);
 
     this.player.cards = this.player.cards.filter((card: Card) => card.id !== deskCard.id);
     this.deskActionsService.playCard(deskCard);
-    // setTimeout(() => {
-    //   this.newPlayerCard = new Card({
-    //     id: 0,
-    //     attack: {
-    //       value: 9,
-    //       type: elemental.air
-    //     },
-    //     defence: {
-    //       value: 11,
-    //       type: elemental.fire
-    //     },
-    //     sausageSteal: 19,
-    //     avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/622943.svg'
-    //   });
-    //   this.showNewCard = true;
-    // }, 1000);
-
   }
 
 
@@ -122,6 +95,12 @@ export class DeskComponent implements OnInit {
         this.enemy = game.enemy;
         this.enemyCardsOnDesk = game.enemyCardsOnDesk;
         this.playerCardsOnDesk = game.playerCardsOnDesk;
+        this.ourTurn = game.ourTurn;
+        console.log('ourTurn', this.ourTurn);
+      });
+
+      this.deskActionsService.ourTurn.subscribe((ourTurn) => {
+        this.ourTurn = ourTurn;
       });
 
       this.deskActionsService.onNewPlayerCard.subscribe((card: Card) => {
@@ -131,12 +110,14 @@ export class DeskComponent implements OnInit {
 
       this.deskActionsService.onNewEnemyCard.subscribe((card: EnemyCard) => {
         card.puttedToHand = true;
+        console.log('new enemy card', card);
         this.enemy.cards.push(card);
       });
 
       this.deskActionsService.onEnemyPlayCard.subscribe((card: Card) => {
         card.puttedToDesk = true;
         this.enemyCardsOnDesk.push(card);
+        this.enemy.cards.pop();
       });
 
       this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
@@ -149,39 +130,6 @@ export class DeskComponent implements OnInit {
       });
 
 
-
-
-      // this.deskActionsService.cardAttack.subscribe((result) => {
-      //   console.log('res', result);
-      //
-      //   const acceptDamage = (card: Card) => {
-      //     const foundCard = result.cards.find((c) => c.id === card.id);
-      //     if (foundCard !== undefined) {
-      //       card.defence.value = card.defence.value - foundCard.damage;
-      //     }
-      //   };
-      //
-      //   this.playerCardsOnDesk.forEach(acceptDamage);
-      //   this.enemyCardsOnDesk.forEach(acceptDamage);
-      //
-      // });
-      // this.enemy = this.playerService.getEnemy();
-
-      // setTimeout(() => {
-      //   this.newPlayerCard = new Card({
-      //     attack: {
-      //       value: 9,
-      //       type: elemental.air
-      //     },
-      //     defence: {
-      //       value: 11,
-      //       type: elemental.fire
-      //     },
-      //     sausageSteal: 19,
-      //     avatar: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/622943.svg'
-      //   });
-      //   this.showNewCard = true;
-      // }, 10);
     });
   }
 

@@ -1,55 +1,25 @@
-import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Renderer2} from '@angular/core';
 import {Card} from '../../models/Card';
-import {AttackResult, CardAttackService} from '../card-attack.service';
+import {CardAttackService} from '../card-attack.service';
 import {offset} from '../offset';
+import {AbstractCardInDeskComponent} from '../abstract.card-on-desk.component';
 
 @Component({
   selector: 'app-enemy-card-in-desk',
   templateUrl: './enemy-card-in-desk.component.html',
   styleUrls: ['./enemy-card-in-desk.component.styl']
 })
-export class EnemyCardInDeskComponent implements OnInit {
-  putToDeskSound = new Audio('/assets/sound/put-to-desk.wav');
+export class EnemyCardInDeskComponent extends AbstractCardInDeskComponent {
   attackMode = false;
-  private playerCard: Card;
-  private attackResult: AttackResult;
 
-  constructor(private cardAttackService: CardAttackService, private elementRef: ElementRef) {
+  constructor(cardAttackService: CardAttackService, elementRef: ElementRef, renderer: Renderer2) {
+
+
+    super(cardAttackService, elementRef, renderer);
+
     this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
       this.attackMode = cardInAttack.inAttack;
     });
-
-    this.cardAttackService.cardAttack.subscribe((result) => {
-      if (result.attackingCard.id === this.playerCard.id) {
-        this.attackResult = result;
-        this.finishAttack();
-      }
-    });
-
-    this.cardAttackService.targetDefence.subscribe((result) => {
-      if (result.id === this.playerCard.id) {
-        this.playerCard.defence.value -= result.damage;
-      }
-    });
-  }
-
-  finishAttack() {
-    this.playerCard.defence.value -= this.attackResult.attackingCard.damage;
-    this.cardAttackService.finishAttack(this.attackResult.targetCard);
-  }
-
-  get card() {
-    return this.playerCard;
-  }
-
-  @Input() set card(card: Card) {
-    this.playerCard = card;
-    if (this.playerCard.puttedToDesk) {
-      setTimeout(() => {
-        this.putToDeskSound.volume = 0.5;
-        this.putToDeskSound.play();
-      }, 800);
-    }
   }
 
   @HostListener('click') target() {
@@ -59,14 +29,26 @@ export class EnemyCardInDeskComponent implements OnInit {
     }
   }
 
-  transitionEnd() {
-    console.log('transitionend');
-    setTimeout(() => {
-      this.playerCard.puttedToDesk = false;
-    }, 10);
+
+  protected getFlightTranslate(x: number, y: number) {
+    return `${x / 2 -  this.size.width / 3 }px, ${y / 2  - this.size.height / 4 }px, 0`;
   }
 
-  ngOnInit() {
+  protected getAttackTranslate(x: number, y: number) {
+    console.log(0, `${x}px, ${y - (this.size.height - this.size.height / 2)}px, 0`);
+    return `${x}px, ${y - (this.size.height / 4)}px, 0`;
   }
+
+
+  protected getPause1Translate(x: number, y: number) {
+    console.log(1, `${x + 20}px, ${y + 20 - (this.size.height - this.size.height / 2)}px, 0`);
+    return `${x - 10}px, ${y - 10 - ( this.size.height / 4)}px, 0`;
+  }
+
+  protected getPause2Translate(x: number, y: number) {
+    console.log(2, `${x}px, ${y - (this.size.height - this.size.height / 2)}px, 0`);
+    return `${x}px, ${y - ( this.size.height / 4}px, 0`;
+  }
+
 
 }

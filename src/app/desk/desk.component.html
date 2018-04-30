@@ -8,7 +8,8 @@
          (onDrop)="onCardDrop($event)">
 
 
-      <div class="desk--playground-cards desk--playground-cards_enemy">
+      <div class="desk--playground-cards desk--playground-cards_enemy"
+           [class.desk--playground-cards_active]="!ourTurn">
         <app-enemy-card-in-desk
           [class.target]="playerInAttack === true"
           *ngFor="let card of enemyCardsOnDesk; trackBy:cardIdentify"
@@ -17,11 +18,11 @@
         </app-enemy-card-in-desk>
       </div>
 
-      <div class="desk--playground-cards desk--playground-cards_player">
+      <div class="desk--playground-cards desk--playground-cards_player"
+           [class.desk--playground-cards_active]="ourTurn">
         <app-player-card-in-desk
           *ngFor="let card of playerCardsOnDesk; trackBy:cardIdentify"
           class="in-desk"
-          [appCardMargin]="playerCardsOnDesk.length"
           [card]="card"
           [class.in-attack]="card.inAttack === true">
         </app-player-card-in-desk>
@@ -59,9 +60,9 @@
 
 
     <div class="desk--card-pane desk--card-pane_enemy">
-     <app-enemy-card
-       [appCardMargin]="enemy.cards.length"
-       [card]="card"
+      <app-enemy-card
+        [appCardMargin]="enemy.cards.length"
+        [card]="card"
         *ngFor="let card of enemy.cards">
       </app-enemy-card>
     </div>

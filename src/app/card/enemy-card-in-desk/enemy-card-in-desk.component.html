@@ -2,7 +2,11 @@
      [class.enemy-card_putted-to-desk]="card.puttedToDesk && !card.inAttack"
      [class.enemy-card_flipped]="!card.puttedToDesk"
      [class.enemy-card_attack-mode]="attackMode"
-     (animationend)="transitionEnd()">
+     [class.enemy-card_in-attack]="playerCard.inAttack"
+     [class.enemy-card_attack-animation]="inAttackProcess"
+     [ngStyle]="cardStyle"
+     (animationend)="animationEnd()"
+     (transitionend)="transitionEnd($event)">
   <app-card
     [card]="card"
     class="enemy-card--face">
@@ -10,5 +14,4 @@
   <app-card-deck
     class="enemy-card--deck"></app-card-deck>
 </div>
-
 

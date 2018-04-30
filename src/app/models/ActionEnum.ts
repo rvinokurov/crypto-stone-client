@@ -15,6 +15,7 @@ export enum ActionType {
   playCard = 'play',
   draw = 'draw',
   end = 'end',
+  start = 'start',
   attack = 'attack'
 }
 

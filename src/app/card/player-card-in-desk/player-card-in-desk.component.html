@@ -4,7 +4,7 @@
   [class.player-hand-card_in-attack]="playerCard.inAttack"
   [class.player-hand-card_attack-animation]="inAttackProcess"
   (animationend)="animationEnd()"
-  (transitionend)="transitionEnd()"
+  (transitionend)="transitionEnd($event)"
   [ngStyle]="cardStyle"
   class="player-hand-card">
 </app-card>

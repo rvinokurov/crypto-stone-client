@@ -59,6 +59,12 @@
     height 100%
     position relative
     transform-style preserve-3d
+    background-color red
+    box-shadow 0 0 0 0 rgba(0, 0, 0, 0.7)
+
+    &_in-attack
+      selected();
+      animation: card-in-attack 10.4s infinite ease-in-out;
 
     &_attack-mode
       cursor url('/assets/attack.cur'), auto
@@ -67,8 +73,14 @@
 
 
     &_flipped
-      transform translate3d(0, 0, 0) scale(1) rotateY(180deg)
+      transform translate3d(0, 0, 0) scale(1)
+
       box-shadow 0 0 0 0 black
+      .enemy-card--face
+        transform rotateY(0deg)
+      .enemy-card--deck
+        display none
+        //transform rotate(180deg)
 
     &_putted-to-desk
       z-index 40000

@@ -13,6 +13,8 @@ export class GameModel {
   playerCardsOnDesk: Card[];
   enemyCardsOnDesk: Card[];
 
+  ourTurn = false;
+
   constructor(game: any) {
     this.playerCardsOnDesk = game.player_desk.map(GameModel.createCard);
     this.enemyCardsOnDesk = game.opponent_desk.map(GameModel.createCard);
@@ -20,6 +22,7 @@ export class GameModel {
     for (let i = 0; i < game.opponent_hand; i++) {
       enemyCards.push(new EnemyCard());
     }
+    this.ourTurn = game.active;
     this.enemy = new Enemy({
       cardsInHand: game.opponent_hand,
       cards: enemyCards,
