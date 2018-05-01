@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Card} from '../../models/Card';
 
 
@@ -11,12 +11,21 @@ export class CardComponent {
 
   @Input() card: Card;
 
+  @Input() destroyed = false;
+
+  @Output()
+  destroy = new EventEmitter<void>();
+
   get defenceImage() {
     return `url('/assets/shield-${this.card.defence.type}.png')`;
   }
 
   get attackImage() {
     return `url('/assets/sword-${this.card.attack.type}.png')`;
+  }
+
+  destroyEnd() {
+    this.destroy.emit();
   }
 
 

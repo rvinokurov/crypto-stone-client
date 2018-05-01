@@ -1,5 +1,7 @@
 <app-card
   [card]="card"
+  (destroy)="destroyEnd()"
+  [destroyed]="destroyed"
   [class.player-hand-card--putted-to-desk]="card.puttedToDesk"
   [class.player-hand-card_in-attack]="playerCard.inAttack"
   [class.player-hand-card_attack-animation]="inAttackProcess"
@@ -8,10 +10,12 @@
   [ngStyle]="cardStyle"
   class="player-hand-card">
 </app-card>
+
 <div class="player-hand-card--damage"
      (animationend)="damageBurnAnimationEnd()"
      *ngIf="damageBurnShow">
   -{{damageBurn}}
 </div>
+
 
 

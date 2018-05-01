@@ -19,6 +19,7 @@ export class PlayerCardInDeskComponent extends AbstractCardInDeskComponent {
          this.playerCard.inAttack = false;
        }
      });
+
   }
 
 

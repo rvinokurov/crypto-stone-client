@@ -1,4 +1,5 @@
 <div class="enemy-card"
+
      [class.enemy-card_putted-to-desk]="card.puttedToDesk && !card.inAttack"
      [class.enemy-card_flipped]="!card.puttedToDesk"
      [class.enemy-card_attack-mode]="attackMode"
@@ -8,6 +9,8 @@
      (animationend)="animationEnd()"
      (transitionend)="transitionEnd($event)">
   <app-card
+    (destroy)="destroyEnd()"
+    [destroyed]="destroyed"
     [card]="card"
     class="enemy-card--face">
   </app-card>

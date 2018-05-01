@@ -1,18 +1,26 @@
-<div class="card--sausage-generation">
-  <div class="card--value">{{card.sausageGeneration}}</div>
-</div>
-<div class="card--sausage-steal">
-  <div class="card--value">{{card.sausageSteal}}</div>
+<div class="card--wrapper"
+     [class.card--wrapper_faded]="destroyed"
+     (animationend)="destroyEnd()">
+  <div class="card--sausage-generation">
+    <div class="card--value">{{card.sausageGeneration}}</div>
+  </div>
+  <div class="card--sausage-steal">
+    <div class="card--value">{{card.sausageSteal}}</div>
+  </div>
+
+  <div class="card--defence" [style.background-image]="defenceImage">
+    <div class="card--value">{{card.defence.value}}</div>
+  </div>
+  <div class="card--attack" [style.background-image]="attackImage">
+    <div class="card--value">{{card.attack.value}}</div>
+  </div>
+
+  <div class="card--avatar"
+       [style.background-image]="card.avatar">
+  </div>
 </div>
 
-<div class="card--defence" [style.background-image]="defenceImage">
-  <div class="card--value">{{card.defence.value}}</div>
-</div>
-<div class="card--attack" [style.background-image]="attackImage">
-  <div class="card--value">{{card.attack.value}}</div>
-</div>
+<div class="card--burn"
+     [class.card--burn_active]="destroyed">
 
-<div class="card--avatar"
-     [style.background-image]="card.avatar">
 </div>
-

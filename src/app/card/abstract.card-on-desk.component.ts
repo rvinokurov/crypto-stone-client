@@ -22,6 +22,7 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
   cardStyle = {};
   inAttackProcess = false;
   damageBurn = 0;
+  destroyed = false;
   protected size = {
     width: 0,
     height: 0
@@ -91,6 +92,7 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     this.playerCard.defence.value -= damage;
     if (this.playerCard.defence.value <= 0) {
       this.playerCard.defence.value = 0;
+      this.destroyed = true;
     }
     this.damageBurnShow = true;
     this.damageBurn = damage;
@@ -205,6 +207,11 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     }
     this.damageBurnShow = false;
   }
+
+  destroyEnd() {
+    // this.cardAttackService.removeCardSubject.next(this.playerCard.id);
+  }
+
 
   protected getFlightTranslate(x: number, y: number) {
     return `${x / 2 + this.size.width / 3 }px, ${y / 2 + this.size.height / 4 }px, 0`;
