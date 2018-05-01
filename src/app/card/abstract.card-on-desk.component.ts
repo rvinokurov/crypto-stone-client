@@ -15,11 +15,13 @@ export enum AttackAnimationStage {
 export class AbstractCardInDeskComponent implements AfterViewInit {
 
 
+  damageBurnShow = false;
   inAttack = false;
   putToDeskSound = new Audio('/assets/sound/put-to-desk.wav');
   playerCard: Card;
   cardStyle = {};
   inAttackProcess = false;
+  damageBurn = 0;
   protected size = {
     width: 0,
     height: 0
@@ -60,7 +62,8 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
 
     this.cardAttackService.targetDefence.subscribe((result) => {
       if (result.id === this.playerCard.id) {
-        this.playerCard.defence.value -= result.damage;
+
+        this.applyDamageBurn(result.damage);
       }
     });
   }
@@ -84,10 +87,20 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     }
   }
 
+  applyDamageBurn(damage) {
+    this.playerCard.defence.value -= damage;
+    if (this.playerCard.defence.value <= 0) {
+      this.playerCard.defence.value = 0;
+    }
+    this.damageBurnShow = true;
+    this.damageBurn = damage;
+  }
+
   ngAfterViewInit() {
     const geometry = this.elementRef.nativeElement.getBoundingClientRect();
     this.size.width = geometry.width;
     this.size.height = geometry.height;
+
   }
 
   initAttackAnimationStyle() {
@@ -154,6 +167,9 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     if ($event.propertyName !== 'transform') {
       return;
     }
+    if (this.playerCard.defence.value <= 0) {
+      return;
+    }
     console.log('end transition!!', new Date(), this.attackAnimationStage, $event);
     if (this.attackAnimationStage === AttackAnimationStage.none) {
       return;
@@ -183,16 +199,20 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     this.playerCard.puttedToDesk = false;
   }
 
-
-  protected getFlightTranslate(x: number, y: number) {
-    return `${x / 2 +  this.size.width / 3 }px, ${y / 2  + this.size.height / 4 }px, 0`;
+  damageBurnAnimationEnd() {
+    if (this.playerCard.defence.value <= 0) {
+      this.cardAttackService.removeCardSubject.next(this.playerCard.id);
+    }
+    this.damageBurnShow = false;
   }
 
+  protected getFlightTranslate(x: number, y: number) {
+    return `${x / 2 + this.size.width / 3 }px, ${y / 2 + this.size.height / 4 }px, 0`;
+  }
 
   protected getAttackTranslate(x: number, y: number) {
     return `${x}px, ${y + this.size.height / 4}px, 0`;
   }
-
 
   protected getPause1Translate(x: number, y: number) {
     return `${x + 10}px, ${y + 10 + this.size.height / 4}px, 0`;
@@ -203,8 +223,9 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
   }
 
   protected applyAttackResult() {
-    this.playerCard.defence.value -= this.attackResult.attackingCard.damage;
+    this.applyDamageBurn(this.attackResult.attackingCard.damage);
     this.cardAttackService.finishAttack(this.attackResult.targetCard);
+
   }
 
 }

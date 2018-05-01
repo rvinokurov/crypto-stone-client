@@ -12,6 +12,28 @@
   }
 }
 
+@keyframes enemy-card-damage-burn {
+  0% {
+    transform translate3d(0,0,0) scale(1)
+    opacity 1
+  }
+
+  30% {
+    transform  scale(1.3)
+    opacity 1
+  }
+
+  70% {
+    transform  scale(1.3)
+    opacity 1
+  }
+
+  100% {
+    transform  scale(2)
+    opacity 0
+  }
+}
+
 @keyframes enemy-put-in-desk {
   30% {
     transform translate3d(-80%, -100%, 0) scale(1.5) rotateY(130deg)
@@ -60,6 +82,14 @@
     position relative
     transform-style preserve-3d
     box-shadow 0 0 0 0 rgba(0, 0, 0, 0.7)
+
+    &--damage
+      color #ff8056
+      damage-burn-element()
+      top -3rem
+      left 50%
+      margin-left -1.25rem
+      animation enemy-card-damage-burn 1.2s ease-out forwards
 
     &_in-attack
       selected();

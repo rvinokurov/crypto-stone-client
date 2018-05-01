@@ -13,5 +13,11 @@
   </app-card>
   <app-card-deck
     class="enemy-card--deck"></app-card-deck>
+  <div class="enemy-card--damage"
+       (animationend)="damageBurnAnimationEnd()"
+       *ngIf="damageBurnShow">
+    -{{damageBurn}}
+  </div>
+
 </div>
 

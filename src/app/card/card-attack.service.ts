@@ -40,6 +40,7 @@ export class CardAttackService {
   private attackingCardCoords: Coordinates;
   private targetCardCoords: Coordinates;
   private cardAttackResultSubject = new Subject<AttackResult>();
+  removeCardSubject = new Subject<number>();
 
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');

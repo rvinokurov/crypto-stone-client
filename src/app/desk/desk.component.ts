@@ -129,6 +129,15 @@ export class DeskComponent implements OnInit {
         }
       });
 
+      this.cardAttackService.removeCardSubject.subscribe((id) => {
+        this.enemyCardsOnDesk = this.enemyCardsOnDesk.filter((card) => {
+          return card.id !== id;
+        });
+        this.playerCardsOnDesk = this.playerCardsOnDesk.filter((card) => {
+          return card.id !== id;
+        });
+      };
+
 
     });
   }
