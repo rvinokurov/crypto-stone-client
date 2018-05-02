@@ -1,28 +1,25 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Hero} from '../models/Hero';
+import {Enemy} from '../models/Enemy';
+import {Player} from '../models/Player';
 
 @Component({
   selector: 'app-hero-card',
   templateUrl: './hero-card.component.html',
   styleUrls: ['./hero-card.component.styl']
 })
-export class HeroCardComponent implements OnInit {
+export class HeroCardComponent {
 
   @Input() isPlayerHero = false;
 
-  @Input() hero: Hero;
+  @Input() player: Player | Enemy;
 
   constructor(private sanitizer: DomSanitizer) {
   }
 
-  ngOnInit() {
-    console.log(this.hero);
-  }
-
   get heroImage() {
-    if (this.hero) {
-      return this.sanitizer.bypassSecurityTrustStyle(`url('${this.hero.url}')`);
+    if (this.player && this.player.general) {
+      return this.sanitizer.bypassSecurityTrustStyle(`url('${this.player.general.image_url}')`);
     }
     return '';
   }

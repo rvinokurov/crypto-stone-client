@@ -24,21 +24,23 @@ export class GameModel {
     }
     this.ourTurn = game.active;
     this.enemy = new Enemy({
+      general: {
+        image_url : game.opponent_general.image_url,
+      },
+      health: game.opponent_hp,
       cardsInHand: game.opponent_hand,
       cards: enemyCards,
       name: game.opponent_name,
-      hero: {
-        url: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/545030.svg',
-      },
       sausages: 99,
     });
 
     this.player = new Player({
       id: game.player_id,
       name: game.player_name,
-      hero: {
-        url: 'https://storage.googleapis.com/ck-kitty-image/0x06012c8cf97bead5deae237070f9587f8e7a266d/545030.svg',
+      general: {
+        image_url : game.general.image_url,
       },
+      health: game.hp,
       cards: game.hand.map(GameModel.createCard),
       sausages: 99,
     });

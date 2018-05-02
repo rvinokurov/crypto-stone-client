@@ -17,6 +17,40 @@
     background-size contain
 
 
+  &--health
+    position absolute
+    width 4rem
+    height 2rem
+    bottom -1rem
+    left 50%
+    font-size 1.4rem
+    line-height 2rem
+    text-align: center
+    vertical-align middle
+    margin-left -2rem
+    z-index 20000
+    font-weight 600
+
+    &_player
+      color #9e429a
+      text-shadow: 0 0 0.01rem #4a2047
+    &_opponent
+      color #d26400
+      text-shadow: 0 0 0.01rem #6e3500
+
+  &--defence-image
+    position absolute
+    background-image url('/assets/shield-fire.png')
+    background-repeat no-repeat
+    background-size auto 100%
+    width 4rem
+    height 4rem
+    bottom -2rem
+    left 50%
+    margin-left -2rem
+    filter grayscale(80%) brightness(160%)
+
+
 
   &--card
     background-image url('/assets/card-background.jpg')

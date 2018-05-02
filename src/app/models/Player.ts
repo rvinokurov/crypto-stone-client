@@ -1,6 +1,5 @@
 import {Card} from './Card';
-import {Hero} from './Hero';
-
+import {General} from './General';
 
 export class Player {
 
@@ -12,7 +11,9 @@ export class Player {
 
   sausages: number;
 
-  hero: Hero;
+  general: General;
+
+  health: number;
 
   constructor(player: playerModel) {
     Object.assign(<Player>this, player);
