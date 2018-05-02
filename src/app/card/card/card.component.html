@@ -1,6 +1,8 @@
 <div class="card--wrapper"
      [class.card--wrapper_faded]="destroyed"
      [class.card--wrapper_glow]="card.inAttack"
+     [class.card--wrapper_player]="cardStyle === 'player'"
+     [class.card--wrapper_opponent]="cardStyle === 'opponent'"
      (animationend)="destroyEnd()">
   <div class="card--sausage-generation">
     <div class="card--value">{{card.sausageGeneration}}</div>

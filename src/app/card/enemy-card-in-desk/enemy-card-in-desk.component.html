@@ -9,6 +9,7 @@
      (animationend)="animationEnd()"
      (transitionend)="transitionEnd($event)">
   <app-card
+    cardStyle="opponent"
     (destroy)="destroyEnd()"
     [destroyed]="destroyed"
     [card]="card"

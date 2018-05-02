@@ -9,6 +9,8 @@ import {Card} from '../../models/Card';
 })
 export class CardComponent {
 
+  @Input() cardStyle = 'player';
+
   @Input() card: Card;
 
   @Input() destroyed = false;
