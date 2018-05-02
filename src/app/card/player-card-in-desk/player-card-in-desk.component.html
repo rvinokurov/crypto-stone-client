@@ -1,8 +1,8 @@
 <app-card
-  [card]="card"
+  [card]="playerCard"
   (destroy)="destroyEnd()"
   [destroyed]="destroyed"
-  [class.player-hand-card--putted-to-desk]="card.puttedToDesk"
+  [class.player-hand-card--putted-to-desk]="playerCard.puttedToDesk"
   [class.player-hand-card_in-attack]="playerCard.inAttack"
   [class.player-hand-card_attack-animation]="inAttackProcess"
   (animationend)="animationEnd()"

@@ -9,6 +9,19 @@
 }
 
 
+@keyframes player-card-glow {
+  0% {
+    box-shadow inset 0 0 5rem 0 #b58bad
+  }
+  50% {
+    box-shadow inset 0 0 5rem 0 #5cda94
+  }
+  100% {
+    box-shadow inset 0 0 5rem 0 #b58bad
+  }
+}
+
+
 :host
   width 100%
   height 100%
@@ -47,6 +60,10 @@
     background-repeat no-repeat
     background-size 100% 100%
     border-radius 5%
+
+    &_glow
+      animation player-card-glow  1.4s  ease-in-out infinite
+
 
     &_faded
       animation card-fade .7s ease-in forwards
