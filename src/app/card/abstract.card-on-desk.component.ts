@@ -160,10 +160,6 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     this.playerCard.inAttack = false;
   }
 
-  @HostListener('click') inAttackListener() {
-    this.playerCard.inAttack = !this.playerCard.inAttack;
-    this.cardAttackService.setCardInAttack(this.playerCard, offset(this.elementRef.nativeElement));
-  }
 
   transitionEnd($event) {
     if ($event.propertyName !== 'transform') {

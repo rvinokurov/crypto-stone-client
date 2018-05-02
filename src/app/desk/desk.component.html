@@ -21,6 +21,7 @@
       <div class="desk--playground-cards desk--playground-cards_player"
            [class.desk--playground-cards_active]="ourTurn">
         <app-player-card-in-desk
+          [active]="ourTurn"
           *ngFor="let card of playerCardsOnDesk; trackBy:cardIdentify"
           class="in-desk"
           [card]="card"
