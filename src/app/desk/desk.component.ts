@@ -45,6 +45,8 @@ export class DeskComponent implements OnInit {
 
   ourTurn = false;
 
+
+
   constructor(
     private gameService: GameService,
     private  route: ActivatedRoute,

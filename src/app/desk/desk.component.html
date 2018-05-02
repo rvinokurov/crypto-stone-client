@@ -4,6 +4,11 @@
 
   <div class="desk--wrapper">
 
+
+    <app-player-stats-table
+      [player]="player"
+      [ourTurn]="ourTurn"
+    ></app-player-stats-table>
     <div class="desk--playground desk--playground_dropable" droppable
          (onDrop)="onCardDrop($event)">
 
@@ -41,8 +46,6 @@
       [card]="newPlayerCard">
     </app-new-card>
 
-    <app-deck class="enemy"></app-deck>
-    <app-deck class="player"></app-deck>
 
 
     <div class="desk--player-name desk--player-name_enemy">

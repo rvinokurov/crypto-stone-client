@@ -20,6 +20,7 @@ import {config  as appConfig} from '../config';
 import {EndTurnButtonComponent} from './end-turn-button/end-turn-button.component';
 import {CardModule} from './card/card.module';
 import {SocketModule} from './socket/socket.module';
+import { PlayerStatsTableComponent } from './player-stats-table/player-stats-table.component';
 
 const appRoutes: Routes = [
   {path: 'table/:guid/:puid', component: DeskComponent},
@@ -37,6 +38,7 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
     DeckComponent,
     NewCardComponent,
     EndTurnButtonComponent,
+    PlayerStatsTableComponent,
   ],
   imports: [
     BrowserModule,

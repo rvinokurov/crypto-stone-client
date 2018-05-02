@@ -1,0 +1,109 @@
+:host
+  display block
+  position absolute
+  bottom 0.9rem
+  right -3rem
+  z-index 60000
+  min-width 8rem
+  min-height 4rem
+
+  &.isOpponent
+    left -3rem
+    top 0.9rem
+
+
+.player-stats-table
+  &--nickname
+    background-image url(/assets/wood-board.png)
+    background-size 100% 100%
+    background-repeat no-repeat
+    color #ffc381
+    width 100%
+    height 2rem
+    font-weight 600
+    line-height 2rem
+    vertical-align middle
+    text-align center
+    text-shadow 0 0 0.1rem #1b0f02
+
+  &--your-turn
+    width 100%
+    font-size 0.8rem
+    color #0d790d
+    padding-bottom 0.25rem
+    margin-bottom 0.25rem
+    border-bottom 1px solid rgba(0, 0, 0, 0.1)
+
+  &--opponent-turn
+    width 100%
+    font-size 0.8rem
+    color #9c4918
+    padding-bottom 0.25rem
+    margin-bottom 0.25rem
+    border-bottom 1px solid rgba(0, 0, 0, 0.1)
+
+
+  &--wrapper
+    background-image url(/assets/stats-scroll.svg)
+    background-size cover
+    background-repeat no-repeat
+    padding 2rem 1.5rem
+    width 100%
+    box-sizing border-box
+
+  &--table
+
+    display table
+    border-collapse collapse
+    font-size 1.1rem
+    line-height 1.4rem
+
+
+
+  &--row
+    display table-row
+
+  &--stat-icon
+    width 1rem
+    background-repeat no-repeat
+    background-size auto 1.3rem
+    display table-cell
+    height 2rem
+    vertical-align: middle
+
+
+  &--steal
+    background-image url(/assets/paw.png)
+    padding-right 1.3rem
+    background-position 0.9rem 50%
+
+  &--generation
+    background-image url(/assets/sausage.png)
+    background-position 1.1rem 50%
+    padding-right 1.3rem
+
+  &--value
+    display table-cell
+    height 2rem
+    padding-left 0.1rem
+    vertical-align middle
+
+  &--value-increase
+    display inline-block
+    padding-left 0.5rem
+    color green
+
+  &--sausage
+    margin-top 0.2rem
+    display inline-block
+    background-repeat no-repeat
+    background-size auto 1.3rem
+    background-position 0% 50%
+    background-image url(/assets/sausage.png)
+    height 1.4rem
+    width 0.6rem
+    margin-right -0.5rem
+
+
+
+
