@@ -17,7 +17,9 @@
         <i class="player-stats-table--sausage"></i>
         <i class="player-stats-table--sausage"></i>
       </div>
-      <div class="player-stats-table--value player-stats-table--value_border">99<span class="player-stats-table--value-increase">+10</span></div>
+      <div class="player-stats-table--value player-stats-table--value_border">
+        {{player.sausages}}
+        <span class="player-stats-table--value-increase">+10</span></div>
     </div>
 
     <div class="player-stats-table--row">
@@ -25,7 +27,7 @@
         +
       </div>
       <div class="player-stats-table--value player-stats-table--value_border">
-        99
+        {{generation}}
       </div>
     </div>
 
@@ -34,7 +36,7 @@
         +
       </div>
       <div class="player-stats-table--value">
-        99
+        {{steal}}
       </div>
     </div>
 

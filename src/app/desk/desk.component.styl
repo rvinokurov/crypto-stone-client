@@ -24,7 +24,7 @@ $cardWidth = 5.5rem
 
   &--wrapper
     height 100%
-    max-width 48rem
+    max-width 54rem
     width 100%
     margin 0 auto
     position relative
@@ -37,92 +37,103 @@ $cardWidth = 5.5rem
   &--playground
     box-sizing border-box
     position absolute
-    width calc(100% - 3em)
-    height "calc(100% - %s)" % ($playgroundOffset * 2)
+    width calc(100% - 1em)
+    height calc(50% - 6rem)
     border-bottom-left-radius: 20% 20%;
     border-bottom-right-radius: 20% 20%;
     border-top-left-radius: 20% 20%;
     border-top-right-radius: 20% 20%;
-    top $playgroundOffset
-    background-image url('/assets/grass3.jpg')
-    box-shadow inset 0 0 12em 1em #023c25, 0 0 10px 5px #023c25
-    left 1.5em
+    background-color: #b88264
+    box-shadow inset 0 0 12em 1em #6d4d32, 0 0 10px 5px #5e422d
+    left .5em
     z-index 50
+
+    &_top
+      top 3rem
+    &_bottom
+      bottom 3rem
+
+    &_texture
+      z-index 51
+      background-color transparent
+      border none
+      border-radious 20%
+      box-shadow: none
+      background-image url(/assets/wood-opacity.svg)
+      background-repeat no-repeat
+      background-size cover
+
     &_dropable
       z-index 40000
       box-shadow none
       background transparent
       border none
+      width calc(100% - 3em)
+      height "calc(100% - %s)" % ($playgroundOffset * 2)
+      left 1.5em
+      top $playgroundOffset
 
 
-  &--playground-border-2
+
+  &--playground-border
     z-index 20
     content ''
     display block
     box-sizing border-box
     position absolute
-    width calc(100% - 3em + 20px)
-    height "calc(100% - %s + 20px)" % ($playgroundOffset * 2)
-    top 'calc(%s - 10px)' % $playgroundOffset
-    background green
-    box-shadow inset 0 0 6px 4px #023c25, 0.4rem 0.4rem 0.3rem 0.05rem rgba(0, 0, 0, 0.58)
-    left calc(1.5em - 10px)
+    width calc(100% - 1em + 20px)
+    height calc(50% - 6rem + 20px)
+
+    background #6d4d32
+    box-shadow inset 0 0 6px 4px #5e422d, 0.3rem 0.3rem 0.2rem 0.05rem rgba(0, 0, 0, 0.3)
+    left calc(0.5em - 10px)
     border-bottom-left-radius: 20% 20%;
     border-bottom-right-radius: 20% 20%;
     border-top-left-radius: 20% 20%;
     border-top-right-radius: 20% 20%;
+    &_top
+      top calc(3rem - 10px)
+    &_bottom
+      bottom calc(3rem - 10px)
 
-
-  &--playground-border
-    z-index 10
-    content ''
-    //display block
-    display none
+  &--playground-inner
     box-sizing border-box
     position absolute
-    width calc(100% - 3em + 60px)
-    height 50%
-    top 25%
+    width calc(100% - 5em)
+    height "calc(100% - %s)" % ($playgroundOffset * 2)
+    border-bottom-left-radius: 30% 50%;
+    border-bottom-right-radius: 30% 50%;
+    border-top-left-radius: 30% 50%;
+    border-top-right-radius: 30% 50%;
+    top $playgroundOffset
+    background-image url('/assets/grass3.jpg')
+    box-shadow inset 0 0 12em 1em #023c25, 0 0 10px 5px #023c25
+    left 2.5em
+    z-index 60
+
+
+  &--playground-border-inner
+    z-index 55
+    content ''
+    display block
+    box-sizing border-box
+    position absolute
+    width calc(100% - 5em + 20px)
+    height "calc(100% - %s + 20px)" % ($playgroundOffset * 2)
+    top 'calc(%s - 10px)' % $playgroundOffset
     background green
-    box-shadow inset 0 0 6px 4px #023c25, 0 0 2rem 1rem #3b3a3c
-    left calc(1.5em - 30px)
-    border-radius 50%
-
-  &--playground-border-1
-    display none
-    transform: rotateZ(-19deg);
-    z-index 10
-    content ''
-    //display block
-    box-sizing border-box
-    position absolute
-    width 70%
-    height: 10rem;
-    top 6rem
-    box-shadow inset 0 0 0.1rem 0.1rem #ffe59d, inset 0 0 5rem 0.1rem rgba(249, 194, 144, 0.63)
-    right 2rem
-    background-color #ffc282
-    border-radius: 50%;
-
-  &--playground-border-3
-    display none
-    transform: rotateZ(-19deg);
-    z-index: 10;
-    content: '';
-    //display: block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 70%;
-    height: 10rem;
-    bottom: 6rem;
-    box-shadow: inset 0 0 0.1rem 0.1rem #f2d7ed, inset 0 0 5rem 0.1rem rgba(249,194,144,0.6), 0 0 1rem 0.1rem #3b3a3c;
-    left: 2rem;
-    background-color: #ceb6c9;
-    border-radius: 50%;
+    box-shadow inset 0 0 6px 4px #023c25
+    left calc(2.5em - 10px)
+    border-bottom-left-radius: 30% 50%;
+    border-bottom-right-radius: 30% 50%;
+    border-top-left-radius: 30% 50%;
+    border-top-right-radius: 30% 50%;
 
 
-    &:active
-      cursor url('/assets/pointer.cur'), auto
+
+
+
+
 
   &--playground-cards
     position absolute
@@ -158,12 +169,12 @@ $cardWidth = 5.5rem
     z-index 1000
     position absolute
     &_enemy
-      top 3rem
-      right -2.5rem
+      top 5rem
+      right -1.5rem
 
     &_player
-      bottom 4rem
-      left -2.5rem
+      bottom 6rem
+      left -1.5rem
 
 
 

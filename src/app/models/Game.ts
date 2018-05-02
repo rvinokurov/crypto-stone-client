@@ -31,7 +31,7 @@ export class GameModel {
       cardsInHand: game.opponent_hand,
       cards: enemyCards,
       name: game.opponent_name,
-      sausages: 99,
+      sausages: game.opponent_sausages,
     });
 
     this.player = new Player({
@@ -42,7 +42,7 @@ export class GameModel {
       },
       health: game.hp,
       cards: game.hand.map(GameModel.createCard),
-      sausages: 99,
+      sausages: game.sausages,
     });
   }
 

@@ -19,6 +19,18 @@ export class PlayerStatsTableComponent {
   constructor() {
   }
 
+  get generation() {
+    return this.cardsOnDesk.reduce((totalGeneration, card) => {
+      return totalGeneration + card.sausageGeneration;
+    }, 0);
+  }
+
+  get steal() {
+    return this.cardsOnDesk.reduce((totalGeneration, card) => {
+      return totalGeneration + card.sausageSteal;
+    }, 0);
+  }
+
   @HostBinding('class.isOpponent') get isOpponentStats() {
     return this.isOpponent;
   }
