@@ -136,7 +136,7 @@ export class DeskComponent implements OnInit {
         this.playerCardsOnDesk = this.playerCardsOnDesk.filter((card) => {
           return card.id !== id;
         });
-      };
+      });
 
 
     });

@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
   selector: 'app-end-turn-button',
   templateUrl: './end-turn-button.component.html',
   styleUrls: ['./end-turn-button.component.styl']
 })
-export class EndTurnButtonComponent implements OnInit {
+export class EndTurnButtonComponent {
 
-  constructor() { }
+  @Input() active = false;
 
-  ngOnInit() {
+  constructor() {
+  }
+
+  @HostBinding('class.disabled') get isActive() {
+    return !this.active;
   }
 
 }

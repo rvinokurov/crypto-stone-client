@@ -47,7 +47,7 @@ export class EnemyCardInDeskComponent extends AbstractCardInDeskComponent {
 
   protected getPause2Translate(x: number, y: number) {
     console.log(2, `${x}px, ${y - (this.size.height - this.size.height / 2)}px, 0`);
-    return `${x}px, ${y - ( this.size.height / 4}px, 0`;
+    return `${x}px, ${y - ( this.size.height / 4)}px, 0`;
   }
 
 

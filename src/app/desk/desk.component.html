@@ -30,7 +30,10 @@
     </div>
 
 
-    <app-end-turn-button (click)="endTurn()"></app-end-turn-button>
+    <app-end-turn-button
+      (click)="endTurn()"
+      [active]="ourTurn">
+    </app-end-turn-button>
 
     <app-new-card
       *ngIf="showNewCard === true"

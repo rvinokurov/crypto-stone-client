@@ -30,10 +30,15 @@ $border-radius = 20%
   border-radius $border-radius
   box-shadow inset 0 0 0.2rem 0.1rem #ea833e, 0.2rem -0.2rem 0.4rem 0.05rem rgba(0, 0, 0, 0.4)
   transform rotateZ(-10deg)
-  transition transform 0.2s ease
-  &:hover
+  transition all 0.2s ease
+  &:hover:not(.disabled)
     transform rotateZ(-15deg)
     animation: pulse-turn-end 1.4s infinite ease-in-out;
+
+  &.disabled
+    filter grayscale(70%) brightness(60%)
+
+
 
 
 .end-turn-button
