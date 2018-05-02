@@ -47,10 +47,13 @@
   host()
   padding  1.6rem
   margin -0.6rem -1.2rem -3rem -1.2rem
-  &:hover
+  &:hover:not(.disabled)
     cursor url('/assets/pointer.cur'), auto
+    z-index 1000;
     .player-hand-card
       transform  scale(1.1)
+  &.disabled
+    filter grayscale(30%) brightness(80%)
 
 
   .player-hand-card

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {Card} from '../../models/Card';
 
 @Component({
@@ -6,9 +6,11 @@ import {Card} from '../../models/Card';
   templateUrl: './player-hand-card.component.html',
   styleUrls: ['./player-hand-card.component.styl']
 })
-export class PlayerHandCardComponent implements OnInit {
+export class PlayerHandCardComponent  {
 
-  private playerCard: Card;
+  playerCard: Card;
+
+  @Input() active = false;
 
   constructor() {
   }
@@ -25,12 +27,12 @@ export class PlayerHandCardComponent implements OnInit {
         // this.putToDeskSound.play();
       }, 800);
     }
-    
+
   }
 
-  ngOnInit() {
+  @HostBinding('class.disabled') get isActive() {
+    return !this.active;
   }
-
 
   transitionEnd() {
     console.log('transitionend');
