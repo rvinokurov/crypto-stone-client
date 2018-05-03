@@ -23,7 +23,6 @@ export class EnemyCardInDeskComponent extends AbstractCardInDeskComponent {
   }
 
   @HostListener('click') target() {
-    console.log('click', this.attackMode);
     if (this.attackMode) {
       this.cardAttackService.setTargetCard(this.playerCard, offset(this.elementRef.nativeElement));
     }
@@ -35,18 +34,15 @@ export class EnemyCardInDeskComponent extends AbstractCardInDeskComponent {
   }
 
   protected getAttackTranslate(x: number, y: number) {
-    console.log(0, `${x}px, ${y - (this.size.height - this.size.height / 2)}px, 0`);
     return `${x}px, ${y - (this.size.height / 4)}px, 0`;
   }
 
 
   protected getPause1Translate(x: number, y: number) {
-    console.log(1, `${x + 20}px, ${y + 20 - (this.size.height - this.size.height / 2)}px, 0`);
     return `${x - 10}px, ${y - 10 - ( this.size.height / 4)}px, 0`;
   }
 
   protected getPause2Translate(x: number, y: number) {
-    console.log(2, `${x}px, ${y - (this.size.height - this.size.height / 2)}px, 0`);
     return `${x}px, ${y - ( this.size.height / 4)}px, 0`;
   }
 

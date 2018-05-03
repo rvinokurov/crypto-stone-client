@@ -21,7 +21,7 @@ export interface AttackResult {
   targetCard: AttackDamage;
   attackingCardCoordinates: Coordinates;
   targetCardCoordinates: Coordinates;
-  side: AttackSide
+  side: AttackSide;
 }
 
 @Injectable()
@@ -47,10 +47,12 @@ export class CardAttackService {
     console.log('obs', this.actionObservable);
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
     this.attackingCardCoordsSubject.subscribe((coordinates) => {
+      console.log('recieve attackin coords', coordinates);
       this.attackingCardCoords = coordinates;
     });
 
     this.targetCardCoordsSubject.subscribe((coordinates) => {
+      console.log('recieve target coords', coordinates);
       this.targetCardCoords = coordinates;
     });
   }
@@ -116,16 +118,17 @@ export class CardAttackService {
           const data = {
             attackingCard: {
               id: payload.objectId,
-              damage: payload.damageToObject,
+              damage: (<any>action).damageToObject,
             },
             targetCard: {
               id: payload.subjectId,
-              damage: payload.damageToSubject
+              damage: (<any>action).damageToSubject
             },
             attackingCardCoordinates: this.attackingCardCoords,
             targetCardCoordinates: this.targetCardCoords,
             side
           };
+          console.log('coords', data);
           this.cardAttackResultSubject.next(data);
         }
       }

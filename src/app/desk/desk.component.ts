@@ -98,7 +98,6 @@ export class DeskComponent implements OnInit {
         this.enemyCardsOnDesk = game.enemyCardsOnDesk;
         this.playerCardsOnDesk = game.playerCardsOnDesk;
         this.ourTurn = game.ourTurn;
-        console.log('ourTurn', this.ourTurn);
       });
 
       this.deskActionsService.ourTurn.subscribe((ourTurn) => {
@@ -112,7 +111,6 @@ export class DeskComponent implements OnInit {
 
       this.deskActionsService.onNewEnemyCard.subscribe((card: EnemyCard) => {
         card.puttedToHand = true;
-        console.log('new enemy card', card);
         this.enemy.cards.push(card);
       });
 

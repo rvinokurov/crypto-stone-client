@@ -35,7 +35,6 @@ export class PlayerHandCardComponent  {
   }
 
   transitionEnd() {
-    console.log('transitionend');
     setTimeout(() => {
       this.playerCard.puttedToHand = false;
     }, 10);

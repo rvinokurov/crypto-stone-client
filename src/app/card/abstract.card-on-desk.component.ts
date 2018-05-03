@@ -1,4 +1,4 @@
-import {AfterViewInit, ElementRef, HostListener, Input, Renderer2} from '@angular/core';
+import {AfterViewInit, ElementRef, Input, Renderer2} from '@angular/core';
 import {Card} from '../models/Card';
 import {AttackResult, CardAttackService} from './card-attack.service';
 import {offset} from './offset';
@@ -49,7 +49,6 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     this.cardAttackService.cardAttack.subscribe((result) => {
       if (result.attackingCard.id === this.playerCard.id) {
         this.attackResult = result;
-        console.log('attack', result);
         this.attackAnimationStage = AttackAnimationStage.flight;
         this.inAttackProcess = true;
 
@@ -106,7 +105,6 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
   }
 
   initAttackAnimationStyle() {
-    console.log('animation style', this.attackAnimationStage);
     if (this.attackAnimationStage === AttackAnimationStage.none) {
       this.cardStyle = {};
       return;
@@ -118,8 +116,14 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
       return;
     }
     const cards = this.attackResult;
-    const x = cards.targetCardCoordinates.x - cards.attackingCardCoordinates.x;
-    const y = cards.targetCardCoordinates.y - cards.attackingCardCoordinates.y;
+    let x = 0;
+    let y = 0;
+    try {
+      x = cards.targetCardCoordinates.x - cards.attackingCardCoordinates.x;
+      y = cards.targetCardCoordinates.y - cards.attackingCardCoordinates.y;
+    } catch (e) {
+      console.error(e);
+    }
 
     if (this.attackAnimationStage === AttackAnimationStage.flight) {
 
@@ -168,7 +172,6 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     if (this.playerCard.defence.value <= 0) {
       return;
     }
-    console.log('end transition!!', new Date(), this.attackAnimationStage, $event);
     if (this.attackAnimationStage === AttackAnimationStage.none) {
       return;
     }
