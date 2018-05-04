@@ -49,22 +49,8 @@ export class HeroCardComponent implements AfterViewInit {
         this.applyDamageBurn(result.damage);
       }
     });
-
-    setTimeout(() => {
-      this.player.health = 1;
-    }, 2000);
-
   }
-
-  get crackOpacity() {
-    if (this.player.health > 0) {
-      return 0;
-    }
-    if (this.player.health <= 0) {
-      return 1;
-    }
-    // return 0.5 - this.player.health / 100;
-  }
+  
 
   @HostBinding('class.in-attack') get inAttack() {
     return this.attackMode;
