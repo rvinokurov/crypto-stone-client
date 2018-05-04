@@ -50,16 +50,20 @@ export class HeroCardComponent implements AfterViewInit {
       }
     });
 
+    setTimeout(() => {
+      this.player.health = 1;
+    }, 2000);
+
   }
 
   get crackOpacity() {
-    if (this.player.health > 50) {
+    if (this.player.health > 0) {
       return 0;
     }
     if (this.player.health <= 0) {
       return 1;
     }
-    return 0.5 - this.player.health / 100;
+    // return 0.5 - this.player.health / 100;
   }
 
   @HostBinding('class.in-attack') get inAttack() {
@@ -100,6 +104,7 @@ export class HeroCardComponent implements AfterViewInit {
     this.player.health = this.player.health - damage;
     if (this.player.health < 0) {
       this.player.health = 0;
+      this.destroy = true;
     }
     this.showExplosion = true;
   }
