@@ -50,7 +50,7 @@ export class HeroCardComponent implements AfterViewInit {
       }
     });
   }
-  
+
 
   @HostBinding('class.in-attack') get inAttack() {
     return this.attackMode;

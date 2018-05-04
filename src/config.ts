@@ -1,3 +1,3 @@
 export const config = {
-  apiPrefix: 'http://localhost:3000'
+  apiPrefix: 'http://192.168.1.159:3000'
 };

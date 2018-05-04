@@ -10,5 +10,12 @@
 </head>
 <body>
   <app-root></app-root>
+<script>
+  var baseHeight = 618;
+  var height = window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight;
+  document.querySelector('html').style.fontSize = (height / baseHeight ) * 16 + 'px';
+</script>
 </body>
 </html>
