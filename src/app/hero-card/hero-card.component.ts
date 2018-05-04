@@ -19,6 +19,8 @@ export class HeroCardComponent implements AfterViewInit {
 
   attackMode = false;
   showExplosion = false;
+  @HostBinding('class.destroy') destroy = false;
+
   protected size = {
     width: 0,
     height: 0
@@ -47,6 +49,7 @@ export class HeroCardComponent implements AfterViewInit {
         this.applyDamageBurn(result.damage);
       }
     });
+
   }
 
   get crackOpacity() {
@@ -63,11 +66,20 @@ export class HeroCardComponent implements AfterViewInit {
     return this.attackMode;
   }
 
+  @HostBinding('class.destroyed') get isDestroyed() {
+    return this.player.health <= 0;
+  }
+
   get heroImage() {
     if (this.player && this.player.general) {
       return this.sanitizer.bypassSecurityTrustStyle(`url('${this.player.general.image_url}')`);
     }
     return '';
+  }
+
+  stopDestroy() {
+    console.log('stop destroy');
+    this.destroy = false;
   }
 
   getOffset() {
