@@ -18,17 +18,17 @@ export class HeroCardComponent {
 
   constructor(private sanitizer: DomSanitizer, protected cardAttackService: CardAttackService, protected elementRef: ElementRef, protected renderer: Renderer2) {
 
-    this.cardAttackService.requestOpponentHeroCoordsSubject.subscribe(() => {
-      if (!this.isPlayerHero) {
-        this.cardAttackService.opponentHeroCoordsSubject.next(offset(this.elementRef.nativeElement));
-      }
-    });
-
-    this.cardAttackService.requestPlayerHeroCoordsSubject.subscribe(() => {
-      if (this.isPlayerHero) {
-        this.cardAttackService.playerHeroCoordsSubject.next(offset(this.elementRef.nativeElement));
-      }
-    });
+    // this.cardAttackService.requestOpponentHeroCoordsSubject.subscribe(() => {
+    //   if (!this.isPlayerHero) {
+    //     this.cardAttackService.opponentHeroCoordsSubject.next(offset(this.elementRef.nativeElement));
+    //   }
+    // });
+    //
+    // this.cardAttackService.requestPlayerHeroCoordsSubject.subscribe(() => {
+    //   if (this.isPlayerHero) {
+    //     this.cardAttackService.playerHeroCoordsSubject.next(offset(this.elementRef.nativeElement));
+    //   }
+    // });
 
   }
 

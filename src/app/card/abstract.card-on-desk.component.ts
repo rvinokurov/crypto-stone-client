@@ -33,15 +33,15 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
   constructor(protected cardAttackService: CardAttackService, protected elementRef: ElementRef, protected renderer: Renderer2) {
 
 
-    this.cardAttackService.requestAttackingCardCoordsSubject.subscribe((id) => {
+    this.cardAttackService.requestAttackingCoordsSubject.subscribe((id) => {
       if (id === this.playerCard.id) {
-        this.cardAttackService.attackingCardCoordsSubject.next(offset(this.elementRef.nativeElement));
+        this.cardAttackService.attackingCoordsSubject.next(offset(this.elementRef.nativeElement));
       }
     });
 
-    this.cardAttackService.requestTargetCardCoordsSubject.subscribe((id) => {
+    this.cardAttackService.requestTargetCoordsSubject.subscribe((id) => {
       if (id === this.playerCard.id) {
-        this.cardAttackService.targetCardCoordsSubject.next(offset(this.elementRef.nativeElement));
+        this.cardAttackService.targetCoordsSubject.next(offset(this.elementRef.nativeElement));
       }
     });
 

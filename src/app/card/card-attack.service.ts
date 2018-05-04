@@ -24,50 +24,40 @@ export interface AttackResult {
   side: AttackSide;
 }
 
+export interface General {
+  id: string;
+}
+
 @Injectable()
 export class CardAttackService {
 
-  public attackingCardCoordsSubject = new Subject<Coordinates>();
-  public targetCardCoordsSubject = new Subject<Coordinates>();
-  public requestAttackingCardCoordsSubject = new Subject<number>();
-  public requestTargetCardCoordsSubject = new Subject<number>();
+  public attackingCoordsSubject = new Subject<Coordinates>();
+  public targetCoordsSubject = new Subject<Coordinates>();
+  public requestAttackingCoordsSubject = new Subject<number>();
+  public requestTargetCoordsSubject = new Subject<number>();
 
 
-  public requestPlayerHeroCoordsSubject = new Subject<void>();
-  public requestOpponentHeroCoordsSubject = new Subject<void>();
-  public playerHeroCoordsSubject = new Subject<Coordinates>();
-  public opponentHeroCoordsSubject = new Subject<Coordinates>();
   removeCardSubject = new Subject<number>();
   private actionObservable: Observable<ActionEvent>;
   private cardInAttackSubject = new Subject<Card>();
-  private targetCardSubject = new Subject<Card>();
   private targetDefenceSubject = new Subject<AttackDamage>();
-  private attacking: Card;
-  private target: Card;
-  private attackingCardCoords: Coordinates;
-  private targetCardCoords: Coordinates;
-  private opponentHeroCoords: Coordinates;
-  private playerHeroCoords: Coordinates;
+  private attacking: Card | General;
+  private target: Card | General;
+  private attackingCoords: Coordinates;
+  private targetCoords: Coordinates;
   private cardAttackResultSubject = new Subject<AttackResult>();
 
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
 
-    this.attackingCardCoordsSubject.subscribe((coordinates) => {
-      this.attackingCardCoords = coordinates;
+    this.attackingCoordsSubject.subscribe((coordinates) => {
+      this.attackingCoords = coordinates;
     });
-    this.targetCardCoordsSubject.subscribe((coordinates) => {
-      this.targetCardCoords = coordinates;
-    });
-
-    this.playerHeroCoordsSubject.subscribe((coordinates) => {
-      this.playerHeroCoords = coordinates;
+    this.targetCoordsSubject.subscribe((coordinates) => {
+      this.targetCoords = coordinates;
     });
 
-    this.opponentHeroCoordsSubject.subscribe((coordinates) => {
-      this.opponentHeroCoords = coordinates;
-    });
   }
 
 
@@ -89,20 +79,33 @@ export class CardAttackService {
 
   setTargetCard(card: Card, coordinates: Coordinates) {
     this.target = card;
-    this.targetCardCoords = coordinates;
+    this.targetCoords = coordinates;
 
     console.log(card, coordinates);
     this.attack(this.attacking, this.target);
   }
 
-  attackGeneral(coordinates: Coordinates) {
-    this.opponentHeroCoords = coordinates;
+  setTargetGeneral(general: General, coordinates: Coordinates) {
+    this.target = general;
+    this.targetCoords = coordinates;
 
+    this.attackGeneral();
+  }
+
+  attackGeneral() {
+    this.socketIoService.action(
+      ActionType.attack,
+      ActionSubject.card,
+      {
+        objectId: this.attacking.id,
+        subjectId: this.target.id
+      },
+      ActionObject.card);
   }
 
   setCardInAttack(card: Card, coordinates: Coordinates) {
     this.attacking = card;
-    this.attackingCardCoords = coordinates;
+    this.attackingCoords = coordinates;
     console.log(card, coordinates);
 
     this.cardInAttackSubject.next(card);
@@ -118,6 +121,7 @@ export class CardAttackService {
       },
       ActionObject.card);
   }
+
   //
   // attackGeneral(playerCard) {
   //   this.socketIoService.action(
@@ -139,9 +143,9 @@ export class CardAttackService {
           let side = AttackSide.attack;
           if (payload.side === AttackSide.defence) {
             side = AttackSide.defence;
-            this.requestAttackingCardCoordsSubject.next(payload.objectId);
-            this.requestTargetCardCoordsSubject.next(payload.subjectId);
-            console.log(this.attackingCardCoords, this.targetCardCoords);
+            this.requestAttackingCoordsSubject.next(payload.objectId);
+            this.requestTargetCoordsSubject.next(payload.subjectId);
+            console.log(this.attackingCoords, this.targetCoords);
           }
           const data = {
             attacking: {
@@ -152,8 +156,8 @@ export class CardAttackService {
               id: payload.subjectId,
               damage: payload.damageToSubject
             },
-            attackingCoordinates: this.attackingCardCoords,
-            targetCoordinates: this.targetCardCoords,
+            attackingCoordinates: this.attackingCoords,
+            targetCoordinates: this.targetCoords,
             side
           };
           this.cardAttackResultSubject.next(data);
