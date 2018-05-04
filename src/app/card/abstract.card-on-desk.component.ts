@@ -21,7 +21,7 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
   playerCard: Card;
   cardStyle = {};
   inAttackProcess = false;
-  damageBurn = 0;
+  damageBurn = '';
   destroyed = false;
   protected size = {
     width: 0,
@@ -94,7 +94,8 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
       this.destroyed = true;
     }
     this.damageBurnShow = true;
-    this.damageBurn = damage;
+
+    this.damageBurn = damage > 0 ?  `-${damage}` : '';
   }
 
   ngAfterViewInit() {

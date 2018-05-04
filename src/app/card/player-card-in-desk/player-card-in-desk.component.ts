@@ -22,6 +22,13 @@ export class PlayerCardInDeskComponent extends AbstractCardInDeskComponent {
       }
     });
 
+    this.cardAttackService.cardAttack.subscribe((result) => {
+      if (result.attacking.id === this.playerCard.id) {
+        this.playerCard.inAttack = false;
+        this.cardAttackService.setCardInAttack(this.playerCard, offset(this.elementRef.nativeElement));
+      }
+    });
+
   }
 
   @HostBinding('class.disabled') get isActive() {

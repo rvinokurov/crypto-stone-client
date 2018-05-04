@@ -1,3 +1,5 @@
+@import '../../styles/target.styl'
+
 @keyframes card-fade {
   0% {
     opacity 1
@@ -7,7 +9,6 @@
     opacity 0
   }
 }
-
 
 @keyframes player-card-glow {
   0% {
@@ -21,16 +22,10 @@
   }
 }
 
-
 :host
   width 100%
   height 100%
   display block
-
-
-
-
-
 
 .card
 
@@ -52,7 +47,6 @@
     &_active
       display block
 
-
   &--wrapper
     width 100%
     height 100%
@@ -61,15 +55,22 @@
     background-repeat no-repeat
     background-size 100% 100%
     border-radius 5%
+    &_target:hover
+      animation: target 1s infinite ease-in-out
+    &_target:hover .card--defence
+      animation: attack-defence-pulse 1s infinite ease-in-out
+
+    &_attacking .card--attack
+      animation: attack-defence-pulse 1s infinite ease-in-out
+
     &_player
       box-shadow inset 0 0 2rem 0.1rem rgba(181, 139, 173, 0.8)
-
 
     &_opponent
       box-shadow inset 0 0 2rem 0.1rem rgba(238, 124, 0, 0.8)
 
     &_glow
-      animation player-card-glow  1.4s  ease-in-out infinite
+      animation player-card-glow 1.4s ease-in-out infinite
 
     &_faded
       animation card-fade .7s ease-in forwards
@@ -85,7 +86,6 @@
     left 0
     width 100%
     height 100%
-
 
   &--defence, &--attack
     position absolute
@@ -131,12 +131,9 @@
       left: -0.46rem;
       transform rotate(185deg)
 
-
-
     .card--value
       top 0.1rem
       left 0.4rem
-
 
   &--attack
     left -0.2rem

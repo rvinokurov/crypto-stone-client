@@ -3,6 +3,8 @@ import {General} from './General';
 
 export class Enemy {
 
+  id = '';
+
   cardsInHand = 3;
 
   name: string;
@@ -23,6 +25,7 @@ export class Enemy {
 
 
 export interface EnemyModel {
+  id: string;
   cardsInHand: number;
   name: string;
   sausages: number;

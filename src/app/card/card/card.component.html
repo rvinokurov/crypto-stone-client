@@ -3,6 +3,8 @@
      [class.card--wrapper_glow]="card.inAttack"
      [class.card--wrapper_player]="cardStyle === 'player'"
      [class.card--wrapper_opponent]="cardStyle === 'opponent'"
+     [class.card--wrapper_attacking]="attacking"
+     [class.card--wrapper_target]="attackMode"
      (animationend)="destroyEnd()">
   <div class="card--sausage-generation">
     <div class="card--value">{{card.sausageGeneration}}</div>

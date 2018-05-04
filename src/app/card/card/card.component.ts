@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Card} from '../../models/Card';
+import {CardAttackService} from '../card-attack.service';
 
 
 @Component({
@@ -15,8 +16,20 @@ export class CardComponent {
 
   @Input() destroyed = false;
 
-  @Output()
-  destroy = new EventEmitter<void>();
+  @Output() destroy = new EventEmitter<void>();
+
+  attackMode = false;
+
+  attacking = false;
+
+  constructor(protected cardAttackService: CardAttackService) {
+
+    this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
+      this.attackMode = cardInAttack.inAttack && this.cardStyle !== 'player';
+      this.attacking = cardInAttack.inAttack  &&  cardInAttack.id === this.card.id;
+    });
+  }
+
 
   get defenceImage() {
     return `url('/assets/shield-${this.card.defence.type}.png')`;

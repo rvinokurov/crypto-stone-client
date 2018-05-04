@@ -95,7 +95,7 @@ export class CardAttackService {
   attackGeneral() {
     this.socketIoService.action(
       ActionType.attack,
-      ActionSubject.card,
+      ActionSubject.player,
       {
         objectId: this.attacking.id,
         subjectId: this.target.id
@@ -138,7 +138,8 @@ export class CardAttackService {
     console.log(JSON.stringify(action, null, '   '));
     try {
       if (action.type === ActionType.attack) {
-        if (action.object === ActionObject.card && action.subject === ActionSubject.card) {
+        if (action.object === ActionObject.card
+          && (action.subject === ActionSubject.card || action.subject === ActionSubject.player)) {
           const {payload} = action;
           let side = AttackSide.attack;
           if (payload.side === AttackSide.defence) {

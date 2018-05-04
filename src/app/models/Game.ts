@@ -24,6 +24,7 @@ export class GameModel {
     }
     this.ourTurn = game.active;
     this.enemy = new Enemy({
+      id: game.opponent_puid,
       general: {
         image_url : game.opponent_general.image_url,
       },

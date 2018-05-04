@@ -8,7 +8,8 @@ export enum ActionObject {
 
 export enum ActionSubject {
   card = 'card',
-  turn = 'turn'
+  turn = 'turn',
+  player = 'player'
 }
 
 export enum ActionType {
