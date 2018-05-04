@@ -18,13 +18,11 @@ export class HeroCardComponent implements AfterViewInit {
   @Input() player: Player | Enemy;
 
   attackMode = false;
-
+  showExplosion = false;
   protected size = {
     width: 0,
     height: 0
   };
-
-  showExplosion = false;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -51,11 +49,14 @@ export class HeroCardComponent implements AfterViewInit {
     });
   }
 
-  getOffset() {
-    const heroOffset = offset(this.elementRef.nativeElement);
-    heroOffset.x += this.size.width / 3;
-    heroOffset.y -= this.size.height / 3;
-    return heroOffset;
+  get crackOpacity() {
+    if (this.player.health > 50) {
+      return 0;
+    }
+    if (this.player.health <= 0) {
+      return 1;
+    }
+    return 0.5 - this.player.health / 100;
   }
 
   @HostBinding('class.in-attack') get inAttack() {
@@ -67,6 +68,13 @@ export class HeroCardComponent implements AfterViewInit {
       return this.sanitizer.bypassSecurityTrustStyle(`url('${this.player.general.image_url}')`);
     }
     return '';
+  }
+
+  getOffset() {
+    const heroOffset = offset(this.elementRef.nativeElement);
+    heroOffset.x += this.size.width / 3;
+    heroOffset.y -= this.size.height / 3;
+    return heroOffset;
   }
 
   ngAfterViewInit() {

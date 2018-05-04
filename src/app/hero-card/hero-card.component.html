@@ -3,16 +3,19 @@
      [class.hero-card_player]="isPlayerHero"
 >
   <div class="hero-card--card">
-    <div class="hero-card--hero" [style.background-image]="heroImage"></div>
+    <div class="hero-card--hero" [style.background-image]="heroImage"  *ngIf="player.health > 0"></div>
+    <div class="hero-card--cracks"
+         [style.opacity]="crackOpacity"
+    ></div>
   </div>
 
 </div>
 
-<div class="hero-card--defence-image"></div>
+<div class="hero-card--defence-image" *ngIf="player.health > 0"></div>
 <div class="hero-card--explosion" *ngIf="showExplosion"
       (animationend)="explosionEnd()"
 ></div>
-<div class="hero-card--health"
+<div class="hero-card--health"  *ngIf="player.health > 0"
      [class.hero-card--health_player]="isPlayerHero"
      [class.hero-card--health_opponent]="!isPlayerHero"
 >{{player.health}}
