@@ -47,7 +47,7 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
 
 
     this.cardAttackService.cardAttack.subscribe((result) => {
-      if (result.attackingCard.id === this.playerCard.id) {
+      if (result.attacking.id === this.playerCard.id) {
         this.attackResult = result;
         this.attackAnimationStage = AttackAnimationStage.flight;
         this.inAttackProcess = true;
@@ -119,8 +119,8 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     let x = 0;
     let y = 0;
     try {
-      x = cards.targetCardCoordinates.x - cards.attackingCardCoordinates.x;
-      y = cards.targetCardCoordinates.y - cards.attackingCardCoordinates.y;
+      x = cards.targetCoordinates.x - cards.attackingCoordinates.x;
+      y = cards.targetCoordinates.y - cards.attackingCoordinates.y;
     } catch (e) {
       console.error(e);
     }
@@ -229,8 +229,8 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
   }
 
   protected applyAttackResult() {
-    this.applyDamageBurn(this.attackResult.attackingCard.damage);
-    this.cardAttackService.finishAttack(this.attackResult.targetCard);
+    this.applyDamageBurn(this.attackResult.attacking.damage);
+    this.cardAttackService.finishAttack(this.attackResult.target);
 
   }
 
