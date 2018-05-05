@@ -1,6 +1,7 @@
 import {Component, HostBinding, Input} from '@angular/core';
 import {Card} from '../models/Card';
 import {Player} from '../models/Player';
+import {DeskActionsService} from '../desk-actions.service';
 
 @Component({
   selector: 'app-player-stats-table',
@@ -16,7 +17,12 @@ export class PlayerStatsTableComponent {
   @Input() player: Player;
   @Input() isOpponent = false;
 
-  constructor() {
+  constructor(private deskActionsService: DeskActionsService) {
+    this.deskActionsService.gameStateChangeSubject.subscribe((gameState) => {
+      if (gameState.playerId === this.player.id) {
+        this.player.sausages = gameState.sausages.newValue;
+      }
+    });
   }
 
   get generation() {

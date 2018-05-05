@@ -7,10 +7,18 @@ import {GameModel} from './models/Game';
 import {EnemyCard} from './models/EnemyCard';
 import {ActionEvent, ActionObject, ActionSubject, ActionType} from './models/ActionEnum';
 
+export interface GameState {
+  playerId: string;
+  sausages: {
+    newValue: number;
+    change: number;
+  };
+}
 
 @Injectable()
 export class DeskActionsService {
 
+  gameStateChangeSubject = new Subject<GameState>();
   private actionObservable: Observable<ActionEvent>;
   private newPlayerCardSubject = new Subject<Card>();
   private enemyPlayCardSubject = new Subject<Card>();
@@ -58,6 +66,9 @@ export class DeskActionsService {
     console.log(JSON.stringify(action, null, '   '));
     try {
 
+      if (action.type === ActionType.change && action.subject === ActionSubject.state) {
+        this.gameStateChangeSubject.next(<GameState>action.payload);
+      }
       if (action.type === ActionType.playCard && action.object === ActionObject.enemy) {
         this.enemyPlayCardSubject.next(GameModel.createCard(action.payload));
       }

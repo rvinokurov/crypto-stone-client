@@ -9,7 +9,8 @@ export enum ActionObject {
 export enum ActionSubject {
   card = 'card',
   turn = 'turn',
-  player = 'player'
+  player = 'player',
+  state = 'state'
 }
 
 export enum ActionType {
@@ -17,7 +18,8 @@ export enum ActionType {
   draw = 'draw',
   end = 'end',
   start = 'start',
-  attack = 'attack'
+  attack = 'attack',
+  change = 'change'
 }
 
 export interface ActionEvent {
