@@ -6,13 +6,15 @@
     <app-player-stats-table
       [player]="enemy"
       isOpponent="true"
-      [cardsOnDesk]="enemyCardsOnDesk"
+      [playerCardsOnDesk]="enemyCardsOnDesk"
+      [opponentCardsOnDesk]="playerCardsOnDesk"
     ></app-player-stats-table>
 
     <app-player-stats-table
       [player]="player"
       [ourTurn]="ourTurn"
-      [cardsOnDesk]="playerCardsOnDesk"
+      [playerCardsOnDesk]="playerCardsOnDesk"
+      [opponentCardsOnDesk]="enemyCardsOnDesk"
     ></app-player-stats-table>
     <div class="desk--playground desk--playground_dropable" droppable
          (onDrop)="onCardDrop($event)">

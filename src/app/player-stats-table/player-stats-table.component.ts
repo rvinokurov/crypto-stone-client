@@ -12,7 +12,8 @@ import {DeskActionsService} from '../desk-actions.service';
 
 export class PlayerStatsTableComponent {
 
-  @Input() cardsOnDesk: Card[] = [];
+  @Input() playerCardsOnDesk: Card[] = [];
+  @Input() opponentCardsOnDesk: Card[] = [];
   @Input() ourTurn = false;
   @Input() player: Player;
   @Input() isOpponent = false;
@@ -26,14 +27,14 @@ export class PlayerStatsTableComponent {
   }
 
   get generation() {
-    return this.cardsOnDesk.reduce((totalGeneration, card) => {
+    return this.playerCardsOnDesk.reduce((totalGeneration, card) => {
       return totalGeneration + card.sausageGeneration;
     }, 0);
   }
 
   get steal() {
-    return this.cardsOnDesk.reduce((totalGeneration, card) => {
-      return totalGeneration + card.sausageSteal;
+    return this.opponentCardsOnDesk.reduce((totalSteal, card) => {
+      return totalSteal + card.sausageSteal;
     }, 0);
   }
 
