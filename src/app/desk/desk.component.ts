@@ -45,7 +45,7 @@ export class DeskComponent implements OnInit {
 
   ourTurn = false;
 
-
+  cardCost = 40;
 
   constructor(
     private gameService: GameService,
@@ -61,6 +61,9 @@ export class DeskComponent implements OnInit {
     return card.id;
   }
 
+  get canDrag() {
+    return this.ourTurn && (this.cardCost <= this.player.sausages);
+  }
 
   onCardOver() {
     this.touchCardSound.play();
@@ -99,6 +102,7 @@ export class DeskComponent implements OnInit {
         this.playerCardsOnDesk = game.playerCardsOnDesk;
         this.ourTurn = game.ourTurn;
       });
+
 
       this.deskActionsService.ourTurn.subscribe((ourTurn) => {
         this.ourTurn = ourTurn;

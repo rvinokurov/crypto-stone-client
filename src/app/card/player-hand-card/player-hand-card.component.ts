@@ -1,19 +1,28 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import {Card} from '../../models/Card';
+import {GameService} from '../../game.service';
+import {Player} from '../../models/Player';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'app-player-hand-card',
   templateUrl: './player-hand-card.component.html',
   styleUrls: ['./player-hand-card.component.styl']
 })
-export class PlayerHandCardComponent  {
+export class PlayerHandCardComponent {
 
   playerCard: Card;
 
   @Input() active = false;
 
+  player: Player;
+
+  sausages = 0;
+
   constructor() {
+
   }
+
 
   get card() {
     return this.playerCard;

@@ -85,7 +85,7 @@
 
     <div class="desk--card-pane desk--card-pane_player">
       <app-player-hand-card
-        [active]="ourTurn"
+        [active]="canDrag"
         [appCardMargin]="player.cards.length"
         *ngFor="let card of player.cards; trackBy:cardIdentify"
         (mouseover)="onCardOver()"
@@ -94,7 +94,7 @@
         (onDragStart)="onDragStart()"
         [dragClass]="'draggableClone'"
         [dragTransitClass]="'draggableClone'"
-        [dragEnabled]="ourTurn"
+        [dragEnabled]="canDrag"
         [card]="card">
       </app-player-hand-card>
     </div>
