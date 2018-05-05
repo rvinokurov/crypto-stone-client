@@ -1,6 +1,7 @@
 import {Card} from './Card';
 import {General} from './General';
 import {Subject} from 'rxjs/Subject';
+import {EnemyCard} from './EnemyCard';
 
 export class Player {
 
@@ -18,7 +19,7 @@ export class Player {
   private currentSausages: number;
   private currentHealth;
 
-  constructor(player: playerModel) {
+  constructor(player: PlayerModel) {
     Object.assign(<Player>this, player);
   }
 
@@ -41,5 +42,13 @@ export class Player {
   }
 }
 
+export interface PlayerModel {
+  id: string;
+  name: string;
+  sausages: number;
+  cards: EnemyCard[];
+  general: General;
+  health: number;
+}
 
-export type playerModel = {[P in keyof Player]: Player[P]};
+

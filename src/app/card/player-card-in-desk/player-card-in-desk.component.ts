@@ -3,6 +3,7 @@ import {CardAttackService} from '../card-attack.service';
 import {AbstractCardInDeskComponent} from '../abstract.card-on-desk.component';
 import {Card} from '../../models/Card';
 import {offset} from '../offset';
+import {DeskActionsService} from '../../desk-actions.service';
 
 @Component({
   selector: 'app-player-card-in-desk',
@@ -13,7 +14,13 @@ export class PlayerCardInDeskComponent extends AbstractCardInDeskComponent {
 
   @Input() active = false;
 
-  constructor(cardAttackService: CardAttackService, elementRef: ElementRef, renderer: Renderer2) {
+
+  constructor(
+    cardAttackService: CardAttackService,
+    elementRef: ElementRef,
+    renderer: Renderer2,
+    private deskActionsService: DeskActionsService
+  ) {
     super(cardAttackService, elementRef, renderer);
 
     this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
@@ -29,14 +36,21 @@ export class PlayerCardInDeskComponent extends AbstractCardInDeskComponent {
       }
     });
 
+    this.deskActionsService.ourTurn.subscribe((ourTurn) => {
+      if (ourTurn) {
+        this.card.actionPoints = 1;
+      }
+    });
+
   }
 
-  @HostBinding('class.disabled') get isActive() {
-    return !this.active;
+
+  @HostBinding('class.disabled') get isDisabled() {
+    return !this.active || this.card.actionPoints === 0;
   }
 
   @HostListener('click') inAttackListener() {
-    if (!this.active) {
+    if (!this.active || this.isDisabled) {
       return;
     }
     this.playerCard.inAttack = !this.playerCard.inAttack;

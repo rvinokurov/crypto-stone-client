@@ -34,7 +34,6 @@ export class HeroCardComponent implements AfterViewInit {
 
     this.cardAttackService.requestTargetCoordsSubject.subscribe((id: string | number) => {
       if (this.player.id === id) {
-        const heroOffset = offset(this.elementRef.nativeElement);
         this.cardAttackService.targetCoordsSubject.next(this.getOffset());
       }
     });
@@ -45,7 +44,6 @@ export class HeroCardComponent implements AfterViewInit {
 
     this.cardAttackService.targetDefence.subscribe((result) => {
       if (result.id === this.player.id) {
-
         this.applyDamageBurn(result.damage);
       }
     });

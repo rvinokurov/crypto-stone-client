@@ -77,6 +77,7 @@ export class GameModel {
       sausageSteal: props['energy drain'].value,
       sausageGeneration: props.regeneration.value,
       avatar: image_url,
+      actionPoints: rawCard.actionPoints || 0
     });
   }
 }
