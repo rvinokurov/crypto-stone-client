@@ -44,6 +44,10 @@ export class PlayerCardInDeskComponent extends AbstractCardInDeskComponent {
 
   }
 
+  damageBurnAnimationEnd() {
+    super.damageBurnAnimationEnd()
+    this.card.actionPoints = 0;
+  }
 
   @HostBinding('class.disabled') get isDisabled() {
     return !this.active || this.card.actionPoints === 0;
