@@ -16,7 +16,7 @@ polyfill({
 // workaround to make scroll prevent work in iOS Safari > 10
 try {
   window.addEventListener('touchmove', function () {
-  }, {passive: false});
+  }, false);
 } catch (e) {
 }
 
