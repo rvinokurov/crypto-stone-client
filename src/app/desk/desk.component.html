@@ -10,6 +10,11 @@
       [opponentCardsOnDesk]="playerCardsOnDesk"
     ></app-player-stats-table>
 
+
+    <div class="desk-request-card" (click)="requestCard()">
+      R
+    </div>
+
     <app-player-stats-table
       [player]="player"
       [ourTurn]="ourTurn"

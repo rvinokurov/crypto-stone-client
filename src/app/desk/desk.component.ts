@@ -65,6 +65,10 @@ export class DeskComponent implements OnInit {
     return this.ourTurn && (this.cardCost <= this.player.sausages);
   }
 
+  requestCard() {
+    this.deskActionsService.requestCard();
+  }
+
   onCardOver() {
     this.touchCardSound.play();
   }

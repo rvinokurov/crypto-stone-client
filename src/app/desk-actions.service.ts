@@ -47,6 +47,15 @@ export class DeskActionsService {
   }
 
 
+  requestCard() {
+    this.socketIoService.action(
+      ActionType.draw,
+      ActionSubject.player,
+      {
+      },
+      ActionObject.card);
+  }
+
   attack(playerCard, enemyCard) {
     this.socketIoService.action(
       ActionType.attack,
