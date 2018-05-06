@@ -45,7 +45,7 @@ export class DeskComponent implements OnInit {
 
   ourTurn = false;
 
-  cardCost = 40;
+  cardCost = 30;
 
   constructor(
     private gameService: GameService,
