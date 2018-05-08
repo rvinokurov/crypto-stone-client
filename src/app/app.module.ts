@@ -20,6 +20,7 @@ import {config  as appConfig} from '../config';
 import {EndTurnButtonComponent} from './end-turn-button/end-turn-button.component';
 import {CardModule} from './card/card.module';
 import {SocketModule} from './socket/socket.module';
+import {CastUiModule} from './cast-ui/cast-ui.module';
 import { PlayerStatsTableComponent } from './player-stats-table/player-stats-table.component';
 
 const appRoutes: Routes = [
@@ -53,7 +54,8 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
     ),
     SocketIoModule.forRoot(config),
     CardModule,
-    SocketModule
+    SocketModule,
+    CastUiModule
   ],
   providers: [
     GameService,
