@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-cast-element',
@@ -7,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CastElementComponent implements OnInit {
 
-  constructor() { }
+  @Input() elementType;
+
+  constructor() {
+  }
+
+  @HostBinding('class') get classByType() {
+    return this.elementType;
+  }
 
   ngOnInit() {
   }

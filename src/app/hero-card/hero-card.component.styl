@@ -1,8 +1,8 @@
 @import '../styles/target.styl'
 @import '../styles/explosion.styl'
 
-$height = 8rem;
-$width = 8rem;
+$height = 11rem;
+$width = 11rem;
 
 :host
   display block
@@ -29,8 +29,8 @@ $width = 8rem;
 
 .hero-cast-circle
   position absolute
-  width 10rem
-  height 10rem
+  width ($width + 2rem)
+  height ($height + 2rem)
   z-index 100000
   left -1rem
   top -1rem
@@ -68,17 +68,28 @@ $width = 8rem;
 
   &--health
     position absolute
-    width 3rem
-    height 1.5rem
-    bottom -0.6rem
+    width 4rem
+    height 2rem
+    bottom -1rem
     left 50%
-    font-size 1.1rem
-    line-height 1.5rem
+    font-size 1.4rem
+    line-height 2rem
     text-align: center
     vertical-align middle
-    margin-left -1.5rem
+    margin-left -2rem
     z-index 20000
     font-weight 600
+
+  &--defence-image, &--explosion
+    position absolute
+    background-repeat no-repeat
+    background-size auto 100%
+    width 4rem
+    height 4rem
+    bottom -2rem
+    left 50%
+    margin-left -2rem
+    filter grayscale(80%) brightness(160%)
 
     &_player
       color #9e429a
@@ -87,16 +98,6 @@ $width = 8rem;
       color #d26400
       text-shadow: 0 0 0.01rem #6e3500
 
-  &--defence-image, &--explosion
-    position absolute
-    background-repeat no-repeat
-    background-size auto 100%
-    width 3rem
-    height 3rem
-    bottom -1.5rem
-    left 50%
-    margin-left -1.5rem
-    filter grayscale(80%) brightness(160%)
 
   &--defence-image
     background-image url('/assets/shield-fire.png')

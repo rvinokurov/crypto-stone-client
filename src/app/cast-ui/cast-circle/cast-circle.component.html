@@ -1,3 +1,9 @@
+<app-cast-element [elementType]="el.type"
+                  [style.top]="el.y"
+                  [style.left]="el.x"
+                  *ngFor="let el of elements"></app-cast-element>
+
+
 <div class="cast-circle--elements-circle" *ngIf="isPlayer"
      (mousemove)="mousemove($event)"
      (mouseout)="mouseout()"
@@ -7,3 +13,5 @@
   <canvas class="cast-circle--elements-sector" #fire></canvas>
   <canvas class="cast-circle--elements-sector" #air></canvas>
 </div>
+
+

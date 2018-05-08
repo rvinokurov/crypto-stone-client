@@ -1,0 +1,37 @@
+$width = 1.4rem
+$height = 1.4rem
+
+element-inner-shadow(shadow)
+  border-color shadow
+  box-shadow inset 0 0 0.5rem 0.1rem rgba(shadow, 0.7)
+
+
+:host
+  width $width
+  height $height
+  position absolute
+  border-radius 50%
+  background white
+  border 0.1rem solid
+  display block
+  box-sizing border-box
+  margin-left -($width/ 2)
+  margin-top -($height / 2)
+
+
+
+  &.earth
+    element-inner-shadow(#55493D)
+
+
+  &.water
+    element-inner-shadow(#50c6cb)
+
+  &.fire
+    element-inner-shadow(#B13600)
+
+  &.air
+    element-inner-shadow(#8095b9)
+
+
+
