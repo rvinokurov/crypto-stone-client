@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
-import {SectorsConfig, countOfType, angleStep} from '../sectorsConfig';
+import {angleStep, countOfType, SectorsConfig} from '../sectorsConfig';
 import {ParticleAnimation} from './ParticleAnimation';
 
 
@@ -21,6 +21,8 @@ export class CastElementsCircleComponent implements OnInit, AfterViewInit {
   private animations: ParticleAnimation[] = [];
 
   private timer;
+
+  private draw;
 
   constructor(private ngZone: NgZone) {
   }
@@ -52,14 +54,17 @@ export class CastElementsCircleComponent implements OnInit, AfterViewInit {
     });
 
     if (this.animate) {
-      this.ngZone.runOutsideAngular(() => {
-        this.timer = setInterval(() => {
-          this.stage.clearRect(0, 0, width, height);
-          for (let i = 0; i < this.animations.length; i++) {
-            this.animations[i].update();
-          }
-        }, 50);
-      });
+      this.draw = () => {
+        this.stage.clearRect(0, 0, width, height);
+        for (let i = 0; i < this.animations.length; i++) {
+          this.animations[i].update();
+        }
+        window.requestAnimationFrame(this.draw);
+      };
+
+      this.draw();
+
+
     } else {
       for (let i = 0; i < this.animations.length; i++) {
         this.animations[i].update();

@@ -9,8 +9,8 @@ function hexToRgb(hex) {
   } : null;
 }
 
-const particleCount = 15;
-const maxOpacity = 0.7;
+const particleCount = 30;
+const maxOpacity = 0.4;
 
 export class ParticleAnimation {
 
@@ -54,11 +54,11 @@ export class ParticleAnimation {
       particle.size = particle.size + particle.sizeChange;
 
       if (particle.opacity > maxOpacity) {
-        particle.opacity = 0.7;
+        particle.opacity = 0.4;
         particle.opacityChange = -Math.abs(particle.opacityChange);
       }
-      if (particle.opacity <= 0.3) {
-        particle.opacity = 0.3;
+      if (particle.opacity <= 0) {
+        particle.opacity = 0;
         particle.opacityChange = Math.abs(particle.opacityChange);
       }
 
