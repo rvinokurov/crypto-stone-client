@@ -34,7 +34,7 @@ export class CastCircleComponent implements OnInit, AfterViewInit {
 
   private sectors: ElementSector[] = [];
 
-  private elements: CastElement[] = [];
+  elements: CastElement[] = [];
 
   constructor(private renderer: Renderer2, private element: ElementRef) {
   }
