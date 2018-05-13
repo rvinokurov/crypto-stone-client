@@ -7,6 +7,7 @@
 <div class="cast-circle--elements-circle" *ngIf="isPlayer"
      (mousemove)="mousemove($event)"
      (mouseout)="mouseout()"
+     (click)="mouseclick($event)"
 >
   <canvas class="cast-circle--elements-sector" #earth></canvas>
   <canvas class="cast-circle--elements-sector" #water></canvas>

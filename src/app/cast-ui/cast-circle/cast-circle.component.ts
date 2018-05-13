@@ -46,6 +46,7 @@ export class CastCircleComponent implements OnInit, AfterViewInit {
     if (this.isPlayer) {
       SectorsConfig.forEach((config) => {
         this.sectors.push(new ElementSector({
+          elementType: config.name,
           element: this[config.name].nativeElement,
           startAngle: config.startAngle,
           endAngle: config.endAngle,
@@ -87,6 +88,14 @@ export class CastCircleComponent implements OnInit, AfterViewInit {
         this.renderer.addClass(sector.canvas, hoverClass);
       } else {
         this.renderer.removeClass(sector.canvas, hoverClass);
+      }
+    });
+  }
+
+  mouseclick(event: MouseEvent) {
+    this.sectors.forEach((sector) => {
+      if (sector.inSector(event)) {
+        console.log(sector.elementType)
       }
     });
   }

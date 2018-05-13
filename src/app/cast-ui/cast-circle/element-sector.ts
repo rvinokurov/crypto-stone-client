@@ -1,6 +1,7 @@
 export class ElementSector {
 
   public readonly canvas: HTMLCanvasElement;
+  public readonly elementType;
   private readonly ctx: CanvasRenderingContext2D;
   private readonly width: number;
   private readonly height: number;
@@ -14,12 +15,14 @@ export class ElementSector {
   private readonly offsetLeft: number;
 
   constructor({
+                elementType,
                 element,
                 startAngle,
                 endAngle,
                 color
               }) {
     this.canvas = element;
+    this.elementType = elementType;
 
     const rect = this.canvas.getBoundingClientRect();
 
