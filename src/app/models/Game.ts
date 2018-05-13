@@ -19,12 +19,24 @@ export class GameModel {
     this.playerCardsOnDesk = game.player_desk.map(GameModel.createCard);
     this.enemyCardsOnDesk = game.opponent_desk.map(GameModel.createCard);
     const enemyCards = [];
+    const pElements = [];
+    const eElements = [];
+    this.enemyCardsOnDesk.forEach((card) => {
+      eElements.push(card.attack.type);
+      eElements.push(card.defence.type);
+    });
+
+    this.playerCardsOnDesk.forEach((card) => {
+      pElements.push(card.attack.type);
+      pElements.push(card.defence.type);
+    });
     for (let i = 0; i < game.opponent_hand; i++) {
       enemyCards.push(new EnemyCard());
     }
     this.ourTurn = game.active;
     this.enemy = new Enemy({
       id: game.opponent_puid,
+      elements: eElements,
       general: {
         image_url : game.opponent_general.image_url,
       },
@@ -44,6 +56,7 @@ export class GameModel {
       health: game.hp,
       cards: game.hand.map(GameModel.createCard),
       sausages: game.sausages,
+      elements: pElements
     });
   }
 

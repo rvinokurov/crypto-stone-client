@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SocketIoService} from './socket/socket-io.service';
-import {Card} from './models/Card';
+import {Card, elemental} from './models/Card';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {GameModel} from './models/Game';
@@ -15,10 +15,17 @@ export interface GameState {
   };
 }
 
+
+export interface Element {
+  type: elemental;
+}
+
 @Injectable()
 export class DeskActionsService {
 
   gameStateChangeSubject = new Subject<GameState>();
+  newPlayerElementSubject = new Subject<Element>();
+  newEnemyElementSubject = new Subject<Element>();
   private actionObservable: Observable<ActionEvent>;
   private newPlayerCardSubject = new Subject<Card>();
   private enemyPlayCardSubject = new Subject<Card>();
@@ -51,8 +58,7 @@ export class DeskActionsService {
     this.socketIoService.action(
       ActionType.draw,
       ActionSubject.player,
-      {
-      },
+      {},
       ActionObject.card);
   }
 
@@ -107,6 +113,12 @@ export class DeskActionsService {
   }
 
   playCard(card: Card) {
+    this.newPlayerElementSubject.next({
+      type: card.attack.type
+    });
+    this.newPlayerElementSubject.next({
+      type: card.defence.type
+    });
     this.socketIoService.action(ActionType.playCard, ActionSubject.card, {id: card.id});
   }
 

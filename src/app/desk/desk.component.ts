@@ -104,6 +104,9 @@ export class DeskComponent implements OnInit {
         this.enemy = game.enemy;
         this.enemyCardsOnDesk = game.enemyCardsOnDesk;
         this.playerCardsOnDesk = game.playerCardsOnDesk;
+
+
+
         this.ourTurn = game.ourTurn;
       });
 
@@ -126,6 +129,12 @@ export class DeskComponent implements OnInit {
         card.puttedToDesk = true;
         this.enemyCardsOnDesk.push(card);
         this.enemy.cards.pop();
+        this.deskActionsService.newEnemyElementSubject.next({
+            type: card.attack.type
+        });
+        this.deskActionsService.newEnemyElementSubject.next({
+          type: card.defence.type
+        });
       });
 
       this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {

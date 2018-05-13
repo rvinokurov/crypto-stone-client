@@ -3,7 +3,7 @@
                   [style.left]="el.x"
                   *ngFor="let el of elements"></app-cast-element>
 
-<app-cast-elements-circle [animate]="isPlayer"></app-cast-elements-circle>
+<app-cast-elements-circle [player]="player" [isPlayer]="isPlayer"></app-cast-elements-circle>
 <div class="cast-circle--elements-circle" *ngIf="isPlayer"
      (mousemove)="mousemove($event)"
      (mouseout)="mouseout()"

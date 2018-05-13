@@ -20,6 +20,7 @@ import {config  as appConfig} from '../config';
 import {EndTurnButtonComponent} from './end-turn-button/end-turn-button.component';
 import {CardModule} from './card/card.module';
 import {SocketModule} from './socket/socket.module';
+import {AnimationModule} from './animation/animation.module';
 import {CastUiModule} from './cast-ui/cast-ui.module';
 import { PlayerStatsTableComponent } from './player-stats-table/player-stats-table.component';
 
@@ -55,6 +56,7 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
     SocketIoModule.forRoot(config),
     CardModule,
     SocketModule,
+    AnimationModule,
     CastUiModule
   ],
   providers: [

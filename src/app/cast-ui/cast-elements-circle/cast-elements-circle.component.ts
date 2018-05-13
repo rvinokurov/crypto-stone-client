@@ -1,6 +1,10 @@
-import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
-import {angleStep, countOfType, SectorsConfig} from '../sectorsConfig';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {angleStep, SectorsConfig} from '../sectorsConfig';
 import {ParticleAnimation} from './ParticleAnimation';
+import {DeskActionsService} from '../../desk-actions.service';
+import {Player} from '../../models/Player';
+import {Enemy} from '../../models/Enemy';
+import {CanvasAnimationManagerService} from '../../animation/canvas-animation-manager.service';
 
 
 @Component({
@@ -11,7 +15,8 @@ import {ParticleAnimation} from './ParticleAnimation';
 export class CastElementsCircleComponent implements OnInit, AfterViewInit {
 
 
-  @Input() animate = false;
+  @Input() isPlayer = false;
+  @Input() player: Enemy | Player;
 
   @ViewChild('canvas') canvasRef: ElementRef;
 
@@ -20,11 +25,24 @@ export class CastElementsCircleComponent implements OnInit, AfterViewInit {
   private stage;
   private animations: ParticleAnimation[] = [];
 
-  private timer;
+  private width;
+  private height;
+  private cx;
+  private cy;
+  private radius;
 
-  private draw;
 
-  constructor(private ngZone: NgZone) {
+  private elements = {};
+
+  constructor(private deskActions: DeskActionsService, private canvasAnimationManager: CanvasAnimationManagerService) {
+    SectorsConfig.forEach((sector) => {
+      this.elements[sector.name] = {
+        angle: sector.startAngle,
+        count: 0,
+        color: sector.color
+      };
+    });
+
   }
 
   ngAfterViewInit() {
@@ -33,47 +51,68 @@ export class CastElementsCircleComponent implements OnInit, AfterViewInit {
 
     const r = this.canvas.getBoundingClientRect();
     this.stage = this.canvas.getContext('2d');
-    const width = r.width;
-    const height = r.height;
-    this.canvas.width = width;
-    this.canvas.height = height;
-    const cx = width / 2;
-    const cy = height / 2;
-    const radius = ((width > height ? height : width) / 2) / 1.2;
+    this.width = r.width;
+    this.height = r.height;
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    this.cx = this.width / 2;
+    this.cy = this.height / 2;
+    this.radius = ((this.width > this.height ? this.height : this.width) / 2) / 1.2;
 
-    SectorsConfig.forEach((sector) => {
-      const angle = sector.startAngle + angleStep;
+    this.reInitElements();
 
-      for (let i = 0; i < countOfType; i++) {
+   this.canvasAnimationManager.addAnimationFunction(this.draw);
+  }
+
+  draw = () => {
+    this.stage.clearRect(0, 0, this.width, this.height);
+    for (let i = 0; i < this.animations.length; i++) {
+      this.animations[i].update();
+    }
+  };
+
+  ngOnInit() {
+    if (this.isPlayer) {
+      this.deskActions.newPlayerElementSubject.subscribe((element) => {
+        this.elements[element.type].count++;
+        console.log('new', element);
+        this.reInitElements();
+      });
+    } else {
+      this.deskActions.newEnemyElementSubject.subscribe((element) => {
+        this.elements[element.type].count++;
+        this.reInitElements();
+      });
+    }
+    this.player.elements.forEach((type) => {
+      this.elements[type].count++;
+    });
+  }
+
+  private reInitElements() {
+
+    Object.keys(this.elements).forEach((elementName) => {
+      const element = this.elements[elementName];
+      const angle = element.angle + angleStep;
+      for (let i = 0; i < element.count; i++) {
         const currentAngle = angle + i * angleStep;
-        const x = cx + radius * Math.cos(currentAngle);
-        const y = cy + radius * Math.sin(currentAngle);
+        const x = this.cx + this.radius * Math.cos(currentAngle);
+        const y = this.cy + this.radius * Math.sin(currentAngle);
 
-        this.animations.push(new ParticleAnimation(width / 13, height / 13, x, y, this.stage, sector.color));
+        this.animations.push(new ParticleAnimation(this.width / 13, this.height / 13, x, y, this.stage, element.color));
       }
     });
 
-    if (this.animate) {
-      this.draw = () => {
-        this.stage.clearRect(0, 0, width, height);
-        for (let i = 0; i < this.animations.length; i++) {
-          this.animations[i].update();
-        }
-        window.requestAnimationFrame(this.draw);
-      };
-
-      this.draw();
-
-
-    } else {
-      for (let i = 0; i < this.animations.length; i++) {
-        this.animations[i].update();
-      }
-    }
-
+    // SectorsConfig.forEach((sector) => {
+    //   const angle = sector.startAngle + angleStep;
+    //   for (let i = 0; i < countOfType; i++) {
+    //     const currentAngle = angle + i * angleStep;
+    //     const x = this.cx + this.radius * Math.cos(currentAngle);
+    //     const y = this.cy + this.radius * Math.sin(currentAngle);
+    //
+    //     this.animations.push(new ParticleAnimation(this.width / 13, this.height / 13, x, y, this.stage, sector.color));
+    //   }
   }
 
-  ngOnInit() {
-  }
 
 }

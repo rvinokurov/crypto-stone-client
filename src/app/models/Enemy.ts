@@ -11,6 +11,8 @@ export class Enemy {
 
   sausages: number;
 
+  elements: string[] = [];
+
   cards: EnemyCard[];
 
   general: General;
@@ -32,4 +34,5 @@ export interface EnemyModel {
   cards: EnemyCard[];
   general: General;
   health: number;
+  elements: string[];
 }

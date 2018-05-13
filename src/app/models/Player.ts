@@ -15,6 +15,7 @@ export class Player {
   general: General;
   healthChangeSubject = new Subject<number>();
 
+  elements: string[] = [];
 
   private currentSausages: number;
   private currentHealth;
@@ -49,6 +50,7 @@ export interface PlayerModel {
   cards: EnemyCard[];
   general: General;
   health: number;
+  elements: string[];
 }
 
 

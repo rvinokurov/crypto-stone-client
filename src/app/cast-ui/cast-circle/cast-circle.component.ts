@@ -4,6 +4,8 @@ import {ElementSector} from './element-sector';
 
 
 import {SectorsConfig, countOfType, angleStep} from '../sectorsConfig';
+import {Player} from '../../models/Player';
+import {Enemy} from '../../models/Enemy';
 
 
 const hoverClass = 'cast-circle--elements-sector_hover';
@@ -27,6 +29,8 @@ export class CastCircleComponent implements OnInit, AfterViewInit {
   @ViewChild('air') air: ElementRef;
 
   @Input() isPlayer = false;
+
+  @Input() player: Enemy | Player;
 
   private sectors: ElementSector[] = [];
 
