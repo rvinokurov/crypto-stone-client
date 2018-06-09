@@ -1,0 +1,93 @@
+<div class="desk"
+     *ngIf="player"
+     [class.desk_attack-mode]="playerInAttack === true">
+
+  <div class="desk--wrapper">
+    <app-player-stats-table
+      [player]="enemy"
+      isOpponent="true"
+      [playerCardsOnDesk]="enemyCardsOnDesk"
+      [opponentCardsOnDesk]="enemyCardsOnDesk"
+    ></app-player-stats-table>
+
+    <app-player-stats-table
+      [player]="enemy"
+      [ourTurn]="ourTurn"
+      [playerCardsOnDesk]="enemyCardsOnDesk"
+      [opponentCardsOnDesk]="enemyCardsOnDesk"
+    ></app-player-stats-table>
+    <div class="desk--playground desk--playground_dropable" droppable
+         (onDrop)="onCardDrop($event)">
+
+
+      <div class="desk--playground-cards desk--playground-cards_enemy"
+           [class.desk--playground-cards_active]="!ourTurn">
+        <app-enemy-card-in-desk
+          [class.target]="playerInAttack === true"
+          *ngFor="let card of enemyCardsOnDesk; trackBy:cardIdentify"
+          class="in-desk enemy"
+          [card]="card">
+        </app-enemy-card-in-desk>
+      </div>
+
+      <div class="desk--playground-cards desk--playground-cards_player"
+           [class.desk--playground-cards_active]="ourTurn">
+        <app-player-card-in-desk
+          [active]="ourTurn"
+          *ngFor="let card of playerCardsOnDesk; trackBy:cardIdentify"
+          class="in-desk"
+          [card]="card"
+          [class.in-attack]="card.inAttack === true">
+        </app-player-card-in-desk>
+      </div>
+    </div>
+
+    <app-new-card
+      *ngIf="showNewCard === true"
+      [card]="newPlayerCard">
+    </app-new-card>
+
+    <app-hero-card class="desk--hero-card desk--hero-card_enemy"
+                   [player]="enemy"></app-hero-card>
+    <div class="desk--pane desk--pane_enemy">
+
+    </div>
+
+
+    <div class="desk--card-pane desk--card-pane_enemy">
+      <app-enemy-card
+        [appCardMargin]="enemy.cards.length"
+        [card]="card"
+        *ngFor="let card of enemy.cards">
+      </app-enemy-card>
+    </div>
+
+
+    <div class="desk--playground-border desk--playground-border_top"></div>
+    <div class="desk--playground desk--playground_top"></div>
+    <div class="desk--playground desk--playground_top desk--playground_texture"></div>
+
+    <div class="desk--playground-border desk--playground-border_bottom"></div>
+    <div class="desk--playground desk--playground_bottom"></div>
+    <div class="desk--playground desk--playground_bottom desk--playground_texture"></div>
+
+    <div class="desk--playground-border-inner"></div>
+    <div class="desk--playground-inner"></div>
+
+
+    <div class="desk--card-pane desk--card-pane_enemy_bottom">
+      <app-enemy-card
+        [appCardMargin]="player.cards.length"
+        *ngFor="let card of player.cards"
+        [card]="card">
+      </app-enemy-card>
+    </div>
+
+
+    <app-hero-card class="desk--hero-card desk--hero-card_player" isPlayerHero="true"
+                   [player]="player"></app-hero-card>
+    <div class="desk--pane desk--pane_player">
+
+    </div>
+  </div>
+</div>

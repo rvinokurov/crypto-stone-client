@@ -18,7 +18,8 @@ export class GameService {
   }
 
   getGame(guid: string, puid: string): Observable<GameModel> {
-    return this.http.get(`${config.apiPrefix}/games/${guid}/players/${puid}`)
+    const url = puid ? `${config.apiPrefix}/games/${guid}/players/${puid}` : `${config.apiPrefix}/games/${guid}/spectator`;
+    return this.http.get(url)
       .map((response: { game: any }) => {
         const game = new GameModel(response.game);
         this.gameSubject.next(game);

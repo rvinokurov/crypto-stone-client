@@ -1,3 +1,3 @@
 export const config = {
-  apiPrefix: 'http://localhost:3000'
+  apiPrefix: 'https://dev.kotowars.com'
 };
