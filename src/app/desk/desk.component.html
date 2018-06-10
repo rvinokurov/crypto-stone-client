@@ -10,11 +10,6 @@
       [opponentCardsOnDesk]="playerCardsOnDesk"
     ></app-player-stats-table>
 
-
-    <div class="desk-request-card" (click)="requestCard()">
-      R
-    </div>
-
     <app-player-stats-table
       [player]="player"
       [ourTurn]="ourTurn"
@@ -24,6 +19,12 @@
     <div class="desk--playground desk--playground_dropable" droppable
          (onDrop)="onCardDrop($event)">
 
+      <div class="elements-help">
+          <p><span class="fire">FIRE</span> &gt; <span class="air">AIR</span></p>
+          <p><span class="air">AIR</span> &gt; <span class="earth">EARTH</span></p>
+          <p><span class="earth">EARTH</span> &gt; <span class="water">WATER</span></p>
+          <p><span class="water">WATER</span> &gt; <span class="fire">FIRE</span></p>
+      </div>
 
       <div class="desk--playground-cards desk--playground-cards_enemy"
            [class.desk--playground-cards_active]="!ourTurn">
