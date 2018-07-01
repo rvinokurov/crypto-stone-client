@@ -35,7 +35,7 @@ export class GameModel {
     }
     this.ourTurn = game.active;
     this.enemy = new Enemy({
-      id: game.opponent.uuid,
+      uuid: game.opponent.uuid,
       elements: eElements,
       general: {
         image_url : game.opponent.general.image_url,
@@ -48,7 +48,7 @@ export class GameModel {
     });
 
     this.player = new Player({
-      id: game.player.uuid,
+      uuid: game.player.uuid,
       name: game.player.name,
       general: {
         image_url : game.player.general.image_url,
