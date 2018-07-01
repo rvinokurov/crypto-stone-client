@@ -30,7 +30,7 @@ export class GameModel {
       pElements.push(card.attack.type);
       pElements.push(card.defence.type);
     });
-    for (let i = 0; i < game.opponent_hand; i++) {
+    for (let i = 0; i < game.opponent.hand; i++) {
       enemyCards.push(new EnemyCard());
     }
     this.ourTurn = game.active;
