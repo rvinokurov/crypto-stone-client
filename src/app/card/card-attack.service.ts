@@ -12,7 +12,7 @@ export interface Coordinates {
 
 
 export interface AttackDamage {
-  id: number | string;
+  uuid: number | string;
   damage: number;
 }
 
@@ -25,7 +25,7 @@ export interface AttackResult {
 }
 
 export interface General {
-  id: string;
+  uuid: string;
 }
 
 @Injectable()
@@ -73,7 +73,7 @@ export class CardAttackService {
     return this.targetDefenceSubject;
   }
 
-  finishAttack(target: { id: number | string, damage: number }) {
+  finishAttack(target: { uuid: number | string, damage: number }) {
     this.targetDefenceSubject.next(target);
   }
 
@@ -97,8 +97,8 @@ export class CardAttackService {
       ActionType.attack,
       ActionSubject.player,
       {
-        objectId: this.attacking.id,
-        subjectId: this.target.id
+        objectId: this.attacking.uuid,
+        subjectId: this.target.uuid
       },
       ActionObject.card);
   }
@@ -116,8 +116,8 @@ export class CardAttackService {
       ActionType.attack,
       ActionSubject.card,
       {
-        objectId: playerCard.id,
-        subjectId: enemyCard.id
+        objectId: playerCard.uuid,
+        subjectId: enemyCard.uuid
       },
       ActionObject.card);
   }
@@ -128,8 +128,8 @@ export class CardAttackService {
   //     ActionType.attack,
   //     ActionSubject.card,
   //     {
-  //       objectId: playerCard.id,
-  //       // subjectId: enemyCard.id
+  //       objectId: playerCard.uuid,
+  //       // subjectId: enemyCard.uuid
   //     },
   //     ActionObject.card);
   // }
@@ -150,11 +150,11 @@ export class CardAttackService {
           }
           const data = {
             attacking: {
-              id: payload.objectId,
+              uuid: payload.objectId,
               damage: payload.damageToObject,
             },
             target: {
-              id: payload.subjectId,
+              uuid: payload.subjectId,
               damage: payload.damageToSubject
             },
             attackingCoordinates: this.attackingCoords,

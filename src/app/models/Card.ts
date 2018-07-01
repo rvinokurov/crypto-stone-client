@@ -9,7 +9,7 @@ export class Card {
   inAttack = false;
   puttedToDesk = false;
   puttedToHand = false;
-  id = 0;
+  uuid = 0;
   attack = {
     type: elemental.fire,
     value: 0
@@ -23,13 +23,13 @@ export class Card {
   sausageSteal = 0;
   cost = 30;
   actionPoints = 0;
-  constructor({id, attack, defence, avatar, sausageSteal = 0, sausageGeneration = 10, actionPoints = 0}) {
+  constructor({uuid, attack, defence, avatar, sausageSteal = 0, sausageGeneration = 10, actionPoints = 0}) {
     this.attack = attack;
     this.defence = defence;
     this.avatar = `url(${avatar})`;
     this.sausageSteal = sausageSteal;
     this.sausageGeneration = sausageGeneration;
-    this.id = id;
+    this.uuid = uuid;
     this.actionPoints = actionPoints;
   }
 }

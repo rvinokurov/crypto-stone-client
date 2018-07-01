@@ -32,8 +32,8 @@ export class HeroCardComponent implements AfterViewInit {
     protected elementRef: ElementRef
   ) {
 
-    this.cardAttackService.requestTargetCoordsSubject.subscribe((id: string | number) => {
-      if (this.player.id === id) {
+    this.cardAttackService.requestTargetCoordsSubject.subscribe((uuid: string | number) => {
+      if (this.player.uuid === uuid) {
         this.cardAttackService.targetCoordsSubject.next(this.getOffset());
       }
     });
@@ -43,7 +43,7 @@ export class HeroCardComponent implements AfterViewInit {
     });
 
     this.cardAttackService.targetDefence.subscribe((result) => {
-      if (result.id === this.player.id) {
+      if (result.uuid === this.player.uuid) {
         this.applyDamageBurn(result.damage);
       }
     });
@@ -100,7 +100,7 @@ export class HeroCardComponent implements AfterViewInit {
   @HostListener('click') target() {
     if (this.attackMode) {
       this.cardAttackService.setTargetGeneral(
-        {id: this.player.id},
+        {uuid: this.player.uuid},
         this.getOffset()
       );
     }

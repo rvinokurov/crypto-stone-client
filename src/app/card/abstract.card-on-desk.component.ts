@@ -32,22 +32,20 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
 
   constructor(protected cardAttackService: CardAttackService, protected elementRef: ElementRef, protected renderer: Renderer2) {
 
-
     this.cardAttackService.requestAttackingCoordsSubject.subscribe((id) => {
-      if (id === this.playerCard.id) {
+      if (id === this.playerCard.uuid) {
         this.cardAttackService.attackingCoordsSubject.next(offset(this.elementRef.nativeElement));
       }
     });
 
     this.cardAttackService.requestTargetCoordsSubject.subscribe((id) => {
-      if (id === this.playerCard.id) {
+      if (id === this.playerCard.uuid) {
         this.cardAttackService.targetCoordsSubject.next(offset(this.elementRef.nativeElement));
       }
     });
 
-
     this.cardAttackService.cardAttack.subscribe((result) => {
-      if (result.attacking.id === this.playerCard.id) {
+      if (result.attacking.uuid === this.playerCard.uuid) {
         this.attackResult = result;
         this.attackAnimationStage = AttackAnimationStage.flight;
         this.inAttackProcess = true;
@@ -61,7 +59,7 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     });
 
     this.cardAttackService.targetDefence.subscribe((result) => {
-      if (result.id === this.playerCard.id) {
+      if (result.uuid === this.playerCard.uuid) {
 
         this.applyDamageBurn(result.damage);
       }
@@ -102,7 +100,6 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
     const geometry = this.elementRef.nativeElement.getBoundingClientRect();
     this.size.width = geometry.width;
     this.size.height = geometry.height;
-
   }
 
   initAttackAnimationStyle() {
@@ -203,13 +200,13 @@ export class AbstractCardInDeskComponent implements AfterViewInit {
 
   damageBurnAnimationEnd() {
     if (this.playerCard.defence.value <= 0) {
-      this.cardAttackService.removeCardSubject.next(this.playerCard.id);
+      this.cardAttackService.removeCardSubject.next(this.playerCard.uuid);
     }
     this.damageBurnShow = false;
   }
 
   destroyEnd() {
-    // this.cardAttackService.removeCardSubject.next(this.playerCard.id);
+    // this.cardAttackService.removeCardSubject.next(this.playerCard.uuid);
   }
 
 

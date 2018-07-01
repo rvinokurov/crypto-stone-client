@@ -5,27 +5,27 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class SocketIoService {
 
-  private puid;
+  private pid;
 
-  private guid;
+  private gid;
 
   private actions = {};
 
   constructor(private socket: Socket) {
   }
 
-  register(guid, puid) {
-    this.guid = guid;
-    this.puid = puid;
+  register(gid, pid) {
+    this.gid = gid;
+    this.pid = pid;
 
-    this.socket.emit('register', this.puid);
+    this.socket.emit('register', this.pid);
     this.socket.on('random', (message) => {
       console.log('message', message);
     });
 
     this.socket.on('disconnect', () => {
       console.log('reconnect');
-      this.socket.emit('register', this.puid);
+      this.socket.emit('register', this.pid);
     });
 
   }
@@ -39,8 +39,8 @@ export class SocketIoService {
 
   action(type: string, subject: string, payload: any, object?) {
     const action = {
-      puid: this.puid,
-      guid: this.guid,
+      pid: this.pid,
+      gid: this.gid,
       type,
       subject,
       object,

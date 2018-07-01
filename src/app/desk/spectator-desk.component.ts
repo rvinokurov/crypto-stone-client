@@ -20,8 +20,8 @@ import {CardAttackService} from '../card/card-attack.service';
 })
 export class SpectatorDeskComponent implements OnInit {
 
-  guid = '';
-  puid = '';
+  gid = '';
+  pid = '';
 
   playerCardsOnDesk = [];
   enemyCardsOnDesk = [];
@@ -58,7 +58,7 @@ export class SpectatorDeskComponent implements OnInit {
   }
 
   cardIdentify(index, card) {
-    return card.id;
+    return card.uuid;
   }
 
   get canDrag() {
@@ -87,19 +87,19 @@ export class SpectatorDeskComponent implements OnInit {
     deskCard.puttedToDesk = true;
     this.playerCardsOnDesk.push(deskCard);
 
-    this.player.cards = this.player.cards.filter((card: Card) => card.id !== deskCard.id);
+    this.player.cards = this.player.cards.filter((card: Card) => card.uuid !== deskCard.uuid);
     this.deskActionsService.playCard(deskCard);
   }
 
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.guid = params.guid;
-      this.puid = params.puid;
+      this.gid = params.gid;
+      this.pid = params.pid;
 
-      this.socketIoService.register(this.guid, this.puid);
+      this.socketIoService.register(this.gid, this.pid);
 
-      this.gameService.getGame(this.guid, this.puid).subscribe((game: GameModel) => {
+      this.gameService.getGame(this.gid, this.pid).subscribe((game: GameModel) => {
         this.player = game.player;
         this.enemy = game.enemy;
         this.enemyCardsOnDesk = game.enemyCardsOnDesk;
@@ -148,10 +148,10 @@ export class SpectatorDeskComponent implements OnInit {
 
       this.cardAttackService.removeCardSubject.subscribe((id) => {
         this.enemyCardsOnDesk = this.enemyCardsOnDesk.filter((card) => {
-          return card.id !== id;
+          return card.uuid !== id;
         });
         this.playerCardsOnDesk = this.playerCardsOnDesk.filter((card) => {
-          return card.id !== id;
+          return card.uuid !== id;
         });
       });
 

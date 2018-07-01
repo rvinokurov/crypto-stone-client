@@ -16,8 +16,8 @@ export class GameModel {
   ourTurn = false;
 
   constructor(game: any) {
-    this.playerCardsOnDesk = game.player_desk.map(GameModel.createCard);
-    this.enemyCardsOnDesk = game.opponent_desk.map(GameModel.createCard);
+    this.playerCardsOnDesk = game.player.desk.map(GameModel.createCard);
+    this.enemyCardsOnDesk = game.opponent.desk.map(GameModel.createCard);
     const enemyCards = [];
     const pElements = [];
     const eElements = [];
@@ -35,27 +35,27 @@ export class GameModel {
     }
     this.ourTurn = game.active;
     this.enemy = new Enemy({
-      id: game.opponent_puid,
+      id: game.opponent.uuid,
       elements: eElements,
       general: {
-        image_url : game.opponent_general.image_url,
+        image_url : game.opponent.general.image_url,
       },
-      health: game.opponent_hp,
-      cardsInHand: game.opponent_hand,
+      health: game.opponent.hp,
+      cardsInHand: game.opponent.hand,
       cards: enemyCards,
-      name: game.opponent_name,
-      sausages: game.opponent_sausages,
+      name: game.opponent.name,
+      sausages: game.opponent.sausages,
     });
 
     this.player = new Player({
-      id: game.player_id,
-      name: game.player_name,
+      id: game.player.uuid,
+      name: game.player.name,
       general: {
-        image_url : game.general.image_url,
+        image_url : game.player.general.image_url,
       },
-      health: game.hp,
-      cards: game.hand.map(GameModel.createCard),
-      sausages: game.sausages,
+      health: game.player.hp,
+      cards: game.player.hand.map(GameModel.createCard),
+      sausages: game.player.sausages,
       elements: pElements
     });
   }
@@ -76,9 +76,9 @@ export class GameModel {
   }
 
   static createCard(rawCard: any): Card {
-    const {props, image_url, id} = rawCard;
+    const {props, image_url, uuid} = rawCard;
     return new Card({
-      id,
+      uuid,
       attack: {
         value: props.attack.value,
         type: GameModel.getElement(props.elementalOfAttack.value),

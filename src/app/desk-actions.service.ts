@@ -67,8 +67,8 @@ export class DeskActionsService {
       ActionType.attack,
       ActionSubject.card,
       {
-        objectId: playerCard.id,
-        subjectId: enemyCard.id
+        objectId: playerCard.uuid,
+        subjectId: enemyCard.uuid
       },
       ActionObject.card);
   }
@@ -119,7 +119,7 @@ export class DeskActionsService {
     this.newPlayerElementSubject.next({
       type: card.defence.type
     });
-    this.socketIoService.action(ActionType.playCard, ActionSubject.card, {id: card.id});
+    this.socketIoService.action(ActionType.playCard, ActionSubject.card, {uuid: card.uuid});
   }
 
 

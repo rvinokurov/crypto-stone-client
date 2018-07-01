@@ -26,8 +26,8 @@ import {CastUiModule} from './cast-ui/cast-ui.module';
 import { PlayerStatsTableComponent } from './player-stats-table/player-stats-table.component';
 
 const appRoutes: Routes = [
-  {path: 'table/:guid/:puid', component: DeskComponent},
-  {path: 'table/:guid', component: SpectatorDeskComponent},
+  {path: 'table/:gid/:pid', component: DeskComponent},
+  {path: 'table/:gid', component: SpectatorDeskComponent},
 ];
 
 const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};

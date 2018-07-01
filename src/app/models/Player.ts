@@ -5,7 +5,7 @@ import {EnemyCard} from './EnemyCard';
 
 export class Player {
 
-  id = '';
+  uuid = '';
 
   cards: Card[];
 
@@ -44,7 +44,7 @@ export class Player {
 }
 
 export interface PlayerModel {
-  id: string;
+  uuid: string;
   name: string;
   sausages: number;
   cards: EnemyCard[];

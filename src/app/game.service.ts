@@ -17,8 +17,8 @@ export class GameService {
   constructor(private http: HttpClient) {
   }
 
-  getGame(guid: string, puid: string): Observable<GameModel> {
-    const url = puid ? `${config.apiPrefix}/games/${guid}/players/${puid}` : `${config.apiPrefix}/games/${guid}/spectator`;
+  getGame(gid: string, pid: string): Observable<GameModel> {
+    const url = pid ? `${config.apiPrefix}/games/${gid}/players/${pid}` : `${config.apiPrefix}/games/${gid}/spectator`;
     return this.http.get(url)
       .map((response: { game: any }) => {
         const game = new GameModel(response.game);
