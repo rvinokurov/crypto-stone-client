@@ -26,7 +26,7 @@ export class CardComponent {
 
     this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
       this.attackMode = cardInAttack.inAttack && this.cardStyle !== 'player';
-      this.attacking = cardInAttack.inAttack  &&  cardInAttack.id === this.card.id;
+      this.attacking = cardInAttack.inAttack  &&  cardInAttack.uuid === this.card.uuid;
     });
   }
 

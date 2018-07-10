@@ -20,8 +20,10 @@ export class PlayerStatsTableComponent {
 
   constructor(private deskActionsService: DeskActionsService) {
     this.deskActionsService.gameStateChangeSubject.subscribe((gameState) => {
-      if (gameState.playerId === this.player.id) {
-        this.player.sausages = gameState.sausages.newValue;
+      if (gameState.playerId === this.player.uuid) {
+        if ('sausages' in gameState) {
+          this.player.sausages = gameState.sausages.newValue;
+        }
       }
     });
   }

@@ -14,11 +14,11 @@ import {CardAttackService} from '../card/card-attack.service';
 
 @Component({
   selector: 'app-desk',
-  templateUrl: './desk.component.html',
+  templateUrl: './spectator-desk.component.html',
   styleUrls: ['./desk.component.styl'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DeskComponent implements OnInit {
+export class SpectatorDeskComponent implements OnInit {
 
   gid = '';
   pid = '';
@@ -43,7 +43,6 @@ export class DeskComponent implements OnInit {
 
   endTurnSound = new Audio('/assets/sound/end-turn-2.wav');
 
-  gameOver = false;
   ourTurn = false;
 
   cardCost = 30;
@@ -106,13 +105,11 @@ export class DeskComponent implements OnInit {
         this.enemyCardsOnDesk = game.enemyCardsOnDesk;
         this.playerCardsOnDesk = game.playerCardsOnDesk;
 
+
+
         this.ourTurn = game.ourTurn;
-        this.gameOver = game.gameOver;
       });
 
-      this.deskActionsService.gameOver.subscribe((gameOver) => {
-        this.gameOver = gameOver;
-      });
 
       this.deskActionsService.ourTurn.subscribe((ourTurn) => {
         this.ourTurn = ourTurn;

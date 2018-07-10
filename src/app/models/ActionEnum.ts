@@ -19,7 +19,8 @@ export enum ActionType {
   end = 'end',
   start = 'start',
   attack = 'attack',
-  change = 'change'
+  change = 'change',
+  gameover = 'gameover'
 }
 
 export interface ActionEvent {

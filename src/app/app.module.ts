@@ -9,6 +9,7 @@ import {SocketIoConfig, SocketIoModule} from 'ng-socket-io';
 
 import {AppComponent} from './app.component';
 import {DeskComponent} from './desk/desk.component';
+import {SpectatorDeskComponent} from './desk/spectator-desk.component';
 
 import {HeroCardComponent} from './hero-card/hero-card.component';
 import {SausageComponent} from './sausage/sausage.component';
@@ -25,7 +26,8 @@ import {CastUiModule} from './cast-ui/cast-ui.module';
 import { PlayerStatsTableComponent } from './player-stats-table/player-stats-table.component';
 
 const appRoutes: Routes = [
-  {path: 'table/:guid/:puid', component: DeskComponent},
+  {path: 'table/:gid/:pid', component: DeskComponent},
+  {path: 'table/:gid', component: SpectatorDeskComponent},
 ];
 
 const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
@@ -35,6 +37,7 @@ const config: SocketIoConfig = {url: appConfig.apiPrefix, options: {}};
   declarations: [
     AppComponent,
     DeskComponent,
+    SpectatorDeskComponent,
     HeroCardComponent,
     SausageComponent,
     DeckComponent,

@@ -24,13 +24,13 @@ export class PlayerCardInDeskComponent extends AbstractCardInDeskComponent {
     super(cardAttackService, elementRef, renderer);
 
     this.cardAttackService.cardInAttack.subscribe((cardInAttack: Card) => {
-      if (cardInAttack.id !== this.playerCard.id) {
+      if (cardInAttack.uuid !== this.playerCard.uuid) {
         this.playerCard.inAttack = false;
       }
     });
 
     this.cardAttackService.cardAttack.subscribe((result) => {
-      if (result.attacking.id === this.playerCard.id) {
+      if (result.attacking.uuid === this.playerCard.uuid) {
         this.playerCard.inAttack = false;
         this.cardAttackService.setCardInAttack(this.playerCard, offset(this.elementRef.nativeElement));
       }
@@ -45,8 +45,14 @@ export class PlayerCardInDeskComponent extends AbstractCardInDeskComponent {
   }
 
   damageBurnAnimationEnd() {
-    super.damageBurnAnimationEnd()
-    this.card.actionPoints = 0;
+    if (this.active) {
+      this.card.actionPoints = 0;
+    }
+    super.damageBurnAnimationEnd();
+    //console.log('! === this ===');
+    //console.log(this);
+    //console.log('! == card ==');
+    //console.log(this.card);
   }
 
   @HostBinding('class.disabled') get isDisabled() {

@@ -6,12 +6,6 @@
      [class.card--wrapper_attacking]="attacking"
      [class.card--wrapper_target]="attackMode"
      (animationend)="destroyEnd()">
-  <div class="card--sausage-generation">
-    <div class="card--value">{{card.sausageGeneration}}</div>
-  </div>
-  <div class="card--sausage-steal">
-    <div class="card--value">{{card.sausageSteal}}</div>
-  </div>
 
   <div class="card--defence" [style.background-image]="defenceImage">
     <div class="card--value">{{card.defence.value}}</div>

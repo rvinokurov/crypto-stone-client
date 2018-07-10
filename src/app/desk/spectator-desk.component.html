@@ -1,8 +1,3 @@
-<div class="gameover overlay" *ngIf="gameOver"></div>
-<div class="gameover message" *ngIf="gameOver">
-    <h1>GAME OVER</h1>
-    <a href="/games/">Create new game</a>
-</div>
 <div class="desk"
      *ngIf="player"
      [class.desk_attack-mode]="playerInAttack === true">
@@ -12,24 +7,18 @@
       [player]="enemy"
       isOpponent="true"
       [playerCardsOnDesk]="enemyCardsOnDesk"
-      [opponentCardsOnDesk]="playerCardsOnDesk"
+      [opponentCardsOnDesk]="enemyCardsOnDesk"
     ></app-player-stats-table>
 
     <app-player-stats-table
-      [player]="player"
+      [player]="enemy"
       [ourTurn]="ourTurn"
-      [playerCardsOnDesk]="playerCardsOnDesk"
+      [playerCardsOnDesk]="enemyCardsOnDesk"
       [opponentCardsOnDesk]="enemyCardsOnDesk"
     ></app-player-stats-table>
     <div class="desk--playground desk--playground_dropable" droppable
          (onDrop)="onCardDrop($event)">
 
-      <div class="elements-help">
-          <p><span class="fire">FIRE</span> &gt; <span class="air">AIR</span></p>
-          <p><span class="air">AIR</span> &gt; <span class="earth">EARTH</span></p>
-          <p><span class="earth">EARTH</span> &gt; <span class="water">WATER</span></p>
-          <p><span class="water">WATER</span> &gt; <span class="fire">FIRE</span></p>
-      </div>
 
       <div class="desk--playground-cards desk--playground-cards_enemy"
            [class.desk--playground-cards_active]="!ourTurn">
@@ -53,18 +42,10 @@
       </div>
     </div>
 
-
-    <app-end-turn-button
-      (click)="endTurn()"
-      [active]="ourTurn">
-    </app-end-turn-button>
-
     <app-new-card
       *ngIf="showNewCard === true"
       [card]="newPlayerCard">
     </app-new-card>
-
-
 
     <app-hero-card class="desk--hero-card desk--hero-card_enemy"
                    [player]="enemy"></app-hero-card>
@@ -94,20 +75,12 @@
     <div class="desk--playground-inner"></div>
 
 
-    <div class="desk--card-pane desk--card-pane_player">
-      <app-player-hand-card
-        [active]="canDrag"
+    <div class="desk--card-pane desk--card-pane_enemy_bottom">
+      <app-enemy-card
         [appCardMargin]="player.cards.length"
-        *ngFor="let card of player.cards; trackBy:cardIdentify"
-        (mouseover)="onCardOver()"
-        draggable
-        [dragData]="card"
-        (onDragStart)="onDragStart()"
-        [dragClass]="'draggableClone'"
-        [dragTransitClass]="'draggableClone'"
-        [dragEnabled]="canDrag"
+        *ngFor="let card of player.cards"
         [card]="card">
-      </app-player-hand-card>
+      </app-enemy-card>
     </div>
 
 
