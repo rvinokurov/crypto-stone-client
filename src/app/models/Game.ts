@@ -13,6 +13,7 @@ export class GameModel {
   playerCardsOnDesk: Card[];
   enemyCardsOnDesk: Card[];
 
+  gameOver = false;
   ourTurn = false;
 
   constructor(game: any) {

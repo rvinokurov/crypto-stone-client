@@ -15,7 +15,6 @@ export interface GameState {
   };
 }
 
-
 export interface Element {
   type: elemental;
 }
@@ -31,10 +30,15 @@ export class DeskActionsService {
   private enemyPlayCardSubject = new Subject<Card>();
   private newEnemyCardSubject = new Subject<EnemyCard>();
   private ourTurnSubject = new Subject<boolean>();
+  private gameOverSubject = new Subject<boolean>();
 
   constructor(private socketIoService: SocketIoService) {
     this.actionObservable = this.socketIoService.subscribe('action');
     this.actionObservable.subscribe((action: ActionEvent) => this.processAction(action));
+  }
+
+  get gameOver() {
+    return this.gameOverSubject;
   }
 
   get ourTurn() {
@@ -81,6 +85,10 @@ export class DeskActionsService {
     console.log(JSON.stringify(action, null, '   '));
     try {
 
+      if (action.type === ActionType.gameover) {
+        return this.gameOverSubject.next(true);
+      }
+
       if (action.type === ActionType.change && action.subject === ActionSubject.state) {
         this.gameStateChangeSubject.next(<GameState>action.payload);
       }
@@ -121,6 +129,5 @@ export class DeskActionsService {
     });
     this.socketIoService.action(ActionType.playCard, ActionSubject.card, {uuid: card.uuid});
   }
-
 
 }

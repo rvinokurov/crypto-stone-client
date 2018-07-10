@@ -1,3 +1,8 @@
+<div class="gameover overlay" *ngIf="gameOver"></div>
+<div class="gameover message" *ngIf="gameOver">
+    <h1>GAME OVER</h1>
+    <a href="/games/">Create new game</a>
+</div>
 <div class="desk"
      *ngIf="player"
      [class.desk_attack-mode]="playerInAttack === true">

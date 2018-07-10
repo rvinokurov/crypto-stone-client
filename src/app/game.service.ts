@@ -32,5 +32,4 @@ export class GameService {
       return game.player;
     });
   }
-
 }

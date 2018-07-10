@@ -43,6 +43,7 @@ export class DeskComponent implements OnInit {
 
   endTurnSound = new Audio('/assets/sound/end-turn-2.wav');
 
+  gameOver = false;
   ourTurn = false;
 
   cardCost = 30;
@@ -105,11 +106,13 @@ export class DeskComponent implements OnInit {
         this.enemyCardsOnDesk = game.enemyCardsOnDesk;
         this.playerCardsOnDesk = game.playerCardsOnDesk;
 
-
-
         this.ourTurn = game.ourTurn;
+        this.gameOver = game.gameOver;
       });
 
+      this.deskActionsService.gameOver.subscribe((gameOver) => {
+        this.gameOver = gameOver;
+      });
 
       this.deskActionsService.ourTurn.subscribe((ourTurn) => {
         this.ourTurn = ourTurn;
